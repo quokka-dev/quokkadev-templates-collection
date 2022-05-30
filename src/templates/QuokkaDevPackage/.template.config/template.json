@@ -1,0 +1,62 @@
+{    
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Fabio Cometti",
+    "classifications": [ "Solution", "Package","Nuget", "Windows", "Linux", "macOS", "QuokkaDev" ],
+    "name": "QuokkaDev Package Solution",
+    "identity": "QuokkaDev.Templates.PackageSolution",        
+    "shortName": "QuokkaDevpacksln",                 
+    "tags": {
+        "language": "C#",    
+        "type": "solution"                
+    },
+    "sourceName": "QuokkaDev.Package",
+    "preferNameDirectory" : true,
+    "symbols": {
+        "Framework":{
+            "type": "parameter",
+            "description": "The target framework for the project.",
+            "datatype": "choice",
+            "choices": [
+                {
+                    "choice": "netcoreapp3.1",
+                    "description": ".Net Core 3.1"
+                },
+                {
+                    "choice": "net5.0",
+                    "description": ".Net 5.0"
+                },
+                {
+                    "choice": "net6.0",
+                    "description": ".Net 6.0"
+                }
+            ],
+            "replaces": "net5.0",
+            "defaultValue": "net5.0"
+        },
+        "RepositoryUrl":{
+            "type": "parameter",
+            "description": "The Repository URL",
+            "replaces": "TheRepositoryUrl",
+            "defaultValue": "https://github.com/orgs/QuokkaDevit/"
+        },
+        "Author":{
+            "type": "parameter",
+            "description": "Package authors",
+            "replaces": "TheAuthor",
+            "defaultValue": ""
+        },
+        "PackageDescription":{
+            "type": "parameter",
+            "description": "Package description",
+            "replaces": "ThePackageDescription",
+            "defaultValue": "An awesome NuGet Package"
+        }
+    },
+    "sources": [
+        {
+            "modifiers": [
+
+            ]
+        }
+    ]
+}

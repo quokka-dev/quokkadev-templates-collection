@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>Action Filter</Name>
+    <Description>Create a new web API action filter</Description>
+    <Icon>Icon.png</Icon>
+    <TemplateID>ed2908c9-50b5-420a-ae69-a3b3bf93ac2f</TemplateID>
+    <ProjectType>CSharp</ProjectType>	
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <DefaultName>CustomActionFilter.cs</DefaultName>
+	<TemplateGroupID>AspNetCore</TemplateGroupID>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>System</Assembly>
+      </Reference>
+    </References>
+    <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.cs">ActionFilterTemplate.cs</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

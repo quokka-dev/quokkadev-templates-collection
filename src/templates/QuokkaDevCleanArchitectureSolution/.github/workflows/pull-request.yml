@@ -1,0 +1,86 @@
+name: Integrate feature
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+permissions: write-all
+
+jobs:
+  build:
+    if: github.event.comment.user.login != 'demonpie'
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        dotnet-version: ['6.0.x' ]
+
+    steps:
+      
+      - name: Get branch info        
+        id: comment-branch
+        uses: xt0rted/pull-request-comment-branch@v1
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+            ref: ${{ steps.comment-branch.outputs.ref }}
+            persist-credentials: false      
+      
+      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      # Insert SonarQube analisys here...
+
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Get changed files 
+        id: files
+        uses: jitterbit/get-changed-files@v1
+      
+      - name: Run format      
+        run: |
+          dotnet format --include ${{ steps.files.outputs.all }} --verify-no-changes
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      
+      - name: Run tests
+        run: dotnet test --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx" --collect:"XPlat Code Coverage" --results-directory coverage
+      
+      - name: Generate Unit Test Report
+        uses: zyborg/dotnet-tests-report@v1
+        with:          
+          report_name: QuokkaDev.Templates Test Report
+          report_title: QuokkaDev.Templates Test Report
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          set_check_status_from_test_outcome: true
+    
+      - name: Copy Coverage To Predictable Location
+        run: cp coverage/*/coverage.cobertura.xml coverage/coverage.cobertura.xml
+        
+      - name: Generate QuokkaDev.Templates Code Coverage Summary Report
+        uses: irongut/CodeCoverageSummary@v1.0.2      
+        with:
+          filename: coverage/coverage.cobertura.xml
+          badge: true
+          format: 'markdown'
+          output: 'both'
+          
+      - name: Publish QuokkaDev.Templates Code Coverage Summary Report
+        uses: LouisBrunner/checks-action@v1.2.0
+        if: always()
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: Code coverage
+          conclusion: ${{ job.status }}          
+          output: | 
+            {"summary":"Code Coverage"}
+          output_text_description_file: code-coverage-results.md      
+      # End 

@@ -1,0 +1,1 @@
+nuget pack .\src\QuokkaDev.Templates.Collection.nuspec -OutputDirectory .\buildpackages -NoDefaultExcludes

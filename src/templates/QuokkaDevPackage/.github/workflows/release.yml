@@ -1,0 +1,92 @@
+name: Releasing
+
+on:
+  push:
+    branches:
+      - release/**
+
+permissions: write-all
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        dotnet-version: ['6.0.x' ]
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v3 
+        with:
+          fetch-depth: 0              
+      
+      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      # Insert SonarQube analisys here...
+
+      - uses: paulhatch/semantic-version@v4.0.2
+        name: Calculate version
+        with:  
+          tag_prefix: "v"          
+          major_pattern: "(MAJOR)"          
+          minor_pattern: "(MINOR)"          
+          format: "${major}.${minor}.${patch}-rc${increment}"
+        id: calculate_version
+
+      - name: Install dependencies
+        run: dotnet restore      
+      
+      - name: Run format      
+        run: |
+          dotnet format --verify-no-changes
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      
+      - name: Run tests
+        run: dotnet test --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx" --collect:"XPlat Code Coverage" --results-directory coverage
+      
+      - name: Generate Unit Test Report
+        uses: zyborg/dotnet-tests-report@v1
+        with:          
+          report_name: QuokkaDev.Package Test Report
+          report_title: QuokkaDev.Package Test Report
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          set_check_status_from_test_outcome: true
+    
+      - name: Copy Coverage To Predictable Location
+        run: cp coverage/*/coverage.cobertura.xml coverage/coverage.cobertura.xml
+        
+      - name: Generate QuokkaDev.Package Code Coverage Summary Report
+        uses: irongut/CodeCoverageSummary@v1.0.2      
+        with:
+          filename: coverage/coverage.cobertura.xml
+          badge: true
+          format: 'markdown'
+          output: 'both'
+          
+      - name: Publish QuokkaDev.Package Code Coverage Summary Report
+        uses: LouisBrunner/checks-action@v1.2.0
+        if: always()
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: Code coverage
+          conclusion: ${{ job.status }}          
+          output: | 
+            {"summary":"Code Coverage"}
+          output_text_description_file: code-coverage-results.md      
+      
+      # Publish  
+
+      # NuGet Package on GitHub Packages
+      
+      - name: Pack QuokkaDev.Package
+        run: dotnet pack src/QuokkaDev.Package/QuokkaDev.Package.csproj -c Release /p:Version=${{ steps.calculate_version.outputs.version }} 
+      - name: Publish to GitHub package QuokkaDev.Package 
+        run: dotnet nuget push src/QuokkaDev.Package/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json  

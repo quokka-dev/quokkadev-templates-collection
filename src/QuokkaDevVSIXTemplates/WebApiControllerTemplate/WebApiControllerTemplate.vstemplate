@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>Web API Controller</Name>
+    <Description>Create a Web API Controller</Description>
+    <Icon>Icon.png</Icon>
+    <TemplateID>e371a265-d7d6-49bc-950d-20c34f18f14d</TemplateID>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <DefaultName>NewWebApiController.cs</DefaultName>
+	<TemplateGroupID>AspNetCore</TemplateGroupID>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>System</Assembly>
+      </Reference>
+    </References>
+    <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.cs">ControllerTemplate.cs</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

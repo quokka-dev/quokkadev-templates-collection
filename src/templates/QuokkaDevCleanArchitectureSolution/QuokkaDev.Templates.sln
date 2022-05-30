@@ -1,0 +1,98 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E53732A4-B84A-454E-A7DC-367E8032F460}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuokkaDev.Templates.Domain", "src\QuokkaDev.Templates.Domain\QuokkaDev.Templates.Domain.csproj", "{D5BD61F6-566F-477D-9620-A0541A3FD78D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{15B409AA-C222-4851-8C90-7771EB6C9641}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuokkaDev.Templates.ArchitecturalTests", "tests\QuokkaDev.Templates.ArchitecturalTests\QuokkaDev.Templates.ArchitecturalTests.csproj", "{7D45EA03-6CEE-4855-A4B6-E3D55BD9CE57}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuokkaDev.Templates.IntegrationTests", "tests\QuokkaDev.Templates.IntegrationTests\QuokkaDev.Templates.IntegrationTests.csproj", "{B41B3C7D-469A-48E8-BE02-581027F899CA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuokkaDev.Templates.UnitTests", "tests\QuokkaDev.Templates.UnitTests\QuokkaDev.Templates.UnitTests.csproj", "{322BD9C7-70CC-431F-B288-D5A9067AF2C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{57053CB0-EF96-4DBB-A8E0-4C326F058DAE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A6670CEF-3982-4043-A357-2D454C596472}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{BA433F45-BA14-4B1A-A794-EABFEDAEBCD0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{0E4AE60D-19CD-4836-9AA3-70DE77184DF8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{DBCCE281-0178-4E39-8CAA-3A171046CB79}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuokkaDev.Templates.Application", "src\QuokkaDev.Templates.Application\QuokkaDev.Templates.Application.csproj", "{D38ABF52-B886-4C65-A95E-C3AFC82DEAAA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuokkaDev.Templates.Api", "src\QuokkaDev.Templates.Api\QuokkaDev.Templates.Api.csproj", "{6871E26C-84D0-4D1F-9594-88C77B77B3E4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuokkaDev.Templates.DataAccess.Commands", "src\QuokkaDev.Templates.DataAccess.Commands\QuokkaDev.Templates.DataAccess.Commands.csproj", "{1FEB7492-F2CF-494D-A527-F195EF8E7C6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuokkaDev.Templates.DataAccess.Queries", "src\QuokkaDev.Templates.DataAccess.Queries\QuokkaDev.Templates.DataAccess.Queries.csproj", "{59466C64-EC03-4C27-92E5-B0FD253734AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5BD61F6-566F-477D-9620-A0541A3FD78D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5BD61F6-566F-477D-9620-A0541A3FD78D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5BD61F6-566F-477D-9620-A0541A3FD78D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5BD61F6-566F-477D-9620-A0541A3FD78D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D45EA03-6CEE-4855-A4B6-E3D55BD9CE57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D45EA03-6CEE-4855-A4B6-E3D55BD9CE57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D45EA03-6CEE-4855-A4B6-E3D55BD9CE57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D45EA03-6CEE-4855-A4B6-E3D55BD9CE57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B41B3C7D-469A-48E8-BE02-581027F899CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B41B3C7D-469A-48E8-BE02-581027F899CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B41B3C7D-469A-48E8-BE02-581027F899CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B41B3C7D-469A-48E8-BE02-581027F899CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{322BD9C7-70CC-431F-B288-D5A9067AF2C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{322BD9C7-70CC-431F-B288-D5A9067AF2C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{322BD9C7-70CC-431F-B288-D5A9067AF2C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{322BD9C7-70CC-431F-B288-D5A9067AF2C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D38ABF52-B886-4C65-A95E-C3AFC82DEAAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D38ABF52-B886-4C65-A95E-C3AFC82DEAAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D38ABF52-B886-4C65-A95E-C3AFC82DEAAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D38ABF52-B886-4C65-A95E-C3AFC82DEAAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6871E26C-84D0-4D1F-9594-88C77B77B3E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6871E26C-84D0-4D1F-9594-88C77B77B3E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6871E26C-84D0-4D1F-9594-88C77B77B3E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6871E26C-84D0-4D1F-9594-88C77B77B3E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FEB7492-F2CF-494D-A527-F195EF8E7C6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FEB7492-F2CF-494D-A527-F195EF8E7C6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FEB7492-F2CF-494D-A527-F195EF8E7C6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FEB7492-F2CF-494D-A527-F195EF8E7C6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59466C64-EC03-4C27-92E5-B0FD253734AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59466C64-EC03-4C27-92E5-B0FD253734AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59466C64-EC03-4C27-92E5-B0FD253734AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59466C64-EC03-4C27-92E5-B0FD253734AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D5BD61F6-566F-477D-9620-A0541A3FD78D} = {57053CB0-EF96-4DBB-A8E0-4C326F058DAE}
+		{7D45EA03-6CEE-4855-A4B6-E3D55BD9CE57} = {15B409AA-C222-4851-8C90-7771EB6C9641}
+		{B41B3C7D-469A-48E8-BE02-581027F899CA} = {15B409AA-C222-4851-8C90-7771EB6C9641}
+		{322BD9C7-70CC-431F-B288-D5A9067AF2C1} = {15B409AA-C222-4851-8C90-7771EB6C9641}
+		{57053CB0-EF96-4DBB-A8E0-4C326F058DAE} = {E53732A4-B84A-454E-A7DC-367E8032F460}
+		{BA433F45-BA14-4B1A-A794-EABFEDAEBCD0} = {E53732A4-B84A-454E-A7DC-367E8032F460}
+		{0E4AE60D-19CD-4836-9AA3-70DE77184DF8} = {E53732A4-B84A-454E-A7DC-367E8032F460}
+		{DBCCE281-0178-4E39-8CAA-3A171046CB79} = {E53732A4-B84A-454E-A7DC-367E8032F460}
+		{D38ABF52-B886-4C65-A95E-C3AFC82DEAAA} = {57053CB0-EF96-4DBB-A8E0-4C326F058DAE}
+		{6871E26C-84D0-4D1F-9594-88C77B77B3E4} = {0E4AE60D-19CD-4836-9AA3-70DE77184DF8}
+		{1FEB7492-F2CF-494D-A527-F195EF8E7C6C} = {BA433F45-BA14-4B1A-A794-EABFEDAEBCD0}
+		{59466C64-EC03-4C27-92E5-B0FD253734AD} = {BA433F45-BA14-4B1A-A794-EABFEDAEBCD0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A6829A5D-EE37-47A5-89D9-30BDC3E87B2A}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>Exception Filter</Name>
+    <Description>Create a new web API exception filter</Description>
+    <Icon>Icon.png</Icon>
+    <TemplateID>defc5f2e-3be7-4b4b-96ca-6388a4b80dbe</TemplateID>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <DefaultName>CustomExceptionFilter.cs</DefaultName>
+	<TemplateGroupID>AspNetCore</TemplateGroupID>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>System</Assembly>
+      </Reference>
+    </References>
+	<ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.cs">ExceptionFilterTemplate.cs</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

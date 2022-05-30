@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>QuokkaDev.Templates.Collection</id>
+    <version>1.0.0</version>
+    <authors>Fabio Cometti</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <icon>templates\icon.png</icon>    
+    <!-- <projectUrl>http://project_url_here_or_delete_this_line/</projectUrl> -->
+    <description>A collection of solution, project and items template for Clean Architecture in .NET</description>
+    <!-- <releaseNotes>Summary of changes made in this release of the package.</releaseNotes> -->
+    <!-- <copyright>$copyright$</copyright> -->
+    <tags>QuokkaDev CleanArchitecture Templates</tags>
+    <packageTypes>
+      <packageType name="Template" />
+    </packageTypes> 
+  </metadata>
+  <files>
+    <file src="templates\**\*.*" exclude="templates\**\bin\**\*.*;templates\**\obj\**\*.*;templates\**\.vs\**\*.*" target="templates" />
+  </files>  
+</package>

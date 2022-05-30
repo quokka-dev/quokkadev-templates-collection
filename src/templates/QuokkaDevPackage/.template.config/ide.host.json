@@ -1,0 +1,33 @@
+{
+    "$schema":"http://json.schemastore.org/vs-2017.3.host",
+    "name": { "text": "QuokkaDev Package Solution" },
+    "description": { "text": "A template for creating a solution for a NuGet Package" }, 
+    "order": 5,
+    "symbolInfo": [        
+        {
+            "id": "RepositoryUrl",
+            "name": {
+                "text": "Repository URL"
+            },
+            "isVisible": true
+        },
+        {
+            "id": "TheAuthor",
+            "name": {
+                "text": "Package authors"
+            },
+            "isVisible": true
+        },
+        {
+            "id": "PackageDescription",
+            "name": {
+                "text": "Package description"
+            },
+            "isVisible": true
+        }
+    ],
+    "supportsDocker": false,
+    "includeLaunchSettings": false,    
+    "isApi": false,    
+    "icon": "icon.png"
+}

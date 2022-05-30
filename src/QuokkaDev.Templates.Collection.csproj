@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<PackageType>Template</PackageType>
+		<PackageId>QuokkaDev.Templates.Collection</PackageId>
+		<Title>QuokkaDev Templates Collection</Title>
+		<Description>A collection of solution, project and items template for Clean Architecture in .NET</Description>
+		<Authors>QuokkaDev - Fabio Cometti</Authors>
+		<Company>QuokkaDev</Company>
+		<Copyright>QuokkaDev © 2022</Copyright>
+		<PackageTags>QuokkaDev CleanArchitecture Templates C#</PackageTags>		
+
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<IncludeContentInPack>true</IncludeContentInPack>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<ContentTargetFolders>content</ContentTargetFolders>
+
+		<PackageProjectUrl>https://github.com/QuokkaDev/QuokkaDev-templates-collection</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/QuokkaDev/QuokkaDev-templates-collection</RepositoryUrl>
+
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageIcon>icon.png</PackageIcon>
+
+		<NoWarn>$(NoWarn);NU5128</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\icon.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="templates\**\*" Exclude="templates\**\bin\**\*.*;templates\**\obj\**\*.*;templates\**\.vs\**\*.*" />
+		<Compile Remove="**\*" />
+	</ItemGroup>
+
+</Project>

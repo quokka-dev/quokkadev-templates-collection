@@ -1,0 +1,123 @@
+name: Publish on main
+
+on:
+  push:
+    branches:
+      - main
+
+permissions: write-all
+
+jobs:
+  build:
+    
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        dotnet-version: ['6.0.x' ]
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v3 
+        with:
+          fetch-depth: 0   
+
+      # Insert SonarQube analisys here...
+
+      # Prepare
+
+      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      - uses: paulhatch/semantic-version@v4.0.2
+        name: Calculate version
+        with:  
+          tag_prefix: "v"          
+          major_pattern: "(MAJOR)"          
+          minor_pattern: "(MINOR)"          
+          format: "${major}.${minor}.${patch}"
+        id: calculate_version
+
+      - name: Install dependencies
+        run: dotnet restore
+
+      # Build
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore /p:Version=${{ steps.calculate_version.outputs.version }}
+      
+      # Test and reporting
+
+      - name: Run tests
+        run: dotnet test --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx" --collect:"XPlat Code Coverage" --results-directory coverage
+      
+      - name: Generate Unit Test Report
+        uses: zyborg/dotnet-tests-report@v1
+        with:          
+          report_name: QuokkaDev.Templates Test Report
+          report_title: QuokkaDev.Templates Test Report
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          set_check_status_from_test_outcome: true
+    
+      - name: Copy Coverage To Predictable Location
+        run: cp coverage/*/coverage.cobertura.xml coverage/coverage.cobertura.xml
+        
+      - name: Generate QuokkaDev.Templates Code Coverage Summary Report
+        uses: irongut/CodeCoverageSummary@v1.0.2      
+        with:
+          filename: coverage/coverage.cobertura.xml
+          badge: true
+          format: 'markdown'
+          output: 'both'
+          
+      - name: Publish QuokkaDev.Templates Code Coverage Summary Report
+        uses: LouisBrunner/checks-action@v1.2.0
+        if: always()
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: Code coverage
+          conclusion: ${{ job.status }}          
+          output: | 
+            {"summary":"Code Coverage"}
+          output_text_description_file: code-coverage-results.md 
+
+      # Publish 
+
+      # Standalone application on Azure
+      
+      #- uses: azure/webapps-deploy@v2
+      #  with:
+      #    publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+      #    app-name: my-app-name
+      #    slot-name: staging
+      #    package: ./SampleWebApplication/'
+
+      # Tag the version on main
+
+      - uses: rickstaa/action-create-tag@v1
+        with:
+          tag: "v${{ steps.calculate_version.outputs.version }}"
+          message: "v${{ steps.calculate_version.outputs.version }}"
+
+      - name: Build Changelog from PRs
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@v3
+        with:
+          configuration: "changelog-configuration.json"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create new Release from tag
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.calculate_version.outputs.version }}
+          release_name: Release v${{ steps.calculate_version.outputs.version }}
+          draft: false
+          prerelease: false
+          body: ${{steps.github_release.outputs.changelog}}

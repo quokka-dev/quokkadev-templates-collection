@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>HttpGet Method</Title>
+			<Shortcut>HttpGet</Shortcut>
+			<Description>Add a HttpGet method to controller</Description>
+			<Author>Fabio Cometti</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>				
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="CSharp">
+				<![CDATA[/// <summary>
+        /// $Name$
+        /// </summary>
+        /// <param name="id"></param>
+		/// <returns></returns>
+		[HttpGet("{id}")]
+		[Authorize(Policy = "MyPolicy"]
+        public async Task<IActionResult> $Name$(string id)
+        {            
+            return Ok();
+        }]]>
+			</Code>
+			<Declarations>
+				<Literal>
+					<ID>Name</ID>
+					<ToolTip>Name of the method</ToolTip>
+					<Default>Get</Default>
+				</Literal>				
+			</Declarations>
+		</Snippet>
+	</CodeSnippet>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>HttpPost Method</Title>
+			<Shortcut>HttpPost</Shortcut>
+			<Description>Add a HttpPost method to controller</Description>
+			<Author>Fabio Cometti</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>				
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="CSharp">
+				<![CDATA[/// <summary>
+        /// $Name$
+        /// </summary>
+        /// <param name="$Payload$"></param>
+		/// <returns></returns>
+		[HttpPost()]
+		[Authorize(Policy = "MyPolicy"]
+        public async Task<IActionResult> $Name$([FromBody]$Type$ $Payload$)
+        {            
+            return Ok();
+        }]]>
+			</Code>
+			<Declarations>
+				<Literal>
+					<ID>Name</ID>
+					<ToolTip>Name of the method</ToolTip>
+					<Default>Post</Default>
+				</Literal>
+				<Literal>
+					<ID>Type</ID>
+					<ToolTip>Type of the payload</ToolTip>
+					<Default>object</Default>
+				</Literal>
+				<Literal>
+					<ID>Payload</ID>
+					<ToolTip>Payload parameter name</ToolTip>
+					<Default>payload</Default>
+				</Literal>
+			</Declarations>
+		</Snippet>
+	</CodeSnippet>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>HttpPut Method</Title>
+			<Shortcut>HttpPut</Shortcut>
+			<Description>Add a HttpPut method to controller</Description>
+			<Author>Fabio Cometti</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="CSharp">
+				<![CDATA[/// <summary>
+        /// $Name$
+        /// </summary>
+        /// <param name="$Payload$"></param>
+		/// <returns></returns>
+		[HttpPut("{$Id$}")]
+		[Authorize(Policy = "MyPolicy"]
+        public async Task<IActionResult> $Name$([FromRoute]string $Id$, [FromBody]$Type$ $Payload$)
+        {            
+            return Ok();
+        }]]>
+			</Code>
+			<Declarations>
+				<Literal>
+					<ID>Id</ID>
+					<ToolTip>Name of the id parameter</ToolTip>
+					<Default>id</Default>
+				</Literal>
+				<Literal>
+					<ID>Name</ID>
+					<ToolTip>Name of the method</ToolTip>
+					<Default>Put</Default>
+				</Literal>
+				<Literal>
+					<ID>Type</ID>
+					<ToolTip>Type of the payload</ToolTip>
+					<Default>object</Default>
+				</Literal>
+				<Literal>
+					<ID>Payload</ID>
+					<ToolTip>Payload parameter name</ToolTip>
+					<Default>payload</Default>
+				</Literal>
+			</Declarations>
+		</Snippet>
+	</CodeSnippet>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>HttpDelete Method</Title>
+			<Shortcut>HttpDelete</Shortcut>
+			<Description>Add a HttpDelete method to controller</Description>
+			<Author>Fabio Cometti</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="CSharp">
+				<![CDATA[/// <summary>
+        /// $Name$
+        /// </summary>
+        /// <param name="id"></param>
+		/// <returns></returns>
+		[HttpDelete("{id}")]
+		[Authorize(Policy = "MyPolicy"]
+        public async Task<IActionResult> $Name$(string id)
+        {            
+            return Ok();
+        }]]>
+			</Code>
+			<Declarations>
+				<Literal>
+					<ID>Name</ID>
+					<ToolTip>Name of the method</ToolTip>
+					<Default>Delete</Default>
+				</Literal>
+			</Declarations>
+		</Snippet>
+	</CodeSnippet>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Add Authorization</Title>
+			<Shortcut>AddAuth</Shortcut>
+			<Description>Add authorization to service collection</Description>
+			<Author>Fabio Cometti</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="CSharp">
+				<![CDATA[//Add authorization Policies
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("$Name$",
+                    policy =>
+                    {
+                        policy.AuthenticationSchemes = new List<string>() { JwtBearerDefaults.AuthenticationScheme };
+						policy.RequireAuthenticatedUser();
+                        //policy.Requirements.Add(new MyCustomRequirement());
+                    });
+            });]]>
+			</Code>
+			<Declarations>
+				<Literal>
+					<ID>Name</ID>
+					<ToolTip>Name of the policy</ToolTip>
+					<Default>MyPolicy</Default>
+				</Literal>
+			</Declarations>
+		</Snippet>
+	</CodeSnippet>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Add Authorization Policy</Title>
+			<Shortcut>Policy</Shortcut>
+			<Description>Add policy to autorization</Description>
+			<Author>Fabio Cometti</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="CSharp">
+				<![CDATA[//options.AddPolicy("$Name$",
+                    policy =>
+                    {
+                        policy.AuthenticationSchemes = new List<string>() { JwtBearerDefaults.AuthenticationScheme };
+						policy.RequireAuthenticatedUser();
+                        //policy.Requirements.Add(new MyCustomRequirement());
+                    });]]>
+			</Code>
+			<Declarations>
+				<Literal>
+					<ID>Name</ID>
+					<ToolTip>Name of the policy</ToolTip>
+					<Default>MyPolicy</Default>
+				</Literal>
+			</Declarations>
+		</Snippet>
+	</CodeSnippet>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Add CORS Policy</Title>
+			<Shortcut>Cors</Shortcut>
+			<Description>Add Cors to service collection</Description>
+			<Author>Fabio Cometti</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="CSharp">
+				<![CDATA[//remember to call app.UseCors("$Name$"); in Configure()
+			services.AddCors(o => o.AddPolicy("$Name$", builder =>
+            {
+                builder.WithOrigins(Config.GetValue<string>("AllowedHosts"))
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));]]>
+			</Code>
+			<Declarations>
+				<Literal>
+					<ID>Name</ID>
+					<ToolTip>Name of the policy</ToolTip>
+					<Default>DefaultPolicy</Default>
+				</Literal>
+			</Declarations>
+		</Snippet>
+	</CodeSnippet>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Dapper query</Title>
+			<Shortcut>Dapquery</Shortcut>
+			<Description>Add dapper query</Description>
+			<Author>Fabio Cometti</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="CSharp">
+				<![CDATA[using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                var result = await connection.QueryAsync<dynamic>(
+                   @"select * FROM MyTable t                        
+                        WHERE t.Id=@id"
+                        , new { id }
+                    );                
+            }]]>
+			</Code>			
+		</Snippet>
+	</CodeSnippet>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Dapper Stored</Title>
+			<Shortcut>Dapstored</Shortcut>
+			<Description>Add dapper call to stored procedure</Description>
+			<Author>Fabio Cometti</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="CSharp">
+				<![CDATA[var p = new DynamicParameters();
+				p.Add("@myParams", "myParamsValue");
+                
+				var result = await connection.Query([$SName$], p, commandType: CommandType.StoredProcedure);                
+            }]]>
+			</Code>
+			<Declarations>
+				<Literal>
+					<ID>Name</ID>
+					<ToolTip>Name of the stored procedure</ToolTip>
+					<Default>MyStored</Default>
+				</Literal>
+			</Declarations>
+		</Snippet>
+	</CodeSnippet>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>xUnit Test Method</Title>
+			<Shortcut>xunit</Shortcut>
+			<Description>Add a xUnit Test Method</Description>
+			<Author>Fabio Cometti</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="CSharp">
+				<![CDATA[[Fact]
+        public void $Name$()
+        {
+            // Arrange
+
+            // Act
+            
+            // Assert            
+            true.Should().BeTrue();
+        }]]>
+			</Code>
+			<Declarations>
+				<Literal>
+					<ID>Name</ID>
+					<ToolTip>Name of the method</ToolTip>
+					<Default>Test</Default>
+				</Literal>
+			</Declarations>
+		</Snippet>
+	</CodeSnippet>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>xUnit async Test Method</Title>
+			<Shortcut>xunitasync</Shortcut>
+			<Description>Add a xUnit async Test Method</Description>
+			<Author>Fabio Cometti</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="CSharp">
+				<![CDATA[[Fact]
+        public async Task $Name$Async()
+        {
+            // Arrange
+
+            // Act
+            
+            // Assert            
+            true.Should().BeTrue();
+        }]]>
+			</Code>
+			<Declarations>
+				<Literal>
+					<ID>Name</ID>
+					<ToolTip>Name of the async method</ToolTip>
+					<Default>Test</Default>
+				</Literal>
+			</Declarations>
+		</Snippet>
+	</CodeSnippet>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Create mock</Title>
+			<Shortcut>mock</Shortcut>
+			<Description>Create and setup a mock</Description>
+			<Author>Fabio Cometti</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="CSharp">
+				<![CDATA[var $MockName$ = new Mock<$MockType$>();
+        $MockName$.Setup(m => m.Equals(It.IsAny<$MockType$>())).Returns(true);
+        $MockType$ obj = $MockName$.Object;]]>
+			</Code>
+			<Declarations>
+				<Literal>
+					<ID>MockName</ID>
+					<ToolTip>Name of the mock variable</ToolTip>
+					<Default>mock</Default>
+				</Literal>
+				<Literal>
+					<ID>MockType</ID>
+					<ToolTip>Type of the mock variable</ToolTip>
+					<Default>object</Default>
+				</Literal>			
+			</Declarations>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>
