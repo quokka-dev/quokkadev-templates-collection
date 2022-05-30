@@ -70,10 +70,7 @@ jobs:
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
-      
-      - name: Prepare nuget source
-        run: dotnet nuget add source --username demonpie --password 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 --store-password-in-clear-text --name github "https://nuget.pkg.github.com/QuokkaDevit/index.json"
-      
+
       # Build templates
 
       - name: Build QuokkaDevCleanArchitectureSolution
