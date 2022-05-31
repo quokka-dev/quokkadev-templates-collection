@@ -202,12 +202,12 @@
 		</Header>
 		<Snippet>
 			<Code Language="CSharp">
-				<![CDATA[//options.AddPolicy("$Name$",
+				<![CDATA[options.AddPolicy("$Name$",
                     policy =>
                     {
                         policy.AuthenticationSchemes = new List<string>() { JwtBearerDefaults.AuthenticationScheme };
 						policy.RequireAuthenticatedUser();
-                        //policy.Requirements.Add(new MyCustomRequirement());
+                    //policy.Requirements.Add(new MyCustomRequirement());
                     });]]>
 			</Code>
 			<Declarations>
@@ -288,8 +288,7 @@
 				<![CDATA[var p = new DynamicParameters();
 				p.Add("@myParams", "myParamsValue");
                 
-				var result = await connection.Query([$SName$], p, commandType: CommandType.StoredProcedure);                
-            }]]>
+				var result = await connection.Query([$SName$], p, commandType: CommandType.StoredProcedure);}]]>
 			</Code>
 			<Declarations>
 				<Literal>
