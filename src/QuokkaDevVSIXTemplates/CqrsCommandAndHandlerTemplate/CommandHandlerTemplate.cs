@@ -22,7 +22,6 @@ namespace $rootnamespace$
 
     /// <summary>
     ///  A command handler for $fileinputname$Command
-    ///  Created by $username$
     /// </summary>
     public class $safeitemname$  : ICommandHandler<$fileinputname$Command, $fileinputname$CommandResult>
     {

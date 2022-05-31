@@ -6,7 +6,7 @@ namespace $rootnamespace$
     /// <summary>
     /// $fileinputname$ exception filter    
     /// </summary>    
-    public class $fileinputname$ : IAsyncActionFilter
+    public class $fileinputname$ : IAsyncExceptionFilter
     {        
         private readonly ILogger<$fileinputname$> logger;
 

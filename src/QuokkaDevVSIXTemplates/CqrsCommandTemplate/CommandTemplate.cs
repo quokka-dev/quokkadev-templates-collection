@@ -1,6 +1,4 @@
-﻿using QuokkaDev.CQRS;
-
-namespace $rootnamespace$
+﻿namespace $rootnamespace$
 {
     /// <summary>
     /// A command request

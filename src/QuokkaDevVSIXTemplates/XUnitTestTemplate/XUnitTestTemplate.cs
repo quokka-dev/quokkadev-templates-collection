@@ -15,12 +15,15 @@ namespace $rootnamespace$
         public async Task Test1()
         {
             // Arrange
+            var mock = new Mock<object>();
+            mock.Setup(m => m.Equals(It.IsAny<object>())).Returns(true);
+            var obj = mock.Object;
 
             // Act
-            
-            // Assert
             await Task.CompletedTask;
-            true.Should().BeTrue();
+
+            // Assert
+            obj.Should().NotBeNull();
         }
     }
 }

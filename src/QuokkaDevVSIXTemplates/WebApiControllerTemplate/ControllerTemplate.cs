@@ -28,7 +28,7 @@ namespace $rootnamespace$
         /// </summary>
         /// <returns>IActionResult</returns>
         [HttpGet("{id}")]
-        [Authorize(Policy = "MyPolicy"]
+        [Authorize(Policy = "MyPolicy")]
         public async Task<IActionResult> Get(string id)
         {            
             // var result = await queryDispatcher.Dispatch(new Query());
@@ -40,7 +40,7 @@ namespace $rootnamespace$
         /// </summary>
         /// <returns>IActionResult</returns>
         [HttpPost()]
-        [Authorize(Policy = "MyPolicy"]
+        [Authorize(Policy = "MyPolicy")]
         public async Task<IActionResult> Post([FromBody]object payload)
         {
             // var result = await commandDispatcher.Dispatch(new Command());
