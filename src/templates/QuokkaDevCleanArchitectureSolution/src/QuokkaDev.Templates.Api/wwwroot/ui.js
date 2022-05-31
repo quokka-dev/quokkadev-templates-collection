@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 function setLogo() {
     var logo = document.querySelector(".topbar-wrapper img");
     if (logo) {
-        logo.setAttribute("src", "/logo.png");
+        logo.setAttribute("src", "/logos.png");
     } else {
         setTimeout(setLogo, 500);
     }
