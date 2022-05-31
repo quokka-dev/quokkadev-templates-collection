@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json.schemastore.org/vsix-publish",
+    "categories": [
+        "coding",
+        "team development",       
+        "scaffolding"
+    ],
+    "identity": {
+        "internalName": "quokkadevvsixtemplates"
+    },
+    "overview": "readme.md",
+    "priceCategory": "free",
+    "publisher": "QuokkaDev",
+    "private": false,
+    "qna": false,
+    "repo": "https://github.com/quokka-dev/quokkadev-templates-collection"
+}

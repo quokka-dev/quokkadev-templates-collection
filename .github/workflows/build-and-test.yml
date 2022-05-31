@@ -50,7 +50,14 @@ jobs:
         uses: actions/upload-artifact@v3
         with:  
           name: QuokkaDevVSIXTemplates.${{ steps.calculate_version.outputs.version }}.vsix
-          path: "./src/QuokkaDevVSIXTemplates/QuokkaDevVSIXTemplates/bin/Release/QuokkaDevVSIXTemplates.vsix"      
+          path: "./src/QuokkaDevVSIXTemplates/QuokkaDevVSIXTemplates/bin/Release/QuokkaDevVSIXTemplates.vsix"
+
+      - name: Publish extension to Marketplace
+        uses: cezarypiatek/VsixPublisherAction@0.2
+        with:
+            extension-file: ./src/QuokkaDevVSIXTemplates/QuokkaDevVSIXTemplates/bin/Release/QuokkaDevVSIXTemplates.vsix
+            publish-manifest-file: ./src/QuokkaDevVSIXTemplates/publishManifest.json
+            personal-access-code: ${{ secrets.VS_MARKETPLACE_TOKEN }}      
 
   build-nuget-package:
     needs: build-vsix
