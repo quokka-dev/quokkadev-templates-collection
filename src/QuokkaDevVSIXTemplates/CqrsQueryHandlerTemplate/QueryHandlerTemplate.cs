@@ -6,7 +6,6 @@ namespace $rootnamespace$
 {
     /// <summary>
     ///  A query handler for $fileinputname$Query
-    ///  Created by $username$
     /// </summary>
     public class $safeitemname$ : IQueryHandler <$fileinputname$Query, $fileinputname$QueryResult>
     {
