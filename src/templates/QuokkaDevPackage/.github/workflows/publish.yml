@@ -91,7 +91,7 @@ jobs:
       - name: Pack QuokkaDev.Package
         run: dotnet pack src/QuokkaDev.Package/QuokkaDev.Package.csproj -c Release /p:Version=${{ steps.calculate_version.outputs.version }} 
       - name: Publish to GitHub package QuokkaDev.Package 
-        run: dotnet nuget push src/QuokkaDev.Package/bin/Release/*.nupkg ${{ secrets.NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json  
+        run: dotnet nuget push src/QuokkaDev.Package/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json  
 
       # Tag the version on main
 
