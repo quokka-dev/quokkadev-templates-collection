@@ -30,9 +30,6 @@ jobs:
 
       # Insert SonarQube analisys here...
       
-      - name: Prepare QuokkaDev nuget source
-        run: dotnet nuget add source --username demonpie --password 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 --store-password-in-clear-text --name github "https://nuget.pkg.github.com/QuokkaDevit/index.json"
-      
       - uses: paulhatch/semantic-version@v4.0.2
         name: Calculate version
         with:  

@@ -9,7 +9,7 @@ permissions: write-all
 
 jobs:
   build:
-    if: github.event.comment.user.login != 'demonpie'
+    if: startsWith(github.head_ref, 'release/') == false
     runs-on: ubuntu-latest
 
     strategy:
