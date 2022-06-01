@@ -18,10 +18,4 @@ public class UnitTest1
         // Assert
         o.Should().NotBeNull();
     }
-
-    [Fact]
-    public static void Test()
-    {
-        // Method intentionally left empty.
-    }
 }
