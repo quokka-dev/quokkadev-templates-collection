@@ -27,7 +27,7 @@ jobs:
           format: "${major}.${minor}.${patch}" 
       
       - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1
+        uses: microsoft/setup-msbuild@v1.1.1
 
       - name: Setup NuGet
         uses: NuGet/setup-nuget@v1.0.6
