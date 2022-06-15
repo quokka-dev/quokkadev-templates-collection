@@ -151,6 +151,20 @@
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
     </ProjectReference>
+    <ProjectReference Include="..\DbContextTemplate\DbContextTemplate.csproj">
+      <Project>{43058E10-EF27-4F2B-AB7D-D2D8D5CE945E}</Project>
+      <Name>DbContextTemplate</Name>
+      <VSIXSubPath>ItemTemplates\QuokkaDev\Data Access</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\EntityConfigurationTemplate\EntityConfigurationTemplate.csproj">
+      <Project>{9160430A-834B-4825-831B-0559EFA74E4C}</Project>
+      <Name>EntityConfigurationTemplate</Name>
+      <VSIXSubPath>ItemTemplates\QuokkaDev\Data Access</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
     <ProjectReference Include="..\MiddlewareTemplate\MiddlewareTemplate.csproj">
       <Project>{A43828A1-0E6B-42ED-B634-11F2CC62232E}</Project>
       <Name>MiddlewareTemplate</Name>

@@ -1,11 +1,6 @@
 ﻿using FluentAssertions;
-using QuokkaDev.Templates.Application.DI;
 using NetArchTest.Rules;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using QuokkaDev.Templates.Application.DI;
 using Xunit;
 
 namespace QuokkaDev.Templates.ArchitecturalTests.Application

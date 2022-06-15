@@ -1,8 +1,8 @@
-﻿using QuokkaDev.Templates.Domain.Aggregates.MyAggregateRoot;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using QuokkaDev.Templates.Domain.Aggregates.MyAggregateRoot;
 using QuokkaDev.Templates.Domain.Interfaces;
 using QuokkaDev.Templates.Domain.SeedWork;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace QuokkaDev.Templates.DataAccess.Commands
 {
@@ -40,7 +40,6 @@ namespace QuokkaDev.Templates.DataAccess.Commands
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<MyAggregateRoot>(ConfigureMyAggregateRoot);
-
         }
 
         /// <summary>
