@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
-using QuokkaDev.Templates.Api;
 using Microsoft.AspNetCore.Mvc;
 using NetArchTest.Rules;
+using QuokkaDev.Templates.Api;
 using Xunit;
 
 namespace QuokkaDev.Templates.ArchitecturalTests.Presentation
@@ -67,7 +67,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Presentation
         }
 
         [Fact]
-        public void Controllers_Should_Have_ApiControllerAttrbiute()
+        public void Controllers_Should_Have_ApiControllerAttribute()
         {
             var result = Types.InAssembly(typeof(Startup).Assembly)
                 .That()
@@ -80,7 +80,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Presentation
         }
 
         [Fact]
-        public void Controllers_Should_Have_RouteAttrbiute()
+        public void Controllers_Should_Have_RouteAttribute()
         {
             var result = Types.InAssembly(typeof(Startup).Assembly)
                 .That()
@@ -93,7 +93,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Presentation
         }
 
         [Fact]
-        public void Controllers_Should_Have_ApiVersionAttrbiute()
+        public void Controllers_Should_Have_ApiVersionAttribute()
         {
             var result = Types.InAssembly(typeof(Startup).Assembly)
                 .That()
