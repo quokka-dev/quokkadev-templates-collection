@@ -1,10 +1,6 @@
 ﻿using QuokkaDev.AsyncNotifications.Abstractions;
 using QuokkaDev.Templates.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using QuokkaDev.Templates.Domain.SeedWork;
 
 namespace QuokkaDev.Templates.DataAccess.Commands.Services
 {
@@ -20,6 +16,10 @@ namespace QuokkaDev.Templates.DataAccess.Commands.Services
         public Task Publish(IDomainEvent domainEvent, CancellationToken cancellationToken)
         {
             return notificationDispatcher.DispatchAsync(domainEvent, cancellationToken);
+        }
+        public Task Notify(IDomainEventNotification<IDomainEvent> domainEventNotifications, CancellationToken cancellationToken)
+        {
+            return notificationDispatcher.DispatchAsync(domainEventNotifications, cancellationToken);
         }
     }
 }
