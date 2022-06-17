@@ -66,6 +66,7 @@ namespace QuokkaDev.Templates.DataAccess.Commands
                     await DispatchDomainEventsAsync(domainEvents, cancellationToken);
                     await transaction.CommitAsync();
                     await NotifyDomainEventsAsync(this.allEvents, cancellationToken);
+                    this.allEvents.Clear();
                     return true;
                 }
                 catch (Exception ex)
@@ -121,22 +122,10 @@ namespace QuokkaDev.Templates.DataAccess.Commands
             var tasks = domainEvents
                 .Select(async (domainEvent) =>
                 {
-                    var domainEventNotification = GetNotification(domainEvent);
-                    if (domainEventNotification != null)
-                    {
-                        await eventsDispatcher.Notify(domainEventNotification, cancellationToken);
-                    }
+                    await eventsDispatcher.Notify(domainEvent, cancellationToken);
                 });
 
             await Task.WhenAll(tasks);
-        }
-
-        private IDomainEventNotification<T>? GetNotification<T>(T domainEvent) where T : IDomainEvent
-        {
-            Type domainEvenNotificationType = typeof(IDomainEventNotification<>);
-            var domainEventNotificationWithGenericType = domainEvenNotificationType.MakeGenericType(domainEvent.GetType());
-            var domainEventNotification = Activator.CreateInstance(domainEventNotificationWithGenericType, domainEvent) as IDomainEventNotification<T>;
-            return domainEventNotification;
         }
     }
 }
