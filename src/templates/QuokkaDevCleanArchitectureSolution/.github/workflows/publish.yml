@@ -29,9 +29,7 @@ jobs:
           path: ~/.nuget/packages
           key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-nuget-  
-
-      # Insert SonarQube analisys here...
+            ${{ runner.os }}-nuget-        
 
       # Prepare
 
@@ -49,18 +47,40 @@ jobs:
           format: "${major}.${minor}.${patch}"
         id: calculate_version
 
+      # SonarCloud configuration
+
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~/sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      
+      - name: Cache SonarCloud scanner
+        id: cache-sonar-scanner
+        uses: actions/cache@v1
+        with:
+          path: ./.sonar/scanner
+          key: ${{ runner.os }}-sonar-scanner
+          restore-keys: ${{ runner.os }}-sonar-scanner
+      
+      - name: Install SonarCloud scanner
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'        
+        run: |
+          mkdir -p .sonar/scanner                
+          dotnet tool install dotnet-sonarscanner --tool-path .sonar/scanner
+ 
+      # end SonarCloud configuration
+
       - name: Install dependencies
         run: dotnet restore
 
-      # Build
-
-      - name: Build
-        run: dotnet build --configuration Release --no-restore /p:Version=${{ steps.calculate_version.outputs.version }}
-      
       # Test and reporting
 
       - name: Run tests
-        run: dotnet test --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx" --collect:"XPlat Code Coverage" --results-directory coverage
+        # For exclude some projects from test coverage append:
+        # DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.ExcludeByFile=**/QuokkaDev.Templates.SomeProject/**/*.cs
+        run: dotnet test --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx" --collect:"XPlat Code Coverage" --results-directory coverage -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover,cobertura
       
       - name: Generate Unit Test Report
         uses: zyborg/dotnet-tests-report@v1
@@ -71,7 +91,9 @@ jobs:
           set_check_status_from_test_outcome: true
     
       - name: Copy Coverage To Predictable Location
-        run: cp coverage/*/coverage.cobertura.xml coverage/coverage.cobertura.xml
+        run: |
+          cp coverage/*/coverage.cobertura.xml coverage/coverage.cobertura.xml
+          cp coverage/*/coverage.opencover.xml coverage/coverage.opencover.xml
         
       - name: Generate QuokkaDev.Templates Code Coverage Summary Report
         uses: irongut/CodeCoverageSummary@v1.0.2      
@@ -91,6 +113,17 @@ jobs:
           output: | 
             {"summary":"Code Coverage"}
           output_text_description_file: code-coverage-results.md 
+
+      # Build
+
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}        
+        run: |
+          .sonar/scanner/dotnet-sonarscanner begin /k:"quokka-dev_quokkadev-project-key" /o:"quokka-dev" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="coverage/coverage.opencover.xml"
+          dotnet build --configuration Release --no-restore /p:Version=${{ steps.calculate_version.outputs.version }}
+          .sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
       # Publish 
 
