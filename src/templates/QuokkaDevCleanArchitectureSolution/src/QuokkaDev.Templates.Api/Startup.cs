@@ -1,8 +1,9 @@
 ﻿using Autofac;
-using QuokkaDev.Templates.Application.DI;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.PlatformAbstractions;
+using QuokkaDev.SecurityHeaders;
+using QuokkaDev.Templates.Application.DI;
 using System.Reflection;
 
 namespace QuokkaDev.Templates.Api
@@ -68,13 +69,17 @@ namespace QuokkaDev.Templates.Api
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.InjectJavascript("/ui.js", "text/javascript"));
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSecurityHeaders();
 
             app.UseAuthentication();
 

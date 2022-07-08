@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.Logging;
 using QuokkaDev.Templates.Domain.Aggregates.MyAggregateRoot;
 using QuokkaDev.Templates.Domain.Interfaces;
 using QuokkaDev.Templates.Domain.SeedWork;
@@ -9,6 +11,8 @@ namespace QuokkaDev.Templates.DataAccess.Commands
     internal class CommandsDbContext : DbContext, IUnitOfWork
     {
         private readonly IDomainEventsDispatcher eventsDispatcher;
+        private readonly ILogger<CommandsDbContext> logger;
+        private readonly List<IDomainEvent> allEvents = new List<IDomainEvent>();
 
         /// <summary>
         /// Default constructor
@@ -22,9 +26,10 @@ namespace QuokkaDev.Templates.DataAccess.Commands
         /// Constructor
         /// </summary>
         /// <param name="context">Configuration options</param>
-        public CommandsDbContext(DbContextOptions<CommandsDbContext> context, IDomainEventsDispatcher eventsDispatcher) : base(context)
+        public CommandsDbContext(DbContextOptions<CommandsDbContext> context, IDomainEventsDispatcher eventsDispatcher, ILogger<CommandsDbContext> logger) : base(context)
         {
             this.eventsDispatcher = eventsDispatcher;
+            this.logger = logger;
         }
 
         #region Db Sets
@@ -50,12 +55,34 @@ namespace QuokkaDev.Templates.DataAccess.Commands
         /// <exception cref="NotImplementedException"></exception>
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
         {
-            await DispatchDomainEventsAsync(cancellationToken);
-            // After executing this line all the changes (from the Command Handler and Domain Event Handlers) 
-            // performed thought the DbContext will be commited
-            var result = await base.SaveChangesAsync();
+            var domainEvents = GetDomainEvents();
+            this.allEvents.AddRange(domainEvents);
+            if (this.Database.CurrentTransaction == null)
+            {
+                using IDbContextTransaction transaction = await this.Database.BeginTransactionAsync();
+                try
+                {
+                    await base.SaveChangesAsync();
+                    await DispatchDomainEventsAsync(domainEvents, cancellationToken);
+                    await transaction.CommitAsync();
+                    await NotifyDomainEventsAsync(this.allEvents, cancellationToken);
+                    this.allEvents.Clear();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    await transaction.RollbackAsync();
+                    logger?.LogError("Rolling back changes occured while saving DB changes, {error}", ex.Message);
+                    throw;
+                }
+            }
+            else
+            {
+                await base.SaveChangesAsync();
+                await DispatchDomainEventsAsync(domainEvents, cancellationToken);
+                return true;
+            }
 
-            return true;
         }
 
         private void ConfigureMyAggregateRoot(EntityTypeBuilder<MyAggregateRoot> myAggregateRootConfiguration)
@@ -63,7 +90,7 @@ namespace QuokkaDev.Templates.DataAccess.Commands
             myAggregateRootConfiguration.HasKey(a => a.Id);
         }
 
-        private async Task DispatchDomainEventsAsync(CancellationToken cancellationToken = default)
+        private IEnumerable<IDomainEvent> GetDomainEvents()
         {
             var domainEntities = this.ChangeTracker
                 .Entries<Entity>()
@@ -76,10 +103,26 @@ namespace QuokkaDev.Templates.DataAccess.Commands
             domainEntities.ToList()
                 .ForEach(entity => entity.Entity.DomainEvents!.Clear());
 
+            return domainEvents;
+        }
+
+        private async Task DispatchDomainEventsAsync(IEnumerable<IDomainEvent> domainEvents, CancellationToken cancellationToken = default)
+        {
             var tasks = domainEvents
                 .Select(async (domainEvent) =>
                 {
                     await eventsDispatcher.Publish(domainEvent, cancellationToken);
+                });
+
+            await Task.WhenAll(tasks);
+        }
+
+        private async Task NotifyDomainEventsAsync(IEnumerable<IDomainEvent> domainEvents, CancellationToken cancellationToken = default)
+        {
+            var tasks = domainEvents
+                .Select(async (domainEvent) =>
+                {
+                    await eventsDispatcher.Notify(domainEvent, cancellationToken);
                 });
 
             await Task.WhenAll(tasks);

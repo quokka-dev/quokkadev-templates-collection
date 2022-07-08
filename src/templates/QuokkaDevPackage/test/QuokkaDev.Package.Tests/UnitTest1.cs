@@ -6,7 +6,7 @@ namespace QuokkaDev.Package.Tests;
 
 public class UnitTest1
 {
-    [Fact]
+    [Fact(DisplayName = "My test description")]
     public void Test1()
     {
         // Arrange

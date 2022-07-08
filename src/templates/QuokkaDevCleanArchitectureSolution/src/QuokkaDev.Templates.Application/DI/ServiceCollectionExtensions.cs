@@ -1,8 +1,9 @@
 ﻿using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
+using QuokkaDev.AsyncNotifications;
 using QuokkaDev.Cqrs;
 using QuokkaDev.Cqrs.Decorators;
 using QuokkaDev.Templates.Application.Infrastructure.Exceptions;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace QuokkaDev.Templates.Application.DI
 {
@@ -11,6 +12,8 @@ namespace QuokkaDev.Templates.Application.DI
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddCQRS(typeof(ServiceCollectionExtensions).Assembly);
+
+            services.AddAsyncNotifications(typeof(ServiceCollectionExtensions).Assembly);
 
             services.AddValidatorsFromAssembly(typeof(ServiceCollectionExtensions).Assembly);
 
