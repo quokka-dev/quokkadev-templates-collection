@@ -76,20 +76,39 @@ jobs:
         run: dotnet restore
 
       # Test and reporting
-
-      - name: Run tests
-        # For exclude some projects from test coverage append:
-        # DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.ExcludeByFile=**/QuokkaDev.Templates.SomeProject/**/*.cs
-        run: dotnet test --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx" --collect:"XPlat Code Coverage" --results-directory coverage -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover,cobertura
       
       - name: Generate Unit Test Report
         uses: zyborg/dotnet-tests-report@v1
-        with:          
-          report_name: QuokkaDev.Templates Test Report
-          report_title: QuokkaDev.Templates Test Report
+        with:
+          project_path: tests/QuokkaDev.Templates.UnitTests           
+          report_name: QuokkaDev.Templates Unit Test Report
+          report_title: QuokkaDev.Templates Unit Test Report
           github_token: ${{ secrets.GITHUB_TOKEN }}
           set_check_status_from_test_outcome: true
-    
+
+      - name: Generate Architectural Test Report
+        uses: zyborg/dotnet-tests-report@v1
+        with:
+          project_path: tests/QuokkaDev.Templates.ArchitecturalTests           
+          report_name: QuokkaDev.Templates Architectural Test Report
+          report_title: QuokkaDev.Templates Architectural Test Report
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          set_check_status_from_test_outcome: true
+
+      - name: Generate Integration Test Report
+        uses: zyborg/dotnet-tests-report@v1
+        with:
+          project_path: tests/QuokkaDev.Templates.IntegrationTests           
+          report_name: QuokkaDev.Templates Integration Test Report
+          report_title: QuokkaDev.Templates Integration Test Report
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          set_check_status_from_test_outcome: true
+
+      - name: Run tests for coverage
+        # For exclude some projects from test coverage append:
+        # DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.ExcludeByFile=**/QuokkaDev.Templates.SomeProject/**/*.cs
+        run: dotnet test tests/QuokkaDev.Templates.UnitTests/QuokkaDev.Templates.UnitTests.csproj --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx" --collect:"XPlat Code Coverage" --results-directory coverage -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover,cobertura
+
       - name: Copy Coverage To Predictable Location
         run: |
           cp coverage/*/coverage.cobertura.xml coverage/coverage.cobertura.xml
