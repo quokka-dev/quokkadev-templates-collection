@@ -1,5 +1,4 @@
-﻿using QuokkaDev.Templates.Domain.Events;
-using QuokkaDev.Templates.Domain.Interfaces;
+﻿using QuokkaDev.Templates.Domain.Interfaces;
 using QuokkaDev.Templates.Domain.SeedWork;
 
 namespace QuokkaDev.Templates.Domain.Aggregates.MyAggregateRoot

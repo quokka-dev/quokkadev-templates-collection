@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
-using QuokkaDev.Templates.Domain.Interfaces;
 using NetArchTest.Rules;
+using QuokkaDev.Templates.Domain.Interfaces;
 using Xunit;
 
 namespace QuokkaDev.Templates.ArchitecturalTests.Domain
@@ -9,6 +9,19 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Domain
     {
         private const string INTERFACE_NAMESPACE = "QuokkaDev.Templates.Domain.Interfaces";
         private const string AGGREGATE_NAMESPACE = "QuokkaDev.Templates.Domain.Aggregates";
+
+        [Fact]
+        public void Interfaces_Should_Have_Right_Name()
+        {
+            var result = Types.InAssembly(typeof(IAggregateRoot).Assembly)
+                .That()
+                .AreInterfaces()
+                .Should()
+                .HaveNameStartingWith("I")
+                .GetResult();
+
+            result.IsSuccessful.Should().BeTrue($"Interfaces name should be start with 'I' but {result.GetOffendingTypes()} does not");
+        }
 
         [Fact]
         public void Objects_In_Interfaces_Namespace_Should_Be_Interface()

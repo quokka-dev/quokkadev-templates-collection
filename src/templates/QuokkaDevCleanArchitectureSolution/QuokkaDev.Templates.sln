@@ -34,7 +34,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuokkaDev.Templates.Api", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuokkaDev.Templates.DataAccess.Commands", "src\QuokkaDev.Templates.DataAccess.Commands\QuokkaDev.Templates.DataAccess.Commands.csproj", "{1FEB7492-F2CF-494D-A527-F195EF8E7C6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuokkaDev.Templates.DataAccess.Queries", "src\QuokkaDev.Templates.DataAccess.Queries\QuokkaDev.Templates.DataAccess.Queries.csproj", "{59466C64-EC03-4C27-92E5-B0FD253734AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuokkaDev.Templates.DataAccess.Queries", "src\QuokkaDev.Templates.DataAccess.Queries\QuokkaDev.Templates.DataAccess.Queries.csproj", "{59466C64-EC03-4C27-92E5-B0FD253734AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,7 +3,9 @@ name: Build NuGet package and VSIX
 on:
   push:
     branches: ['main']
-
+    paths-ignore:
+      - '**/README.md'
+      - '**/.github/workflows/*.yml'
 jobs:
   build-vsix:    
     runs-on: windows-latest

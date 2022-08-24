@@ -1,9 +1,10 @@
 ﻿using Autofac;
-using QuokkaDev.Templates.DataAccess.Commands.Services;
-using QuokkaDev.Templates.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
+using QuokkaDev.Templates.DataAccess.Commands.Services;
+using QuokkaDev.Templates.Domain.Interfaces;
 
 namespace QuokkaDev.Templates.DataAccess.Commands.DI
 {
@@ -45,6 +46,10 @@ namespace QuokkaDev.Templates.DataAccess.Commands.DI
                 else
                 {
                     optionsBuilder = optionsBuilder.UseInMemoryDatabase("myDataBase");
+                    optionsBuilder.ConfigureWarnings(b =>
+                    {
+                        b.Ignore(InMemoryEventId.TransactionIgnoredWarning);
+                    });
                 }
 
                 return optionsBuilder.Options;
