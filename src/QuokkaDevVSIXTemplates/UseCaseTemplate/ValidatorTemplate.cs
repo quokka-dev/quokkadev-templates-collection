@@ -1,5 +1,4 @@
-﻿using QuokkaDev.CQRS;
-using FluentValidation;
+﻿using FluentValidation;
 using $rootnamespace$.$fileinputname$.Commands;
 using $rootnamespace$.$fileinputname$.Queries;
 

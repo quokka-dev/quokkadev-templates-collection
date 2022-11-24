@@ -107,6 +107,15 @@
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
     </ProjectReference>
+
+	<ProjectReference Include="..\CqrsNotificationHandlerTemplate\CqrsNotificationHandlerTemplate.csproj">
+		<Project>{17498975-AB91-47D1-B094-F55E351EC77D}</Project>
+		<Name>CqrsNotificationHandlerTemplate</Name>
+		<VSIXSubPath>ItemTemplates\QuokkaDev\CQRS</VSIXSubPath>
+		<ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+		<IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+	</ProjectReference>  
+	  
     <ProjectReference Include="..\CqrsCommandTemplate\CqrsCommandTemplate.csproj">
       <Project>{1D7D2C4E-6B09-472D-BD72-E19DC736A352}</Project>
       <Name>CqrsCommandTemplate</Name>

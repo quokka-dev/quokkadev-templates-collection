@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using QuokkaDev.CQRS;
+using QuokkaDev.Cqrs.Abstractions;
 using Microsoft.Extensions.Logging;
 using $rootnamespace$.$fileinputname$.Commands;
 using $rootnamespace$.$fileinputname$.Queries;
