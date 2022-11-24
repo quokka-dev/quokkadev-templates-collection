@@ -1,6 +1,4 @@
-﻿using QuokkaDev.CQRS;
-
-namespace $rootnamespace$.$fileinputname$.Queries
+﻿namespace $rootnamespace$.$fileinputname$.Queries
 {
     /// <summary>
     /// A query request

@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace $rootnamespace$
 {
-    public class $safeitemname$ : IEntityTypeConfiguration<object>
+    public class $safeitemname$Configuration : IEntityTypeConfiguration<$safeitemname$>
     {
-        public void Configure(EntityTypeBuilder<object> builder)
+        public void Configure(EntityTypeBuilder<$safeitemname$> builder)
         {
             builder.ToTable("MyEntityTableName");
         }
