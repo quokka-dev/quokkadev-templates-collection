@@ -1,11 +1,10 @@
 ﻿using Asp.Versioning;
-using Autofac;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using QuokkaDev.SecurityHeaders;
 using QuokkaDev.Templates.Application.DI;
-using System.Reflection;
-
+using QuokkaDev.Templates.DataAccess.Commands.DI;
+using QuokkaDev.Templates.DataAccess.Queries.DI;
 namespace QuokkaDev.Templates.Api
 {
     public class Startup
@@ -59,15 +58,11 @@ namespace QuokkaDev.Templates.Api
                     });
             });
 
+            services.AddCommandsDataAccess(Configuration.GetConnectionString("Default")!, false);
+            services.AddQueriesDataAccess(Configuration.GetConnectionString("Default")!);
+
             services.AddApplicationServices();
             services.AddHttpContextAccessor();
-        }
-
-        public void ConfigureContainer(ContainerBuilder builder)
-        {
-            var applicationPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var assemblies = Directory.GetFiles(applicationPath, "*QuokkaDev.Templates.*.dll").Select(dll => Assembly.LoadFile(dll)).ToArray();
-            builder.RegisterAssemblyModules(assemblies);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

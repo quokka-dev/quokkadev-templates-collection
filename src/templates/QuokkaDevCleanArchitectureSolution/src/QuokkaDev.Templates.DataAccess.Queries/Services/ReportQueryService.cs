@@ -8,7 +8,7 @@ namespace QuokkaDev.Templates.DataAccess.Queries.Services
     {
         private readonly string connectionString = string.Empty;
 
-        public ReportQueryService(DataAccessQuerySettings settings)
+        public ReportQueryService(QuerySettings settings)
         {
             connectionString = !string.IsNullOrWhiteSpace(settings.ConnectionString) ? settings.ConnectionString : throw new ArgumentNullException(nameof(settings.ConnectionString));
         }
