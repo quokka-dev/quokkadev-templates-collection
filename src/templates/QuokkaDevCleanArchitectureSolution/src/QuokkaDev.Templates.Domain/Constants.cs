@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace QuokkaDev.Templates.Domain.DataTypes
+﻿namespace QuokkaDev.Templates.Domain
 {
     public static class Constants
     {

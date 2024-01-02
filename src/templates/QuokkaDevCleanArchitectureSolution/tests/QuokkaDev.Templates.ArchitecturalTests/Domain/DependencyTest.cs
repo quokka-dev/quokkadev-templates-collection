@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using QuokkaDev.Templates.Domain.Exceptions;
 using NetArchTest.Rules;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using QuokkaDev.Templates.Domain;
 
 namespace QuokkaDev.Templates.ArchitecturalTests.Domain
 {

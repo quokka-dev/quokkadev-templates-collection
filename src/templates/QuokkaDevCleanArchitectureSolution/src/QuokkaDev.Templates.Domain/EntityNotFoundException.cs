@@ -1,11 +1,4 @@
-﻿using QuokkaDev.Templates.Domain.DataTypes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace QuokkaDev.Templates.Domain.Exceptions
+﻿namespace QuokkaDev.Templates.Domain
 {
     public class EntityNotFoundException : ApplicationException
     {

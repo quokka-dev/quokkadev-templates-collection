@@ -1,8 +1,8 @@
 using NetArchTest.Rules;
-using QuokkaDev.Templates.Domain.Exceptions;
 using System;
 using Xunit;
 using FluentAssertions;
+using QuokkaDev.Templates.Domain;
 
 namespace QuokkaDev.Templates.ArchitecturalTests.Domain;
 

@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
-using QuokkaDev.Templates.Domain.Aggregates.MyAggregateRoot;
 using QuokkaDev.Templates.Domain.Interfaces;
+using QuokkaDev.Templates.Domain.MyAggregateRoot;
 using QuokkaDev.Templates.Domain.SeedWork;
 
 namespace QuokkaDev.Templates.DataAccess.Commands

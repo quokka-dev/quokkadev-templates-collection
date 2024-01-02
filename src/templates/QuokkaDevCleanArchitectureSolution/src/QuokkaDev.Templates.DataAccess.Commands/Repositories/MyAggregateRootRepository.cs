@@ -1,4 +1,4 @@
-﻿using QuokkaDev.Templates.Domain.Aggregates.MyAggregateRoot;
+﻿using QuokkaDev.Templates.Domain.MyAggregateRoot;
 using System;
 using System.Collections.Generic;
 using System.Linq;

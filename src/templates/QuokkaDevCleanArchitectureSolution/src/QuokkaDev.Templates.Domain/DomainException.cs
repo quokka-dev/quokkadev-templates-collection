@@ -1,4 +1,4 @@
-﻿namespace QuokkaDev.Templates.Domain.Exceptions
+﻿namespace QuokkaDev.Templates.Domain
 {
     [Serializable]
     public class DomainException : ApplicationException
