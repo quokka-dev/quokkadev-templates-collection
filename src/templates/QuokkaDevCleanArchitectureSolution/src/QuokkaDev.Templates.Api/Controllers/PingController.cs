@@ -1,7 +1,8 @@
+using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc;
 using QuokkaDev.Cqrs.Abstractions;
 using QuokkaDev.Templates.Api.Filters;
 using QuokkaDev.Templates.Application.UseCases.Ping.Queries;
-using Microsoft.AspNetCore.Mvc;
 
 namespace QuokkaDev.Templates.Api.Controllers
 {
