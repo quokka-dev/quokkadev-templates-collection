@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<PackageType>Template</PackageType>
 		<PackageId>QuokkaDev.Templates.Collection</PackageId>
 		<Title>QuokkaDev Templates Collection</Title>
@@ -9,7 +9,7 @@
 		<Authors>QuokkaDev - Fabio Cometti</Authors>
 		<Company>QuokkaDev</Company>
 		<Copyright>QuokkaDev © 2022</Copyright>
-		<PackageTags>QuokkaDev CleanArchitecture Templates C#</PackageTags>		
+		<PackageTags>QuokkaDev CleanArchitecture Templates C#</PackageTags>
 
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<IncludeContentInPack>true</IncludeContentInPack>

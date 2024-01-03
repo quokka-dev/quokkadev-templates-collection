@@ -790,7 +790,7 @@ var result = await connection.Query([], p, commandType: CommandType.StoredProced
 ### xUnit Test Method
 shortcut: `xunit`
 ```csharp
-[Fact]
+[Fact(DisplayName="Test")]
 public void Test()
 {
     // Arrange
@@ -804,7 +804,7 @@ public void Test()
 ### xUnit async Test Method
 shortcut: `xunitasync`
 ```csharp
-[Fact]
+[Fact(DisplayName="TestAsync")]
 public async Task TestAsync()
 {
     // Arrange
