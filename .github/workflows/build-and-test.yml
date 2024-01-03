@@ -7,7 +7,7 @@ on:
       - '**/README.md'
       - '**/.github/workflows/*.yml'
 jobs:
-  build-vsix:    
+  build-vsix:
     runs-on: windows-latest
 
     outputs:
@@ -15,31 +15,31 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3      
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
       - name: Calculate version
         uses: paulhatch/semantic-version@v4.0.2
-        id: calculate_version        
-        with: 
-          tag_prefix: "v"        
-          major_pattern: "(MAJOR)"        
-          minor_pattern: "(MINOR)"        
-          format: "${major}.${minor}.${patch}" 
-      
+        id: calculate_version
+        with:
+          tag_prefix: "v"
+          major_pattern: "(MAJOR)"
+          minor_pattern: "(MINOR)"
+          format: "${major}.${minor}.${patch}"
+
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v1.1
 
       - name: Setup NuGet
         uses: NuGet/setup-nuget@v1.0.6
-        
+
       - name: Navigate to Workspace
-        run: cd $GITHUB_WORKSPACE    
-        
+        run: cd $GITHUB_WORKSPACE
+
       - name: Restore Packages
         run: nuget restore ./src/QuokkaDevVSIXTemplates/QuokkaDevVSIXTemplates.sln
- 
+
       - name: Update VSIX version
         run: |
           .\Update-Version.ps1 ${{ steps.calculate_version.outputs.version }}
@@ -47,19 +47,19 @@ jobs:
       - name: Build Solution
         run: |
           msbuild.exe ./src/QuokkaDevVSIXTemplates/QuokkaDevVSIXTemplates.sln /nologo /nr:false /p:platform="Any CPU" /p:configuration="Release"
-          
+
       - name: Upload artifact
         uses: actions/upload-artifact@v3
-        with:  
+        with:
           name: QuokkaDevVSIXTemplates.${{ steps.calculate_version.outputs.version }}.vsix
           path: "./src/QuokkaDevVSIXTemplates/QuokkaDevVSIXTemplates/bin/Release/QuokkaDevVSIXTemplates.vsix"
 
       - name: Publish extension to Marketplace
-        uses: cezarypiatek/VsixPublisherAction@0.2
+        uses: cezarypiatek/VsixPublisherAction@1.0
         with:
             extension-file: ./src/QuokkaDevVSIXTemplates/QuokkaDevVSIXTemplates/bin/Release/QuokkaDevVSIXTemplates.vsix
             publish-manifest-file: ./src/QuokkaDevVSIXTemplates/QuokkaDevVSIXTemplates/publishManifest.json
-            personal-access-code: ${{ secrets.VS_MARKETPLACE_TOKEN }}      
+            personal-access-code: ${{ secrets.VS_MARKETPLACE_TOKEN }}
 
   build-nuget-package:
     needs: build-vsix
@@ -71,10 +71,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3      
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      
+
       - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
         uses: actions/setup-dotnet@v2
         with:
@@ -87,21 +87,21 @@ jobs:
 
       - name: Build QuokkaDevPackage
         run: dotnet build --configuration Release src/templates/QuokkaDevPackage/QuokkaDev.Package.sln
-      
+
       - name: Install dependencies
-        run: dotnet restore src/QuokkaDev.Templates.Collection.csproj   
+        run: dotnet restore src/QuokkaDev.Templates.Collection.csproj
 
       # End Build templates
-      
+
       - name: Pack QuokkaDev.Templates.Collection
         run: dotnet pack src/QuokkaDev.Templates.Collection.csproj -c Release /p:NoDefaultExcludes=true /p:Version=${{ needs.build-vsix.outputs.version }}
-      
-      - name: Publish to GitHub package QuokkaDev.Templates.Collection 
+
+      - name: Publish to GitHub package QuokkaDev.Templates.Collection
         run: dotnet nuget push src/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
-        with:  
+        with:
           name: QuokkaDev.Templates.Collection.${{ needs.build-vsix.outputs.version }}.nupkg
           path: src/bin/Release/*.nupkg
 
@@ -139,12 +139,12 @@ jobs:
           body: ${{steps.github_release.outputs.changelog}}
 
       - name: Upload NuGet Package to Release
-        id: upload-release-asset-1 
+        id: upload-release-asset-1
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: src/bin/Release/QuokkaDev.Templates.Collection.${{ needs.build-vsix.outputs.version }}.nupkg
           asset_name: QuokkaDev.Templates.Collection.${{ needs.build-vsix.outputs.version }}.nupkg
           asset_content_type: application/x-msdownload
@@ -155,7 +155,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: QuokkaDevVSIXTemplates.vsix
           asset_name: QuokkaDevVSIXTemplates.${{ needs.build-vsix.outputs.version }}.vsix
           asset_content_type: application/vsix
