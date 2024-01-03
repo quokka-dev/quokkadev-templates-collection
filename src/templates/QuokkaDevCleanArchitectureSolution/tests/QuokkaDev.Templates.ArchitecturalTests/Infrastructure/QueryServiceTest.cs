@@ -1,19 +1,18 @@
 ﻿using FluentAssertions;
-using QuokkaDev.Templates.DataAccess.Queries.DI;
-using QuokkaDev.Templates.Domain.Interfaces;
 using NetArchTest.Rules;
+using QuokkaDev.Templates.Application.Services;
 using Xunit;
 
 namespace QuokkaDev.Templates.ArchitecturalTests.Infrastructure
 {
     public class QueryServiceTest
     {
-        private const string QUERYSERVICE_NAMESPACE = "QuokkaDev.Templates.DataAccess.Queries.Services";
+        private const string QUERYSERVICE_NAMESPACE = "QuokkaDev.Templates.Query.Dapper.Services";
 
-        [Fact]
+        [Fact(DisplayName = "QueryServices Should Reside In Namespace")]
         public void QueryServices_Should_Reside_In_Namespace()
         {
-            var result = Types.InAssembly(typeof(DataAccessQueriesModule).Assembly)
+            var result = Types.InAssembly(typeof(QuokkaDev.Templates.Query.Dapper.DI.ServiceCollectionExtensions).Assembly)
                 .That()
                 .ImplementInterface(typeof(IQueryService))
                 .Should()
@@ -23,10 +22,10 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Infrastructure
             result.IsSuccessful.Should().BeTrue($"QueryServices should reside in namespaces {QUERYSERVICE_NAMESPACE} but {result.GetOffendingTypes()} does not");
         }
 
-        [Fact]
+        [Fact(DisplayName = "QueryServices Should Have Right Name")]
         public void QueryServices_Should_Have_Right_Name()
         {
-            var result = Types.InAssembly(typeof(DataAccessQueriesModule).Assembly)
+            var result = Types.InAssembly(typeof(QuokkaDev.Templates.Query.Dapper.DI.ServiceCollectionExtensions).Assembly)
                 .That()
                 .ImplementInterface(typeof(IQueryService))
                 .Should()
@@ -36,10 +35,10 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Infrastructure
             result.IsSuccessful.Should().BeTrue($"QueryServices should have name ending with 'QueryService' but {result.GetOffendingTypes()} does not");
         }
 
-        [Fact]
+        [Fact(DisplayName = "Class In Namespace Should Be QueryServices")]
         public void Class_In_Namespace_Should_Be_QueryServices()
         {
-            var result = Types.InAssembly(typeof(DataAccessQueriesModule).Assembly)
+            var result = Types.InAssembly(typeof(QuokkaDev.Templates.Query.Dapper.DI.ServiceCollectionExtensions).Assembly)
                 .That()
                 .ResideInNamespaceMatching(QUERYSERVICE_NAMESPACE)
                 .Should()
@@ -49,10 +48,10 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Infrastructure
             result.IsSuccessful.Should().BeTrue($"Classes in namespaces {QUERYSERVICE_NAMESPACE} should inherit from IQueryService but {result.GetOffendingTypes()} does not");
         }
 
-        [Fact]
+        [Fact(DisplayName = "Class In Namespace Should Have Right Name")]
         public void Class_In_Namespace_Should_Have_Right_Name()
         {
-            var result = Types.InAssembly(typeof(DataAccessQueriesModule).Assembly)
+            var result = Types.InAssembly(typeof(QuokkaDev.Templates.Query.Dapper.DI.ServiceCollectionExtensions).Assembly)
                 .That()
                 .ResideInNamespaceMatching(QUERYSERVICE_NAMESPACE)
                 .Should()

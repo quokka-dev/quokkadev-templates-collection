@@ -1,21 +1,22 @@
-﻿using Autofac;
+﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.Extensions.PlatformAbstractions;
 using QuokkaDev.SecurityHeaders;
 using QuokkaDev.Templates.Application.DI;
-using System.Reflection;
-
+using QuokkaDev.Templates.Persistence.Ef.DI;
+using QuokkaDev.Templates.Query.Dapper.DI;
 namespace QuokkaDev.Templates.Api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Environment { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -26,21 +27,22 @@ namespace QuokkaDev.Templates.Api
             services.AddApiVersioning(o =>
             {
                 o.AssumeDefaultVersionWhenUnspecified = true;
-                o.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+                o.DefaultApiVersion = new ApiVersion(1, 0);
                 o.ReportApiVersions = true;
-            });
-
-            services.AddVersionedApiExplorer(options =>
+            })
+            .AddMvc()
+            .AddApiExplorer(options =>
             {
                 options.GroupNameFormat = "'v'VVV";
                 options.SubstituteApiVersionInUrl = true;
+                options.FormatGroupName = (group, version) => $"{group} - {version}";
             });
 
             var hcBuilder = services.AddHealthChecks();
 
             // Change Default with the name of the SQL Server connection string to check
             hcBuilder.AddSqlServer(
-                    Configuration.GetConnectionString("Default"),
+                    Configuration.GetConnectionString("Default")!,
                     name: "DB-check",
                     tags: new string[] { "sqldb" });
 
@@ -56,15 +58,11 @@ namespace QuokkaDev.Templates.Api
                     });
             });
 
+            services.AddPersistenceEf(Configuration.GetConnectionString("Default")!, false);
+            services.AddQueriesDataAccess(Configuration.GetConnectionString("Default")!);
+
             services.AddApplicationServices();
             services.AddHttpContextAccessor();
-        }
-
-        public void ConfigureContainer(ContainerBuilder builder)
-        {
-            var applicationPath = PlatformServices.Default.Application.ApplicationBasePath;
-            var assemblies = Directory.GetFiles(applicationPath, "*QuokkaDev.Templates.*.dll").Select(dll => Assembly.LoadFile(dll)).ToArray();
-            builder.RegisterAssemblyModules(assemblies);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

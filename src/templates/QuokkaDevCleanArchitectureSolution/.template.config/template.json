@@ -1,13 +1,13 @@
-{    
+{
     "$schema": "http://json.schemastore.org/template",
     "author": "Fabio Cometti",
     "classifications": [ "Solution", "Clean Architecture", "Windows", "Linux", "macOS", "QuokkaDev" ],
     "name": "QuokkaDev Clean Architecture Solution",
-    "identity": "QuokkaDev.Templates.CleanArchitectureSolution",        
-    "shortName": "QuokkaDevcasln",                 
+    "identity": "QuokkaDev.Templates.CleanArchitectureSolution",
+    "shortName": "QuokkaDevcasln",
     "tags": {
-        "language": "C#",    
-        "type": "solution"                
+        "language": "C#",
+        "type": "solution"
     },
     "sourceName": "QuokkaDev.Templates",
     "preferNameDirectory" : true,
@@ -28,10 +28,14 @@
                 {
                     "choice": "net6.0",
                     "description": ".Net 6.0"
+                },
+                {
+                    "choice": "net8.0",
+                    "description": ".Net 8.0"
                 }
             ],
-            "replaces": "net5.0",
-            "defaultValue": "net5.0"
+            "replaces": "net8.0",
+            "defaultValue": "net8.0"
         }
     },
     "sources": [
