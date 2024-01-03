@@ -8,7 +8,7 @@ on:
       - '**/.github/workflows/*.yml'
 jobs:
   build-vsix:
-    runs-on: windows-latest
+    runs-on: windows-2019
 
     outputs:
       version: ${{ steps.calculate_version.outputs.version }}
