@@ -1,6 +1,9 @@
-﻿namespace $rootnamespace$
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace $rootnamespace$
 {
-    internal class $safeitemname$Configuration : BaseRepository<$fileinputname$>, I$safeitemname$
+    internal class $safeitemname$ : BaseRepository<$fileinputname$>, I$safeitemname$
     {
         public $safeitemname$(CommandsDbContext context) : base(context)
         {

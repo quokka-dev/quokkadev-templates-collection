@@ -7,7 +7,7 @@ namespace QuokkaDev.Templates.UnitTests;
 
 public class UnitTest1
 {
-    [Fact]
+    [Fact(DisplayName = "Test")]
     public async Task Test1()
     {
         // Arrange

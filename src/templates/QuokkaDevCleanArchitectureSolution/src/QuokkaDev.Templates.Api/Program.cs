@@ -1,4 +1,3 @@
-using Autofac.Extensions.DependencyInjection;
 using Serilog;
 
 namespace QuokkaDev.Templates.Api
@@ -44,7 +43,6 @@ namespace QuokkaDev.Templates.Api
             Host.CreateDefaultBuilder(args)
                 .UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
                         .ReadFrom.Configuration(hostingContext.Configuration))
-                .UseServiceProviderFactory(new AutofacServiceProviderFactory())
                 .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
     }
 }

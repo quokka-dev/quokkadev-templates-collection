@@ -1,7 +1,7 @@
 using FluentAssertions;
+using Microsoft.AspNetCore.Mvc.Testing;
 using QuokkaDev.Templates.Api;
 using QuokkaDev.Templates.Application.UseCases.Ping.Queries;
-using Microsoft.AspNetCore.Mvc.Testing;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;
@@ -24,7 +24,7 @@ public class IntegrationTest1
         options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
     }
 
-    [Theory]
+    [Theory(DisplayName = "Ping Should Contain Response Text")]
     [InlineData("ECHO!!!")]
     [InlineData("My request test")]
     public async Task Ping_Should_Contain_Response_Text(string echoRequest)
@@ -41,7 +41,7 @@ public class IntegrationTest1
         objectResponse?.EchoResponse.Should().StartWith($"Response: {echoRequest}");
     }
 
-    [Theory]
+    [Theory(DisplayName = "Ping Should Respond Ok")]
     [InlineData("ECHO!!!")]
     [InlineData("My request test")]
     public async Task Ping_Should_Respond_Ok(string echoRequest)
@@ -56,7 +56,7 @@ public class IntegrationTest1
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
     }
 
-    [Fact]
+    [Fact(DisplayName = "Empty Ping Request Should Respond BadRequest")]
     public async Task Empty_Ping_Request_Should_Respond_BadRequest()
     {
         // Arrange   

@@ -1,9 +1,9 @@
 ﻿using QuokkaDev.Templates.Api.Models;
 using QuokkaDev.Templates.Application.Infrastructure.Exceptions;
-using QuokkaDev.Templates.Domain.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
+using QuokkaDev.Templates.Domain;
 
 namespace QuokkaDev.Templates.Api.Filters
 {
