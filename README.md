@@ -2,7 +2,7 @@
 
 QuokkaDev Template collection is a set of dotnet templates, C# project items and code snippet that can help a developer to write project and files following a shared set of best practices.
 
-It is composed by two main artifacts. 
+It is composed by two main artifacts.
 
 The first artifact is a NuGet package containing two different project templates, one for scaffolding a generic NuGet package solution and one for scaffolding a web API solution based on Clean Architecture styles(see more about about Clean Architecture [here](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)).
 
@@ -54,7 +54,7 @@ The last way is to clone this repository, build the project QuokkaDevVSIXTemplat
 The NuGet package contains two different templates
 
 ## Quokka Dev Clean Architecture Solution
-Quokka Dev Clean Architecture Solution is a solution template for build a Asp.Net REST API project (currently in .NET 6.0) based on [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) principles. It furthermore uses [CQRS](https://martinfowler.com/bliki/CQRS.html) design pattern for having separate write/read models. In the domain layer some DDD ([Domain Driven Design](https://it.wikipedia.org/wiki/Domain-driven_design)) are implemented. The template come with this out-of-the-box features:
+Quokka Dev Clean Architecture Solution is a solution template for build a Asp.Net REST API project (currently in .NET 8.0) based on [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) principles. It furthermore uses [CQRS](https://martinfowler.com/bliki/CQRS.html) design pattern for having separate write/read models. In the domain layer some DDD ([Domain Driven Design](https://it.wikipedia.org/wiki/Domain-driven_design)) principles are implemented. The template come with this out-of-the-box features:
 
 - .editorconfig file for C# style rules
 - .gitignore file configured for .NET solution
@@ -72,7 +72,7 @@ Quokka Dev Clean Architecture Solution is a solution template for build a Asp.Ne
 - Custom implementation of CQRS pattern based on [QuokkaDev.CQRS](https://www.nuget.org/packages/QuokkaDev.Cqrs/) and [QuokkaDev.CQRS.Decorators](https://www.nuget.org/packages/QuokkaDev.Cqrs.Decorators/) packages (both the packages are open and availables on GitHub)
 - Validation based on FluentValidation
 - Integration with AutoMapper
-- API docs with Swagger 
+- API docs with Swagger
 - Health Checks
 - Centralized management of the exceptions
 - API Versioning
@@ -357,7 +357,7 @@ namespace QuokkaDev.Templates.DataAccess.Queries
                 connection.Open();
 
                 var result = await connection.QueryAsync<dynamic>(
-                   @"select * FROM MyTable t                        
+                   @"select * FROM MyTable t
                         WHERE t.Id=@id"
                         , new { id }
                     );
@@ -392,8 +392,8 @@ using System.Net;
 namespace WebApiApp1
 {
     /// <summary>
-    /// MyCustomActionFilter action filter    
-    /// </summary>    
+    /// MyCustomActionFilter action filter
+    /// </summary>
     public class MyCustomActionFilter : IAsyncActionFilter
     {
         private readonly ILogger<MyCustomActionFilter> logger;
@@ -427,8 +427,8 @@ using Microsoft.AspNetCore.Mvc.Filters;
 namespace WebApiApp1
 {
     /// <summary>
-    /// MyCustomExceptionFilter exception filter    
-    /// </summary>    
+    /// MyCustomExceptionFilter exception filter
+    /// </summary>
     public class MyCustomExceptionFilter : IAsyncExceptionFilter
     {
         private readonly ILogger<MyCustomExceptionFilter> logger;
@@ -468,7 +468,7 @@ namespace WebApiApp1
 
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
-            if (true) // check if authorized 
+            if (true) // check if authorized
             {
                 context.Result = new UnauthorizedResult();
             }
@@ -486,8 +486,8 @@ using System.Net;
 namespace WebApiApp1
 {
     /// <summary>
-    /// MyCustomResultFilter result filter    
-    /// </summary>    
+    /// MyCustomResultFilter result filter
+    /// </summary>
     public class MyCustomResultFilter : IAsyncResultFilter
     {
         private readonly ILogger<MyCustomResultFilter> logger;
@@ -591,7 +591,7 @@ using QuokkaDev.Templates.Application.UseCases.Ping;
 namespace WebApiApp1
 {
     /// <summary>
-    /// MyCustomWebApiController Controller    
+    /// MyCustomWebApiController Controller
     /// </summary>
     [ApiController]
     [Route("[controller]")]
@@ -773,7 +773,7 @@ using (var connection = new SqlConnection(connectionString))
     connection.Open();
 
     var result = await connection.QueryAsync<dynamic>(
-        @"select * FROM MyTable t                        
+        @"select * FROM MyTable t
             WHERE t.Id=@id"
             , new { id }
         );
@@ -797,7 +797,7 @@ public void Test()
 
     // Act
 
-    // Assert            
+    // Assert
     true.Should().BeTrue();
 }
 ```
@@ -811,7 +811,7 @@ public async Task TestAsync()
 
     // Act
 
-    // Assert            
+    // Assert
     true.Should().BeTrue();
 }
 ```
