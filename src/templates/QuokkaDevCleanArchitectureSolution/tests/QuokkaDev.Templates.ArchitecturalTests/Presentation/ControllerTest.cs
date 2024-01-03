@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using Asp.Versioning;
+using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using NetArchTest.Rules;
 using QuokkaDev.Templates.Api;

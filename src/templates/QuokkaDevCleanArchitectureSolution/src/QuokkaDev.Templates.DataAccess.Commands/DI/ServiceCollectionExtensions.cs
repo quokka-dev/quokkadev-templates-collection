@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
+using QuokkaDev.Templates.Application.Services;
 using QuokkaDev.Templates.DataAccess.Commands.Services;
-using QuokkaDev.Templates.Domain.Interfaces;
 using System.Reflection;
 
 namespace QuokkaDev.Templates.DataAccess.Commands.DI

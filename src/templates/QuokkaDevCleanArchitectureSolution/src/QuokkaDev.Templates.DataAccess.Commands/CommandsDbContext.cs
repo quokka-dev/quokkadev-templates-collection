@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
-using QuokkaDev.Templates.Domain.Interfaces;
-using QuokkaDev.Templates.Domain.MyAggregateRoot;
+using QuokkaDev.Templates.Application.Services;
 using QuokkaDev.Templates.Domain.SeedWork;
+using System.Data;
 
 namespace QuokkaDev.Templates.DataAccess.Commands
 {
@@ -12,7 +11,7 @@ namespace QuokkaDev.Templates.DataAccess.Commands
     {
         private readonly IDomainEventsDispatcher eventsDispatcher;
         private readonly ILogger<CommandsDbContext> logger;
-        private readonly List<IDomainEvent> allEvents = new List<IDomainEvent>();
+        private IDbContextTransaction? currentTransaction = null;
 
         /// <summary>
         /// Default constructor
@@ -20,6 +19,7 @@ namespace QuokkaDev.Templates.DataAccess.Commands
         public CommandsDbContext()
         {
             eventsDispatcher = null!;
+            logger = null!;
         }
 
         /// <summary>
@@ -34,9 +34,11 @@ namespace QuokkaDev.Templates.DataAccess.Commands
 
         #region Db Sets
 
-        public DbSet<MyAggregateRoot> MyAggregateRoots => Set<MyAggregateRoot>();
+        // Put your DbSet here
 
         #endregion
+
+        public bool HasActiveTransaction => currentTransaction != null;
 
         /// <summary>
         /// Configure EF model
@@ -44,7 +46,12 @@ namespace QuokkaDev.Templates.DataAccess.Commands
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<MyAggregateRoot>(ConfigureMyAggregateRoot);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CommandsDbContext).Assembly);
+        }
+
+        protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+        {
+            base.ConfigureConventions(configurationBuilder);
         }
 
         /// <summary>
@@ -55,45 +62,74 @@ namespace QuokkaDev.Templates.DataAccess.Commands
         /// <exception cref="NotImplementedException"></exception>
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
         {
-            var domainEvents = GetDomainEvents();
-            this.allEvents.AddRange(domainEvents);
-            if (this.Database.CurrentTransaction == null)
-            {
-                using IDbContextTransaction transaction = await this.Database.BeginTransactionAsync();
-                try
-                {
-                    await base.SaveChangesAsync();
-                    await DispatchDomainEventsAsync(domainEvents, cancellationToken);
-                    await transaction.CommitAsync();
-                    await NotifyDomainEventsAsync(this.allEvents, cancellationToken);
-                    this.allEvents.Clear();
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    await transaction.RollbackAsync();
-                    logger?.LogError("Rolling back changes occured while saving DB changes, {error}", ex.Message);
-                    throw;
-                }
-            }
-            else
-            {
-                await base.SaveChangesAsync();
-                await DispatchDomainEventsAsync(domainEvents, cancellationToken);
-                return true;
-            }
-
+            await DispatchDomainEventsAsync(cancellationToken);
+            // After executing this line all the changes (from the Command Handler and Domain Event Handlers) 
+            // performed thought the DbContext will be commited
+            await this.SaveChangesAsync(cancellationToken);
+            return true;
         }
 
-        private void ConfigureMyAggregateRoot(EntityTypeBuilder<MyAggregateRoot> myAggregateRootConfiguration)
+        public async Task<bool> TransactionalSaveEntitiesAsync(CancellationToken cancellationToken = default)
         {
-            myAggregateRootConfiguration.HasKey(a => a.Id);
+            bool result;
+            var transaction = await this.BeginTransactionAsync();
+
+            try
+            {
+                result = await this.SaveEntitiesAsync(cancellationToken);
+                await this.CommitTransactionAsync(transaction!);
+                return result;
+            }
+            catch (Exception)
+            {
+                await this.RollbackTransactionAsync(transaction!);
+                throw;
+            }
         }
 
-        private IEnumerable<IDomainEvent> GetDomainEvents()
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            return await base.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task<ICommandTransaction?> BeginTransactionAsync()
+        {
+            if (currentTransaction is not null)
+            {
+                return null;
+            }
+
+            currentTransaction = await Database.BeginTransactionAsync(IsolationLevel.ReadCommitted);
+            return new CommandTransaction(currentTransaction);
+        }
+
+        public Task CommitTransactionAsync(ICommandTransaction transaction)
+        {
+            CheckTransaction(transaction);
+            return CommitTransactionInternalAsync(transaction);
+        }
+
+        public Task RollbackTransactionAsync(ICommandTransaction transaction)
+        {
+            CheckTransaction(transaction);
+            return RollbackTransactionInternalAsync(transaction);
+        }
+
+        public async Task ExecuteStrategyAsync(Func<Task> actionStrategy)
+        {
+            var strategy = Database.CreateExecutionStrategy();
+            await strategy.ExecuteAsync(async () => await actionStrategy());
+        }
+
+        public void Reset()
+        {
+            this.ChangeTracker.Clear();
+        }
+
+        private async Task DispatchDomainEventsAsync(CancellationToken cancellationToken = default)
         {
             var domainEntities = this.ChangeTracker
-                .Entries<Entity>()
+                .Entries<IAggregateRoot>()
                 .Where(x => x.Entity.DomainEvents?.Any() == true);
 
             var domainEvents = domainEntities
@@ -101,31 +137,57 @@ namespace QuokkaDev.Templates.DataAccess.Commands
                 .ToList();
 
             domainEntities.ToList()
-                .ForEach(entity => entity.Entity.DomainEvents!.Clear());
+                .ForEach(entity => entity.Entity.ClearDomainEvents());
 
-            return domainEvents;
-        }
-
-        private async Task DispatchDomainEventsAsync(IEnumerable<IDomainEvent> domainEvents, CancellationToken cancellationToken = default)
-        {
             var tasks = domainEvents
-                .Select(async (domainEvent) =>
-                {
-                    await eventsDispatcher.Publish(domainEvent, cancellationToken);
-                });
+                .Select(async (domainEvent) => await eventsDispatcher.Publish(domainEvent, cancellationToken));
 
             await Task.WhenAll(tasks);
         }
 
-        private async Task NotifyDomainEventsAsync(IEnumerable<IDomainEvent> domainEvents, CancellationToken cancellationToken = default)
+        private async Task CommitTransactionInternalAsync(ICommandTransaction transaction)
         {
-            var tasks = domainEvents
-                .Select(async (domainEvent) =>
+            try
+            {
+                await transaction.CommitAsync();
+            }
+            finally
+            {
+                if (currentTransaction != null)
                 {
-                    await eventsDispatcher.Notify(domainEvent, cancellationToken);
-                });
+                    currentTransaction.Dispose();
+                    currentTransaction = null;
+                }
+            }
+        }
 
-            await Task.WhenAll(tasks);
+        private async Task RollbackTransactionInternalAsync(ICommandTransaction transaction)
+        {
+            try
+            {
+                await transaction!.RollbackAsync();
+            }
+            finally
+            {
+                if (currentTransaction != null)
+                {
+                    currentTransaction.Dispose();
+                    currentTransaction = null;
+                }
+            }
+        }
+
+        private void CheckTransaction(ICommandTransaction transaction)
+        {
+            if (transaction == null)
+            {
+                throw new ArgumentNullException(nameof(transaction));
+            }
+
+            if (transaction.Id != currentTransaction?.TransactionId)
+            {
+                throw new InvalidOperationException($"Transaction {transaction.Id} is not current");
+            }
         }
     }
 }

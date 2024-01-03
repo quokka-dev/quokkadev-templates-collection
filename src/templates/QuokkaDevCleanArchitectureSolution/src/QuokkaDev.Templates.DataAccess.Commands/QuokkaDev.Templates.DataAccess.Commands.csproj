@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\QuokkaDev.Templates.Application\QuokkaDev.Templates.Application.csproj" />
     <ProjectReference Include="..\QuokkaDev.Templates.Domain\QuokkaDev.Templates.Domain.csproj" />
   </ItemGroup>
 

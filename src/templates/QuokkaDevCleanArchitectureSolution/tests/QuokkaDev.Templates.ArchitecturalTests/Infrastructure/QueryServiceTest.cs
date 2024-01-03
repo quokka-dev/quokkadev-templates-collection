@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
-using QuokkaDev.Templates.DataAccess.Queries.DI;
-using QuokkaDev.Templates.Domain.Interfaces;
 using NetArchTest.Rules;
+using QuokkaDev.Templates.Application.Services;
 using Xunit;
 
 namespace QuokkaDev.Templates.ArchitecturalTests.Infrastructure
@@ -13,7 +12,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Infrastructure
         [Fact]
         public void QueryServices_Should_Reside_In_Namespace()
         {
-            var result = Types.InAssembly(typeof(DataAccessQueriesModule).Assembly)
+            var result = Types.InAssembly(typeof(QuokkaDev.Templates.DataAccess.Queries.DI.ServiceCollectionExtensions).Assembly)
                 .That()
                 .ImplementInterface(typeof(IQueryService))
                 .Should()
@@ -26,7 +25,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Infrastructure
         [Fact]
         public void QueryServices_Should_Have_Right_Name()
         {
-            var result = Types.InAssembly(typeof(DataAccessQueriesModule).Assembly)
+            var result = Types.InAssembly(typeof(QuokkaDev.Templates.DataAccess.Queries.DI.ServiceCollectionExtensions).Assembly)
                 .That()
                 .ImplementInterface(typeof(IQueryService))
                 .Should()
@@ -39,7 +38,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Infrastructure
         [Fact]
         public void Class_In_Namespace_Should_Be_QueryServices()
         {
-            var result = Types.InAssembly(typeof(DataAccessQueriesModule).Assembly)
+            var result = Types.InAssembly(typeof(QuokkaDev.Templates.DataAccess.Queries.DI.ServiceCollectionExtensions).Assembly)
                 .That()
                 .ResideInNamespaceMatching(QUERYSERVICE_NAMESPACE)
                 .Should()
@@ -52,7 +51,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Infrastructure
         [Fact]
         public void Class_In_Namespace_Should_Have_Right_Name()
         {
-            var result = Types.InAssembly(typeof(DataAccessQueriesModule).Assembly)
+            var result = Types.InAssembly(typeof(QuokkaDev.Templates.DataAccess.Queries.DI.ServiceCollectionExtensions).Assembly)
                 .That()
                 .ResideInNamespaceMatching(QUERYSERVICE_NAMESPACE)
                 .Should()

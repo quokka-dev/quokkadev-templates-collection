@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using QuokkaDev.Templates.Domain.Interfaces;
+using QuokkaDev.Templates.Application.Services;
 using System.Reflection;
 
 namespace QuokkaDev.Templates.DataAccess.Queries.DI

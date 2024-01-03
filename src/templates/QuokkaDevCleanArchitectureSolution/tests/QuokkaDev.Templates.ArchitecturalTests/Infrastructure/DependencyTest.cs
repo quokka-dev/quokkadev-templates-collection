@@ -1,6 +1,4 @@
 ﻿using FluentAssertions;
-using QuokkaDev.Templates.DataAccess.Commands.DI;
-using QuokkaDev.Templates.DataAccess.Queries.DI;
 using NetArchTest.Rules;
 using Xunit;
 
@@ -11,7 +9,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Infrastructure
         [Fact]
         public void DataAccess_Queries_Should_Have_No_Dependency_On_Other_Projects()
         {
-            var result = Types.InAssembly(typeof(DataAccessQueriesModule).Assembly)
+            var result = Types.InAssembly(typeof(QuokkaDev.Templates.DataAccess.Queries.DI.ServiceCollectionExtensions).Assembly)
                 .Should()
                 .NotHaveDependencyOnAny(
                     "QuokkaDev.Templates.DataAccess.Commands",
@@ -24,7 +22,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Infrastructure
         [Fact]
         public void DataAccess_Commands_Should_Have_No_Dependency_On_Other_Projects()
         {
-            var result = Types.InAssembly(typeof(DataAccessCommandsModule).Assembly)
+            var result = Types.InAssembly(typeof(QuokkaDev.Templates.DataAccess.Commands.DI.ServiceCollectionExtensions).Assembly)
                 .Should()
                 .NotHaveDependencyOnAny(
                     "QuokkaDev.Templates.DataAccess.Queries",
