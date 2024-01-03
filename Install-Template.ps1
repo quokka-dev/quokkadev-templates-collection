@@ -9,7 +9,7 @@ if($null -ne $template){
     Write-Host "Removing $id"
     dotnet new -u $id
 }
-# Clear TemplateCache
+# Clear Template Cache
 Write-Host "Clearing Template Cache"
 Remove-Item ~/.templateengine -Recurse -Force
 
