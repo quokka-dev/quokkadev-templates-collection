@@ -22,8 +22,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\QuokkaDev.Templates.Application\QuokkaDev.Templates.Application.csproj" />
-    <ProjectReference Include="..\QuokkaDev.Templates.DataAccess.Commands\QuokkaDev.Templates.DataAccess.Commands.csproj" />
-    <ProjectReference Include="..\QuokkaDev.Templates.DataAccess.Queries\QuokkaDev.Templates.DataAccess.Queries.csproj" />
+    <ProjectReference Include="..\QuokkaDev.Templates.Persistence.Ef\QuokkaDev.Templates.Persistence.Ef.csproj" />
+    <ProjectReference Include="..\QuokkaDev.Templates.Query.Dapper\QuokkaDev.Templates.Query.Dapper.csproj" />
     <ProjectReference Include="..\QuokkaDev.Templates.Domain\QuokkaDev.Templates.Domain.csproj" />
   </ItemGroup>
 
@@ -31,6 +31,10 @@
     <Content Update="wwwroot\logos.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

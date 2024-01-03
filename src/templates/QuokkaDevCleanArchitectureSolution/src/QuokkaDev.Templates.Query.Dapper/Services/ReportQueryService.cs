@@ -2,7 +2,7 @@
 using QuokkaDev.Templates.Application.Services;
 using System.Data.SqlClient;
 
-namespace QuokkaDev.Templates.DataAccess.Queries.Services
+namespace QuokkaDev.Templates.Query.Dapper.Services
 {
     internal class ReportQueryService : IReportQueryService
     {

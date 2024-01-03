@@ -8,9 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AngleSharp" Version="1.0.7" />
-    <PackageReference Include="AngleSharp.Css" Version="0.17.0" />
-    <PackageReference Include="AngleSharp.Diffing" Version="0.18.2" />
     <PackageReference Include="FluentAssertions" Version="6.12.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
@@ -39,8 +36,8 @@
     <ItemGroup>
       <ProjectReference Include="..\..\src\QuokkaDev.Templates.Api\QuokkaDev.Templates.Api.csproj" />
       <ProjectReference Include="..\..\src\QuokkaDev.Templates.Application\QuokkaDev.Templates.Application.csproj" />
-      <ProjectReference Include="..\..\src\QuokkaDev.Templates.DataAccess.Commands\QuokkaDev.Templates.DataAccess.Commands.csproj" />
-      <ProjectReference Include="..\..\src\QuokkaDev.Templates.DataAccess.Queries\QuokkaDev.Templates.DataAccess.Queries.csproj" />
+      <ProjectReference Include="..\..\src\QuokkaDev.Templates.Persistence.Ef\QuokkaDev.Templates.Persistence.Ef.csproj" />
+      <ProjectReference Include="..\..\src\QuokkaDev.Templates.Query.Dapper\QuokkaDev.Templates.Query.Dapper.csproj" />
       <ProjectReference Include="..\..\src\QuokkaDev.Templates.Domain\QuokkaDev.Templates.Domain.csproj" />
     </ItemGroup>
 

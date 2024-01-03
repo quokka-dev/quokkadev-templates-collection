@@ -1,4 +1,4 @@
-﻿namespace QuokkaDev.Templates.Api.Controllers
+﻿namespace QuokkaDev.Templates.Api
 {
     public static class ControllerExtensions
     {

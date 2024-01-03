@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using QuokkaDev.SecurityHeaders;
 using QuokkaDev.Templates.Application.DI;
-using QuokkaDev.Templates.DataAccess.Commands.DI;
-using QuokkaDev.Templates.DataAccess.Queries.DI;
+using QuokkaDev.Templates.Persistence.Ef.DI;
+using QuokkaDev.Templates.Query.Dapper.DI;
 namespace QuokkaDev.Templates.Api
 {
     public class Startup
@@ -58,7 +58,7 @@ namespace QuokkaDev.Templates.Api
                     });
             });
 
-            services.AddCommandsDataAccess(Configuration.GetConnectionString("Default")!, false);
+            services.AddPersistenceEf(Configuration.GetConnectionString("Default")!, false);
             services.AddQueriesDataAccess(Configuration.GetConnectionString("Default")!);
 
             services.AddApplicationServices();

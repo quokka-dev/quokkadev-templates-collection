@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 using QuokkaDev.Templates.Application.Services;
 
-namespace QuokkaDev.Templates.DataAccess.Commands
+namespace QuokkaDev.Templates.Persistence.Ef
 {
     internal sealed class CommandTransaction : ICommandTransaction
     {

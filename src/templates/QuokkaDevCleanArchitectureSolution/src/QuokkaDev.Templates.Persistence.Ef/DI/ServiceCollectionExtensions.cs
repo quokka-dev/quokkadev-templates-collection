@@ -2,10 +2,10 @@
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using QuokkaDev.Templates.Application.Services;
-using QuokkaDev.Templates.DataAccess.Commands.Services;
+using QuokkaDev.Templates.Persistence.Ef.Services;
 using System.Reflection;
 
-namespace QuokkaDev.Templates.DataAccess.Commands.DI
+namespace QuokkaDev.Templates.Persistence.Ef.DI
 {
     public static class ServiceCollectionExtensions
     {
@@ -16,7 +16,7 @@ namespace QuokkaDev.Templates.DataAccess.Commands.DI
         /// <param name="connectionString">the connection string for a SQL server Db</param>
         /// <param name="useInMemoryDb">Indicate if you want to use an inMemory Db (for test purposes)</param>
         /// <returns>The original service collection</returns>
-        public static IServiceCollection AddCommandsDataAccess(this IServiceCollection services, string? connectionString = null, bool useInMemoryDb = false)
+        public static IServiceCollection AddPersistenceEf(this IServiceCollection services, string? connectionString = null, bool useInMemoryDb = false)
         {
             services.AddScoped<IDomainEventsDispatcher, DomainEventDispatcher>()
                 .RegisterUnitOfWork(connectionString, useInMemoryDb)

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace QuokkaDev.Templates.DataAccess.Commands.MyAggregateRoot
+namespace QuokkaDev.Templates.Persistence.Ef.MyAggregateRoot
 {
     internal class MyAggregateRootConfig : IEntityTypeConfiguration<Domain.MyAggregateRoot.MyAggregateRoot>
     {

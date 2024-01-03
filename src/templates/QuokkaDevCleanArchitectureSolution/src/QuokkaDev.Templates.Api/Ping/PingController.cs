@@ -4,7 +4,7 @@ using QuokkaDev.Cqrs.Abstractions;
 using QuokkaDev.Templates.Api.Filters;
 using QuokkaDev.Templates.Application.UseCases.Ping.Queries;
 
-namespace QuokkaDev.Templates.Api.Controllers
+namespace QuokkaDev.Templates.Api.Ping
 {
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]

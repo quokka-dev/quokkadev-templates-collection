@@ -2,7 +2,7 @@
 using QuokkaDev.Templates.Application.Services;
 using QuokkaDev.Templates.Domain.SeedWork;
 
-namespace QuokkaDev.Templates.DataAccess.Commands.Services
+namespace QuokkaDev.Templates.Persistence.Ef.Services
 {
     internal class DomainEventDispatcher : IDomainEventsDispatcher
     {

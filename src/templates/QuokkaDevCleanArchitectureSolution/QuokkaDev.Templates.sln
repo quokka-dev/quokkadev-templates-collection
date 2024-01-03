@@ -23,14 +23,17 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{BA433F45-BA14-4B1A-A794-EABFEDAEBCD0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{DBCCE281-0178-4E39-8CAA-3A171046CB79}"
+	ProjectSection(SolutionItems) = preProject
+		src\QuokkaDev.Templates.Domain\Common\Services\.gitkeep = src\QuokkaDev.Templates.Domain\Common\Services\.gitkeep
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuokkaDev.Templates.Application", "src\QuokkaDev.Templates.Application\QuokkaDev.Templates.Application.csproj", "{D38ABF52-B886-4C65-A95E-C3AFC82DEAAA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuokkaDev.Templates.Api", "src\QuokkaDev.Templates.Api\QuokkaDev.Templates.Api.csproj", "{6871E26C-84D0-4D1F-9594-88C77B77B3E4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuokkaDev.Templates.DataAccess.Commands", "src\QuokkaDev.Templates.DataAccess.Commands\QuokkaDev.Templates.DataAccess.Commands.csproj", "{1FEB7492-F2CF-494D-A527-F195EF8E7C6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuokkaDev.Templates.Persistence.Ef", "src\QuokkaDev.Templates.Persistence.Ef\QuokkaDev.Templates.Persistence.Ef.csproj", "{1FEB7492-F2CF-494D-A527-F195EF8E7C6C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuokkaDev.Templates.DataAccess.Queries", "src\QuokkaDev.Templates.DataAccess.Queries\QuokkaDev.Templates.DataAccess.Queries.csproj", "{59466C64-EC03-4C27-92E5-B0FD253734AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuokkaDev.Templates.Query.Dapper", "src\QuokkaDev.Templates.Query.Dapper\QuokkaDev.Templates.Query.Dapper.csproj", "{59466C64-EC03-4C27-92E5-B0FD253734AD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{E34143C0-811F-4B0F-9A26-71E3CF985587}"
 EndProject

@@ -5,7 +5,7 @@ using QuokkaDev.Templates.Application.Services;
 using QuokkaDev.Templates.Domain.SeedWork;
 using System.Data;
 
-namespace QuokkaDev.Templates.DataAccess.Commands
+namespace QuokkaDev.Templates.Persistence.Ef
 {
     internal class CommandsDbContext : DbContext, IUnitOfWork
     {

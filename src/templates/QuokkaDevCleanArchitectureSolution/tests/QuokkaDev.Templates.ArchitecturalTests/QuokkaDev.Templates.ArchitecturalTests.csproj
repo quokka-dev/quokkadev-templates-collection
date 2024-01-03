@@ -29,8 +29,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\QuokkaDev.Templates.Api\QuokkaDev.Templates.Api.csproj" />
     <ProjectReference Include="..\..\src\QuokkaDev.Templates.Application\QuokkaDev.Templates.Application.csproj" />
-    <ProjectReference Include="..\..\src\QuokkaDev.Templates.DataAccess.Commands\QuokkaDev.Templates.DataAccess.Commands.csproj" />
-    <ProjectReference Include="..\..\src\QuokkaDev.Templates.DataAccess.Queries\QuokkaDev.Templates.DataAccess.Queries.csproj" />
+    <ProjectReference Include="..\..\src\QuokkaDev.Templates.Persistence.Ef\QuokkaDev.Templates.Persistence.Ef.csproj" />
+    <ProjectReference Include="..\..\src\QuokkaDev.Templates.Query.Dapper\QuokkaDev.Templates.Query.Dapper.csproj" />
     <ProjectReference Include="..\..\src\QuokkaDev.Templates.Domain\QuokkaDev.Templates.Domain.csproj" />
   </ItemGroup>
 

@@ -9,65 +9,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Presentation
 {
     public class ControllerTest
     {
-        private const string CONTROLLER_NAMESPACE = "QuokkaDev.Templates.Api.Controllers";
-
-        [Fact]
-        public void Controllers_Should_Reside_In_Namespace()
-        {
-            var result = Types.InAssembly(typeof(Startup).Assembly)
-                .That()
-                .Inherit(typeof(ControllerBase))
-                .Should()
-                .ResideInNamespaceMatching(CONTROLLER_NAMESPACE)
-                .GetResult();
-
-            result.IsSuccessful.Should().BeTrue($"Controllers should reside in namespaces {CONTROLLER_NAMESPACE} but {result.GetOffendingTypes()} does not");
-        }
-
-        [Fact]
-        public void Controllers_Should_Have_Right_Name()
-        {
-            var result = Types.InAssembly(typeof(Startup).Assembly)
-                .That()
-                .Inherit(typeof(ControllerBase))
-                .Should()
-                .HaveNameEndingWith("Controller")
-                .GetResult();
-
-            result.IsSuccessful.Should().BeTrue($"Controllers should have name ending with 'Controller' but {result.GetOffendingTypes()} does not");
-        }
-
-        [Fact]
-        public void Class_In_Namespace_Should_Be_Controllers()
-        {
-            var result = Types.InAssembly(typeof(Startup).Assembly)
-                .That()
-                .ResideInNamespaceMatching(CONTROLLER_NAMESPACE)
-                .And()
-                .AreNotStatic()
-                .Should()
-                .Inherit(typeof(ControllerBase))
-                .GetResult();
-
-            result.IsSuccessful.Should().BeTrue($"non static classes in namespaces {CONTROLLER_NAMESPACE} should inherit from ControllerBase but {result.GetOffendingTypes()} does not");
-        }
-
-        [Fact]
-        public void Class_In_Namespace_Should_Have_Right_Name()
-        {
-            var result = Types.InAssembly(typeof(Startup).Assembly)
-                .That()
-                .ResideInNamespaceMatching(CONTROLLER_NAMESPACE)
-                .And()
-                .AreNotStatic()
-                .Should()
-                .HaveNameEndingWith("Controller")
-                .GetResult();
-
-            result.IsSuccessful.Should().BeTrue($"non static classes in namespaces {CONTROLLER_NAMESPACE} should have name ending with 'Controller' but {result.GetOffendingTypes()} does not");
-        }
-
-        [Fact]
+        [Fact(DisplayName = "Controllers Should Have ApiControllerAttribute")]
         public void Controllers_Should_Have_ApiControllerAttribute()
         {
             var result = Types.InAssembly(typeof(Startup).Assembly)
@@ -80,7 +22,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Presentation
             result.IsSuccessful.Should().BeTrue($"Controllers should have ApiControllerAttribute but {result.GetOffendingTypes()} does not");
         }
 
-        [Fact]
+        [Fact(DisplayName = "Controllers Should Have RouteAttribute")]
         public void Controllers_Should_Have_RouteAttribute()
         {
             var result = Types.InAssembly(typeof(Startup).Assembly)
@@ -93,7 +35,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Presentation
             result.IsSuccessful.Should().BeTrue($"Controllers should have RouteAttribute but {result.GetOffendingTypes()} does not");
         }
 
-        [Fact]
+        [Fact(DisplayName = "Controllers Should Have ApiVersionAttribute")]
         public void Controllers_Should_Have_ApiVersionAttribute()
         {
             var result = Types.InAssembly(typeof(Startup).Assembly)

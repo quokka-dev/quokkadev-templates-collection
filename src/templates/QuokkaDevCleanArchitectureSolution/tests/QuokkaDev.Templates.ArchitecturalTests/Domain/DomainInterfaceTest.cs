@@ -7,10 +7,9 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Domain
 {
     public class DomainInterfaceTest
     {
-        private const string INTERFACE_NAMESPACE = "QuokkaDev.Templates.Domain.Interfaces";
         private const string AGGREGATE_NAMESPACE = "QuokkaDev.Templates.Domain";
 
-        [Fact]
+        [Fact(DisplayName = "Interfaces Should Have Right Name")]
         public void Interfaces_Should_Have_Right_Name()
         {
             var result = Types.InAssembly(typeof(IAggregateRoot).Assembly)
@@ -23,7 +22,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Domain
             result.IsSuccessful.Should().BeTrue($"Interfaces name should be start with 'I' but {result.GetOffendingTypes()} does not");
         }
 
-        [Fact]
+        [Fact(DisplayName = "No Repository Implementations Are Allowed In Domain")]
         public void No_Repository_Implementations_Are_Allowed_In_Domain()
         {
             var result = Types.InAssembly(typeof(IAggregateRoot).Assembly)
@@ -36,7 +35,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Domain
             result.IsSuccessful.Should().BeTrue($"No IRepository<> implementations are allowed in domain but {result.GetOffendingTypes()} does not");
         }
 
-        [Fact]
+        [Fact(DisplayName = "Repositories Interfaces Should Have Right Name")]
         public void Repositories_Interfaces_Should_Have_Right_Name()
         {
             var result = Types.InAssembly(typeof(IAggregateRoot).Assembly)
@@ -51,7 +50,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Domain
             result.IsSuccessful.Should().BeTrue($"Repositories interfaces must have name starting with 'I' and ending with 'Repository' but {result.GetOffendingTypes()} does not");
         }
 
-        [Fact]
+        [Fact(DisplayName = "Repositories Interfaces Should Have Right Namespace")]
         public void Repositories_Interfaces_Should_Have_Right_Namespace()
         {
             var result = Types.InAssembly(typeof(IAggregateRoot).Assembly)

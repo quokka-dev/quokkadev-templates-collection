@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QuokkaDev.Templates.Domain.SeedWork;
 
-namespace QuokkaDev.Templates.DataAccess.Commands
+namespace QuokkaDev.Templates.Persistence.Ef
 {
     internal abstract class BaseRepository<T> : IRepository<T>
         where T : class, IAggregateRoot

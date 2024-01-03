@@ -2,7 +2,7 @@
 using QuokkaDev.Templates.Application.Services;
 using System.Reflection;
 
-namespace QuokkaDev.Templates.DataAccess.Queries.DI
+namespace QuokkaDev.Templates.Query.Dapper.DI
 {
     public static class ServiceCollectionExtensions
     {
@@ -16,7 +16,7 @@ namespace QuokkaDev.Templates.DataAccess.Queries.DI
         {
             Assembly currentAssembly = typeof(ServiceCollectionExtensions).Assembly;
 
-            var queryServices = currentAssembly.GetTypes().Where(t => "QuokkaDev.Templates.DataAccess.Queries.Services".Equals(t.Namespace!) &&
+            var queryServices = currentAssembly.GetTypes().Where(t => "QuokkaDev.Templates.Query.Dapper.Services".Equals(t.Namespace!) &&
                     t.IsAbstract == false &&
                     t.IsAssignableTo(typeof(IQueryService)) &&
                     t.Name.EndsWith("QueryService")); ;

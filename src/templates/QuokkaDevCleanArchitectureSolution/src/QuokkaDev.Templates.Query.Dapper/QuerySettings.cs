@@ -1,4 +1,4 @@
-﻿namespace QuokkaDev.Templates.DataAccess.Queries
+﻿namespace QuokkaDev.Templates.Query.Dapper
 {
     public class QuerySettings
     {
