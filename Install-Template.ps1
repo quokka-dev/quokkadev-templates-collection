@@ -13,7 +13,7 @@ if($null -ne $template){
 Write-Host "Clearing Template Cache"
 Remove-Item ~/.templateengine -Recurse -Force
 
-#Build new Package
+#Build a new Package
 Write-Host "Building Template Package $id"
 .\Build-Template.ps1
 
