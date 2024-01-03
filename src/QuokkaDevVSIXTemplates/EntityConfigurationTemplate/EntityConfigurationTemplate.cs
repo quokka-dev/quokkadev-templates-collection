@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace $rootnamespace$
 {
-    public class $safeitemname$Configuration : IEntityTypeConfiguration<$safeitemname$>
+    public class $safeitemname$ : IEntityTypeConfiguration<$fileinputname$>
     {
-        public void Configure(EntityTypeBuilder<$safeitemname$> builder)
+        public void Configure(EntityTypeBuilder<$fileinputname$> builder)
         {
-            builder.ToTable("MyEntityTableName");
+            builder.ToTable(nameof($fileinputname$));
         }
     }
 }

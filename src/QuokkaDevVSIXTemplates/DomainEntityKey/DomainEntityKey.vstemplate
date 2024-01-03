@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
   <TemplateData>
-    <Name>CQRS Query</Name>
-    <Description>Create a CQRS query</Description>
+    <Name>Entity Key</Name>
+    <Description>Create an Entity key</Description>
     <Icon>Icon.png</Icon>
-    <TemplateID>af474b57-4ae0-4653-bdd5-0503446afc2b</TemplateID>
+    <TemplateID>25f09dd3-2b12-4010-84f0-e194a70b8112</TemplateID>
     <ProjectType>CSharp</ProjectType>
     <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
     <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
-    <DefaultName>New</DefaultName>
+    <DefaultName>EntityId</DefaultName>
   </TemplateData>
   <TemplateContent>
     <References>
@@ -16,6 +16,6 @@
         <Assembly>System</Assembly>
       </Reference>
     </References>
-    <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$Query.cs">QueryTemplate.cs</ProjectItem>
+	  <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.cs">EntityId.cs</ProjectItem>
   </TemplateContent>
 </VSTemplate>
