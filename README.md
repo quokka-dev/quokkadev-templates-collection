@@ -14,11 +14,11 @@ There are three way to install the NuGet package.
 
 The first (recommended) is directly from [nuget.org](https://www.nuget.org/), using the command:
 
-    dotnet new --install QuokkaDev.Templates.Collection
+    dotnet new install QuokkaDev.Templates.Collection
 
 The second is to download it from the [release section of this repository](https://github.com/quokka-dev/quokkadev-templates-collection/releases) and then install it manually using the command:
 
-    dotnet new --install path/to/my/local/package/QuokkaDev.Templates.Collection.x.x.x.nupkg
+    dotnet new install path/to/my/local/package/QuokkaDev.Templates.Collection.x.x.x.nupkg
 
 The last is to clone the repository, pack the template package and then install it manually using. For pack the NuGet package use the following command from the root of the repository:
 
@@ -26,17 +26,17 @@ The last is to clone the repository, pack the template package and then install 
 
 And then install it using the command:
 
-    dotnet new --install path/to/my/local/package/QuokkaDev.Templates.Collection.1.0.0.nupkg
+    dotnet new install path/to/my/local/package/QuokkaDev.Templates.Collection.1.0.0.nupkg
 
 # Update of the NuGet Package
 
 If you install the package using the first way, you can easily check for updates using the command:
 
-    dotnet new --update-check
+    dotnet new update --check-only
 
 If a new version of the package is available you can intall it with:
 
-    dotnet new --install QuokkaDev.Templates.Collection.x.x.x
+    dotnet new install QuokkaDev.Templates.Collection.x.x.x
 
 # Visual Studio 2022 Extension installation
 
