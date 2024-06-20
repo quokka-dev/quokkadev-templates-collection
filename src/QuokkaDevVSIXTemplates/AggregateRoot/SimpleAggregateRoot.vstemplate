@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>Aggregate Root (simple)</Name>
+    <Description>Create an AggregateRoot</Description>
+    <Icon>icon.png</Icon>
+    <TemplateID>ce4cdc9e-965d-4703-9f30-f4d34708a852</TemplateID>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>    
+	<DefaultName>NewAggregateRoot</DefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>System</Assembly>
+      </Reference>
+    </References>
+	  <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.cs" CustomTool="MSBuild:Compile" >AggregateRoot.cs</ProjectItem>	  
+  </TemplateContent>
+</VSTemplate>

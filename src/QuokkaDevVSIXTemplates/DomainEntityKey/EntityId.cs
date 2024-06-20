@@ -1,24 +1,27 @@
 ﻿namespace $rootnamespace$
 {
     /// <summary>
-    /// Specific key for Credit notes, based on a Guid
+    /// Specific key based on a Guid
     /// </summary>
-    public sealed record $safeitemname$ : EntityKey<Guid>
+    public struct $safeitemname$
     {
-        private $safeitemname$(Guid g) : base(g)
+        /// <summary>
+        /// Inner value of the key
+        /// </summary>
+        public Guid Value { get; }
+
+        private $safeitemname$(Guid g) => Value = g;        
+
+        /// <summary>
+        /// Create new $safeitemname$
+        /// </summary>
+        /// <returns></returns>
+        public static $safeitemname$ NewId()
         {
+            return new $safeitemname$(Guid.NewGuid());
         }
 
-/// <summary>
-/// Create new CreditNoteId
-/// </summary>
-/// <returns></returns>
-public static $safeitemname$ NewId()
-        {
-            return new $safeitemname$(GuidProvider.NewGuid());
-        }
-
-        public static implicit operator Guid($safeitemname$ cid) => cid.Value;
-public static explicit operator $safeitemname$(Guid g) => new $safeitemname$(g);
+        public static implicit operator Guid($safeitemname$ key) => key.Value;
+        public static explicit operator $safeitemname$(Guid g) => new $safeitemname$(g);
     }
 }

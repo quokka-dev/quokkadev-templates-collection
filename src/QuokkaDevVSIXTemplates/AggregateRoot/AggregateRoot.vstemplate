@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>Aggregate Root</Name>
+    <Description>Create an AggregateRoot with all support files</Description>
+    <Icon>icon.png</Icon>
+    <TemplateID>ee1f84e4-a05e-48cb-a66d-96f016c4905e</TemplateID>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>    
+	<DefaultName>NewAggregateRoot</DefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>System</Assembly>
+      </Reference>
+    </References>
+	  <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.cs" CustomTool="MSBuild:Compile" >AggregateRoot.cs</ProjectItem>
+	  <ProjectItem ReplaceParameters="true" TargetFileName="I$fileinputname$Repository.cs" CustomTool="MSBuild:Compile" >IRepository.cs</ProjectItem>
+	  <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$Specifications.cs" CustomTool="MSBuild:Compile" >Specifications.cs</ProjectItem>
+	  <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$Events.cs" CustomTool="MSBuild:Compile" >Events.cs</ProjectItem>
+	  <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$Factory.cs" CustomTool="MSBuild:Compile" >Factory.cs</ProjectItem>
+  </TemplateContent>
+  <WizardExtension>
+	  <Assembly>QuokkaDevVSIXTemplates, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Assembly>
+	  <FullClassName>QuokkaDevVSIXTemplates.AggregateWizard</FullClassName>
+  </WizardExtension>
+</VSTemplate>
