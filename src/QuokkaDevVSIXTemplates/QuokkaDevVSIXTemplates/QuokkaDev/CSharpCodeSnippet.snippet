@@ -3,7 +3,7 @@
 	<CodeSnippet Format="1.0.0">
 		<Header>
 			<Title>HttpGet Method</Title>
-			<Shortcut>HttpGet</Shortcut>
+			<Shortcut>qHttpGet</Shortcut>
 			<Description>Add a HttpGet method to controller</Description>
 			<Author>Fabio Cometti</Author>
 			<SnippetTypes>
@@ -36,7 +36,7 @@
 	<CodeSnippet Format="1.0.0">
 		<Header>
 			<Title>HttpPost Method</Title>
-			<Shortcut>HttpPost</Shortcut>
+			<Shortcut>qHttpPost</Shortcut>
 			<Description>Add a HttpPost method to controller</Description>
 			<Author>Fabio Cometti</Author>
 			<SnippetTypes>
@@ -79,7 +79,7 @@
 	<CodeSnippet Format="1.0.0">
 		<Header>
 			<Title>HttpPut Method</Title>
-			<Shortcut>HttpPut</Shortcut>
+			<Shortcut>qHttpPut</Shortcut>
 			<Description>Add a HttpPut method to controller</Description>
 			<Author>Fabio Cometti</Author>
 			<SnippetTypes>
@@ -127,7 +127,7 @@
 	<CodeSnippet Format="1.0.0">
 		<Header>
 			<Title>HttpDelete Method</Title>
-			<Shortcut>HttpDelete</Shortcut>
+			<Shortcut>qHttpDelete</Shortcut>
 			<Description>Add a HttpDelete method to controller</Description>
 			<Author>Fabio Cometti</Author>
 			<SnippetTypes>
@@ -160,7 +160,7 @@
 	<CodeSnippet Format="1.0.0">
 		<Header>
 			<Title>Add Authorization</Title>
-			<Shortcut>AddAuth</Shortcut>
+			<Shortcut>qAddAuth</Shortcut>
 			<Description>Add authorization to service collection</Description>
 			<Author>Fabio Cometti</Author>
 			<SnippetTypes>
@@ -193,7 +193,7 @@
 	<CodeSnippet Format="1.0.0">
 		<Header>
 			<Title>Add Authorization Policy</Title>
-			<Shortcut>Policy</Shortcut>
+			<Shortcut>qPolicy</Shortcut>
 			<Description>Add policy to autorization</Description>
 			<Author>Fabio Cometti</Author>
 			<SnippetTypes>
@@ -222,7 +222,7 @@
 	<CodeSnippet Format="1.0.0">
 		<Header>
 			<Title>Add CORS Policy</Title>
-			<Shortcut>Cors</Shortcut>
+			<Shortcut>qCors</Shortcut>
 			<Description>Add Cors to service collection</Description>
 			<Author>Fabio Cometti</Author>
 			<SnippetTypes>
@@ -251,7 +251,7 @@
 	<CodeSnippet Format="1.0.0">
 		<Header>
 			<Title>Dapper query</Title>
-			<Shortcut>Dapquery</Shortcut>
+			<Shortcut>qDapquery</Shortcut>
 			<Description>Add dapper query</Description>
 			<Author>Fabio Cometti</Author>
 			<SnippetTypes>
@@ -276,7 +276,7 @@
 	<CodeSnippet Format="1.0.0">
 		<Header>
 			<Title>Dapper Stored</Title>
-			<Shortcut>Dapstored</Shortcut>
+			<Shortcut>qDapstored</Shortcut>
 			<Description>Add dapper call to stored procedure</Description>
 			<Author>Fabio Cometti</Author>
 			<SnippetTypes>
@@ -302,7 +302,7 @@
 	<CodeSnippet Format="1.0.0">
 		<Header>
 			<Title>xUnit Test Method</Title>
-			<Shortcut>xunit</Shortcut>
+			<Shortcut>qxunit</Shortcut>
 			<Description>Add a xUnit Test Method</Description>
 			<Author>Fabio Cometti</Author>
 			<SnippetTypes>
@@ -334,7 +334,7 @@
 	<CodeSnippet Format="1.0.0">
 		<Header>
 			<Title>xUnit async Test Method</Title>
-			<Shortcut>xunitasync</Shortcut>
+			<Shortcut>qxunitasync</Shortcut>
 			<Description>Add a xUnit async Test Method</Description>
 			<Author>Fabio Cometti</Author>
 			<SnippetTypes>
@@ -366,7 +366,7 @@
 	<CodeSnippet Format="1.0.0">
 		<Header>
 			<Title>Create mock</Title>
-			<Shortcut>mock</Shortcut>
+			<Shortcut>qmock</Shortcut>
 			<Description>Create and setup a mock</Description>
 			<Author>Fabio Cometti</Author>
 			<SnippetTypes>
@@ -390,6 +390,169 @@
 					<ToolTip>Type of the mock variable</ToolTip>
 					<Default>object</Default>
 				</Literal>			
+			</Declarations>
+		</Snippet>
+	</CodeSnippet>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Add collection to aggregate</Title>
+			<Shortcut>qcoll</Shortcut>
+			<Description>Add collection to aggregate</Description>
+			<Author>Fabio Cometti</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="CSharp">
+				<![CDATA[private readonly List<$Type$> _$Name$ = [];
+        public IReadOnlyCollection<$Type$> $Name$ => _$Name$.AsReadOnly();]]>
+			</Code>
+			<Declarations>
+				<Literal>
+					<ID>Type</ID>
+					<ToolTip>Type of the collection</ToolTip>
+					<Default>object</Default>
+				</Literal>
+				<Literal>
+					<ID>Name</ID>
+					<ToolTip>Name of the collection</ToolTip>
+					<Default>MyCollection</Default>
+				</Literal>
+			</Declarations>
+		</Snippet>
+	</CodeSnippet>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Create domain event</Title>
+			<Shortcut>qevent</Shortcut>
+			<Description>Create domain event</Description>
+			<Author>Fabio Cometti</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="CSharp">
+				<![CDATA[public sealed record $Name$Event() : IDomainEvent
+    {
+    }]]>
+			</Code>
+			<Declarations>
+				<Literal>
+					<ID>Name</ID>
+					<ToolTip>Name of the event</ToolTip>
+					<Default>MyDomain</Default>
+				</Literal>
+			</Declarations>
+		</Snippet>
+	</CodeSnippet>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Create a specification</Title>
+			<Shortcut>qspec</Shortcut>
+			<Description>Create a specification for an aggregate</Description>
+			<Author>Fabio Cometti</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="CSharp">
+				<![CDATA[public sealed class $Name$Specification : Specification<$AggregateType$>
+    {    
+        public $Name$Specification()
+        {            
+        }
+
+        public override Expression<Func<$AggregateType$, bool>> ToExpression()
+        {
+            return agg => true;
+        }
+    }]]>
+			</Code>
+			<Declarations>
+				<Literal>
+					<ID>Name</ID>
+					<ToolTip>Name of the specification</ToolTip>
+					<Default>MySpec</Default>
+				</Literal>
+				<Literal>
+					<ID>AggregateType</ID>
+					<ToolTip>Aggregate type</ToolTip>
+					<Default>MyAggregateType</Default>
+				</Literal>
+			</Declarations>
+		</Snippet>
+	</CodeSnippet>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Custom converter</Title>
+			<Shortcut>qefconverter</Shortcut>
+			<Description>Create an EF custom converter</Description>
+			<Author>Fabio Cometti</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="CSharp">
+				<![CDATA[internal class $Name$Converter : ValueConverter<$Type1$, $Type2$>
+    {
+        public $Name$Converter()
+        : base(
+             v => ($Type2$)v,
+             v => ($Type1$)v)
+        {
+        }
+    }]]>
+			</Code>
+			<Declarations>
+				<Literal>
+					<ID>Name</ID>
+					<ToolTip>Name of the converter</ToolTip>
+					<Default>New</Default>
+				</Literal>
+				<Literal>
+					<ID>Type1</ID>
+					<ToolTip>First type</ToolTip>
+					<Default>Guid</Default>
+				</Literal>
+				<Literal>
+					<ID>Type2</ID>
+					<ToolTip>Second type</ToolTip>
+					<Default>string</Default>
+				</Literal>
+			</Declarations>
+		</Snippet>
+	</CodeSnippet>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Entity config</Title>
+			<Shortcut>qefconfig</Shortcut>
+			<Description>Create an EF entity configuration</Description>
+			<Author>Fabio Cometti</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="CSharp">
+				<![CDATA[public class $Name$Configuration : IEntityTypeConfiguration<$Name$>
+    {
+        public void Configure(EntityTypeBuilder<$Name$> builder)
+        {
+            builder.ToTable(nameof($Name$));
+            builder.HasKey(c => c.Id);
+        }
+    }]]>
+			</Code>
+			<Declarations>
+				<Literal>
+					<ID>Name</ID>
+					<ToolTip>Name of the configuration</ToolTip>
+					<Default>New</Default>
+				</Literal>				
 			</Declarations>
 		</Snippet>
 	</CodeSnippet>

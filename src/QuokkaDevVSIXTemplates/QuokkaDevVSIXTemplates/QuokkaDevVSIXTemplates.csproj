@@ -4,6 +4,16 @@
     <MinimumVisualStudioVersion>17.0</MinimumVisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>qicon.ico</ApplicationIcon>
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -45,6 +55,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AggregateWizard.cs" />
+    <Compile Include="NewAggregateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewAggregateForm.Designer.cs">
+      <DependentUpon>NewAggregateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuokkaDevVSIXTemplatesPackage.cs" />
   </ItemGroup>
@@ -53,6 +70,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="qicon.ico" />
     <Content Include="QuokkaDev\CSharpCodeSnippet.snippet">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
@@ -66,7 +84,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.TemplateWizardInterface, Version=17.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.SDK" Version="17.3.32804.24" ExcludeAssets="runtime">
@@ -86,6 +107,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AggregateRoot\AggregateRoot.csproj">
+      <Project>{be282a87-d696-4aa5-90bd-c9be905bb3f5}</Project>
+      <Name>AggregateRoot</Name>
+      <VSIXSubPath>ItemTemplates\QuokkaDev\Domain</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
     <ProjectReference Include="..\AuthorizationFilterTemplate\AuthorizationFilterTemplate.csproj">
       <Project>{8ED2F8A1-9611-494A-B81F-A6EA07A69E61}</Project>
       <Name>AuthorizationFilterTemplate</Name>
@@ -173,14 +201,7 @@
     <ProjectReference Include="..\DomainEntityKey\DomainEntityKey.csproj">
       <Project>{eccd537d-ae00-4f0a-8e77-6e5026dbb356}</Project>
       <Name>DomainEntityKey</Name>
-	  <VSIXSubPath>ItemTemplates\QuokkaDev\Domain</VSIXSubPath>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-	  <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
-    </ProjectReference>
-    <ProjectReference Include="..\EntityConfigurationTemplate\EntityConfigurationTemplate.csproj">
-      <Project>{9160430A-834B-4825-831B-0559EFA74E4C}</Project>
-      <Name>EntityConfigurationTemplate</Name>
-      <VSIXSubPath>ItemTemplates\QuokkaDev\Data Access</VSIXSubPath>
+      <VSIXSubPath>ItemTemplates\QuokkaDev\Domain</VSIXSubPath>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
     </ProjectReference>
@@ -247,6 +268,11 @@
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NewAggregateForm.resx">
+      <DependentUpon>NewAggregateForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
