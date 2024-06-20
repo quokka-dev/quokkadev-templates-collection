@@ -7,6 +7,9 @@ using System.Windows.Forms;
 
 namespace QuokkaDevVSIXTemplates
 {
+    /// <summary>
+    /// Wizard for aggregate creation
+    /// </summary>
     public class AggregateWizard : IWizard
     {
         private bool IncludeIRepo = false;
