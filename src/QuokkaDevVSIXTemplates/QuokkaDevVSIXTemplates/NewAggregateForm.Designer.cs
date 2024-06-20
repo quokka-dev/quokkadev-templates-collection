@@ -124,7 +124,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(304, 160);
+            this.ClientSize = new System.Drawing.Size(377, 206);
             this.Controls.Add(this.chkIncludeIRepo);
             this.Controls.Add(this.chkIncludeEvents);
             this.Controls.Add(this.chkIncludeFactory);
