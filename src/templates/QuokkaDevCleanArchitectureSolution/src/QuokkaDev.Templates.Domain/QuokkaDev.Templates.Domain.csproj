@@ -1,16 +1,43 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>		
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="9.16.0.82469">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
+
+	<ItemGroup>
+		<PackageReference Include="SonarAnalyzer.CSharp" Version="9.28.0.94264">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+	<!--#if (UseExternalSeedWork) -->
+	<ItemGroup Condition="'$(UseExternalSeedWork)' != ''">
+		<Compile Remove="SeedWork\**" />
+		<EmbeddedResource Remove="SeedWork\**" />
+		<None Remove="SeedWork\**" />	
+	</ItemGroup>
+	<!--#endif -->
+	<!--#if (UseExternalDomainCommon) -->
+	<ItemGroup Condition="'$(UseExternalDomainCommon)' != ''">
+		<Compile Remove="Common\**" />
+		<EmbeddedResource Remove="Common\**" />
+		<None Remove="Common\**" />
+	</ItemGroup>
+ 	<!--#endif -->
+
+	<!--#if (UseExternalDomainCommon) -->
+	<ItemGroup Condition="'$(UseExternalDomainCommon)' != ''">
+		<ProjectReference Include="..\QuokkaDev.Templates.Domain.Common\QuokkaDev.Templates.Domain.Common.csproj" />		
+	</ItemGroup>
+	<!--#endif -->
+	<!--#if (UseExternalSeedWork) -->
+	<ItemGroup Condition="'$(UseExternalSeedWork)' != ''">		
+		<ProjectReference Include="..\QuokkaDev.Templates.Domain.SeedWork\QuokkaDev.Templates.Domain.SeedWork.csproj" />
+	</ItemGroup>
+	<!--#endif -->	
 
 </Project>

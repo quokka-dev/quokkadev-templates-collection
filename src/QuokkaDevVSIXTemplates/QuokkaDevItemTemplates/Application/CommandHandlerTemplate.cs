@@ -1,0 +1,24 @@
+﻿using AutoMapper;
+using QuokkaDev.Cqrs.Abstractions;
+using Microsoft.Extensions.Logging;
+
+namespace $rootnamespace$
+{
+    /// <summary>
+    ///  A command handler for $fileinputname$Command
+    /// </summary>
+    public class $safeitemname$  : ICommandHandler<$fileinputname$Command, $fileinputname$CommandResult>
+    {
+        private readonly ICoreServices<$safeitemname$> _coreServices;
+
+        public $safeitemname$(ICoreServices<$safeitemname$> coreServices)
+        {
+            _coreServices = coreServices;
+        }
+
+        public Task<$fileinputname$CommandResult> Handle($fileinputname$Command request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

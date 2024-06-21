@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using QuokkaDev.Templates.Api;
 using Microsoft.AspNetCore.Mvc.Filters;
 using NetArchTest.Rules;
 using Xunit;
@@ -13,7 +12,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Presentation
         [Fact]
         public void Filters_Should_Reside_In_Namespace()
         {
-            var result = Types.InAssembly(typeof(Startup).Assembly)
+            var result = Types.InAssembly(typeof(Program).Assembly)
                 .That()
                 .ImplementInterface(typeof(IAsyncExceptionFilter))
                 .Or()
@@ -44,7 +43,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Presentation
         [Fact]
         public void Filters_Should_Have_Right_Name()
         {
-            var result = Types.InAssembly(typeof(Startup).Assembly)
+            var result = Types.InAssembly(typeof(Program).Assembly)
                 .That()
                 .ImplementInterface(typeof(IAsyncExceptionFilter))
                 .Or()
@@ -75,7 +74,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Presentation
         [Fact]
         public void Class_In_Namespace_Should_Be_Controllers()
         {
-            var result = Types.InAssembly(typeof(Startup).Assembly)
+            var result = Types.InAssembly(typeof(Program).Assembly)
                 .That()
                 .ResideInNamespaceMatching(FILTER_NAMESPACE)
                 .Should()
@@ -106,7 +105,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Presentation
         [Fact]
         public void Class_In_Namespace_Should_Have_Right_Name()
         {
-            var result = Types.InAssembly(typeof(Startup).Assembly)
+            var result = Types.InAssembly(typeof(Program).Assembly)
                 .That()
                 .ResideInNamespaceMatching(FILTER_NAMESPACE)
                 .Should()

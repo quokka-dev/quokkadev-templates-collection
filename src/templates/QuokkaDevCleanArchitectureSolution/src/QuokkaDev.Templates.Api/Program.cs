@@ -1,48 +1,123 @@
-using Serilog;
+using Asp.Versioning.ApiExplorer;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using QuokkaDev.SecurityHeaders;
+using QuokkaDev.Templates.Api.Infrastructure;
+using QuokkaDev.Templates.Api.Infrastructure.HostedServices;
+using QuokkaDev.Templates.Api.Infrastructure.Middlewares;
+using QuokkaDev.Templates.Application;
+using QuokkaDev.Templates.Persistence.Ef;
+using QuokkaDev.Templates.Query.Dapper;
+using System.Reflection;
 
-namespace QuokkaDev.Templates.Api
+var builder = WebApplication.CreateBuilder(args);
+IConfiguration configuration = builder.Configuration;
+IWebHostEnvironment environment = builder.Environment;
+
+string connectionString = configuration.GetConnectionString("Default") ?? throw new Exception("Connection string 'Default' is not defined.");
+
+//Settings
+builder.Configuration.SetBasePath(environment.ContentRootPath)
+        .AddJsonFile($"appsettings.json", optional: false)
+        .AddJsonFile($"appsettings.{environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+        .AddUserSecrets(assembly: Assembly.GetExecutingAssembly(), optional: true, reloadOnChange: true)
+        .AddEnvironmentVariables();
+
+//Logging
+builder.AddLogging(configuration);
+
+builder.Services.AddApplicationHealthChecks(configuration, connectionString);
+
+builder.Services.AddApiServices(configuration);
+builder.Services.AddApiDocumentationAndVersioning();
+
+builder.Services.AddSingleton<BatchHostedService>();
+builder.Services.AddSingleton<IHostedService, BatchHostedService>(
+                   serviceProvider => serviceProvider.GetRequiredService<BatchHostedService>());
+
+builder.Services.AddDataAccess(connectionString);
+builder.Services.AddQueriesDataAccess(connectionString);
+
+builder.Services.AddApplicationServices(configuration)
+    .AutoRegisterApplicationservicesServices()
+    .AddCommandAndQueries()
+    .AddAutoMapper()
+    .AddDomainEventsDispatchment()
+    .RegisterBatches();
+
+// Configure the HTTP request pipeline.
+var app = builder.Build();
+
+app.UseResponseCompression();
+
+app.UseMiddleware<CorrelationMiddleware>(new CorrelationOptions
 {
-    /// <summary>
-    /// QuokkaDev.Templates Solution entry point
-    /// </summary>
-    public class Program
-    {
-        /// <summary>
-        /// API project entry point
-        /// </summary>
-        /// <param name="args">command line arguments</param>
-        public static void Main(string[] args)
-        {
-            Log.Logger = new LoggerConfiguration()
-            .Enrich.FromLogContext()
-            .WriteTo.Console()
-            .CreateLogger();
+    TryToUseRequestHeader = true,
+    ValidRequestHeaders = new string[] { "X-Correlation-Id" },
+    EnrichLog = true,
+    LogPropertyName = "CorrelationId",
+    WriteCorrelationIDToResponse = true,
+    DefaultResponseHeaderName = "X-Correlation-Id"
+});
 
-            try
-            {
-                Log.Information("Starting up QuokkaDev.Templates.Api");
-                CreateHostBuilder(args).Build().Run();
-            }
-            catch (Exception ex)
-            {
-                Log.Fatal(ex, "Application QuokkaDev.Templates.Api start-up failed");
-                throw;
-            }
-            finally
-            {
-                Log.CloseAndFlush();
-            }
+app.UseCors("Default");
+app.UseSecurityHeaders(configuration);
+
+if (environment.IsDevelopment())
+{
+    app.UseSwagger();
+
+    var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+
+    app.UseSwaggerUI(c =>
+    {
+        c.InjectJavascript("/ui.js", "text/javascript");
+        c.InjectStylesheet("/style.css");
+        foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
+        {
+            c.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",
+                description.GroupName.ToUpperInvariant());
         }
 
-        /// <summary>
-        /// Configure the host builder
-        /// </summary>
-        /// <param name="args"></param>
-        /// <returns></returns>
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
-                        .ReadFrom.Configuration(hostingContext.Configuration))
-                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
-    }
+        c.DefaultModelsExpandDepth(0);
+        c.DocumentTitle = "QuokkaDev API";
+
+        // Uncomment to configure Swagger UI for using oauth
+        //c.OAuthClientId(configuration["AzureAdB2C:ClientId"]);
+        //c.OAuthScopes("scope.name.write", "scope.name.read");
+        //c.OAuthAppName("QuokkaDev API - Swagger");
+        //c.EnablePersistAuthorization();
+        //c.OAuthUsePkce();
+    });
 }
+else
+{
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+
+var cacheMaxAgeOneWeek = (60 * 60 * 24 * 365).ToString();
+app.UseStaticFiles(new StaticFileOptions
+{
+    OnPrepareResponse = ctx =>
+    {
+        ctx.Context.Response.Headers.Append(
+             "Cache-Control", $"public, max-age={cacheMaxAgeOneWeek}");
+    }
+});
+
+app.UseAuthentication();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.MapControllers();
+app.MapHealthChecks("/hc", new HealthCheckOptions()
+{
+    Predicate = _ => true
+});
+
+app.Run();
+
+public partial class Program { }

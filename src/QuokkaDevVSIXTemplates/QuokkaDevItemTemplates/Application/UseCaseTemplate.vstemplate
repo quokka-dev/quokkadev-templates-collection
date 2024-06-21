@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+	<TemplateData>
+		<Name>Use Case</Name>
+		<Description>Create complete scaffolding for a new Use Case</Description>
+		<Icon>icon.png</Icon>
+		<TemplateID>c361df54-58dd-4549-bc91-425592bc81bc</TemplateID>
+		<ProjectType>CSharp</ProjectType>		
+		<RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+		<NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+		<DefaultName>NewUseCase</DefaultName>
+	</TemplateData>
+	<TemplateContent>
+		<References>
+			<Reference>
+				<Assembly>System</Assembly>
+			</Reference>			
+		</References>
+		<ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$\$fileinputname$Command.cs" CustomTool="MSBuild:Compile" >CommandTemplate.cs</ProjectItem>
+		<ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$\$fileinputname$Query.cs" CustomTool="MSBuild:Compile" >QueryTemplate.cs</ProjectItem>
+		<ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$\$fileinputname$CommandHandler.cs" CustomTool="MSBuild:Compile" >CommandHandlerTemplate.cs</ProjectItem>
+		<ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$\$fileinputname$QueryHandler.cs" CustomTool="MSBuild:Compile" >QueryHandlerTemplate.cs</ProjectItem>
+		<ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$\$fileinputname$CommandValidator.cs" CustomTool="MSBuild:Compile" >CommandValidatorTemplate.cs</ProjectItem>
+		<ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$\$fileinputname$QueryValidator.cs" CustomTool="MSBuild:Compile" >QueryValidatorTemplate.cs</ProjectItem>
+	</TemplateContent>
+</VSTemplate>

@@ -1,4 +1,6 @@
-﻿namespace QuokkaDev.Templates.Domain.SeedWork
+﻿using System.Text;
+
+namespace QuokkaDev.Templates.Domain.SeedWork
 {
     public abstract class BaseDomainPolicy : IDomainPolicy
     {
@@ -10,34 +12,50 @@
         public void ThrowIfNotPassed()
         {
             PolicyEvaluationResult result = ProcessPolicy();
-            if (result.Exception is not null)
+            if (result.ErrorDetail is not null)
             {
-                throw result.Exception;
+                throw new PolicyException(result.ErrorDetail, 0);
             }
         }
 
-        protected abstract PolicyEvaluationResult ProcessPolicy();
+        protected abstract PolicyEvaluationResult ProcessPolicy();  
+    }
 
-        protected sealed class PolicyEvaluationResult
+    public sealed class PolicyEvaluationResult
+    {
+        public bool IsPassed { get; private set; }
+        public PolicyError? ErrorDetail { get; private set; }
+
+        private PolicyEvaluationResult(bool isPassed, PolicyError? errorDetail)
         {
-            public bool IsPassed { get; private set; }
-            public DomainException? Exception { get; private set; }
+            IsPassed = isPassed;
+            ErrorDetail = errorDetail;
+        }
 
-            private PolicyEvaluationResult(bool isPassed, DomainException? exception)
-            {
-                IsPassed = isPassed;
-                Exception = exception;
-            }
+        public static PolicyEvaluationResult PassedResult()
+        {
+            return new PolicyEvaluationResult(true, null);
+        }
 
-            public static PolicyEvaluationResult PassedResult()
-            {
-                return new PolicyEvaluationResult(true, null);
-            }
-
-            public static PolicyEvaluationResult NotPassedResult(DomainException exception)
-            {
-                return new PolicyEvaluationResult(false, exception);
-            }
+        public static PolicyEvaluationResult NotPassedResult(PolicyError errorDetail)
+        {
+            return new PolicyEvaluationResult(false, errorDetail);
         }
     }
+
+    public abstract record PolicyError(IEnumerable<string> Errors)
+    {
+        public override string ToString()
+        {
+            StringBuilder sb = new();            
+            foreach (var error in Errors)
+            {
+                sb.AppendLine(error);
+            }
+            
+            return sb.ToString();
+        }
+    }
+
+    public sealed record GenericPolicyError() : PolicyError([]) { };
 }

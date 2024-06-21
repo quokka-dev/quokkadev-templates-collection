@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using NetArchTest.Rules;
 using QuokkaDev.Templates.Domain.SeedWork;
+using QuokkaDev.Templates.Persistence.Ef;
 using Xunit;
 
 namespace QuokkaDev.Templates.ArchitecturalTests.Infrastructure
@@ -12,7 +13,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Infrastructure
         [Fact]
         public void Repositories_Should_Reside_In_Namespace()
         {
-            var result = Types.InAssembly(typeof(QuokkaDev.Templates.Persistence.Ef.DI.ServiceCollectionExtensions).Assembly)
+            var result = Types.InAssembly(typeof(ServiceCollectionExtensions).Assembly)
                 .That()
                 .ImplementInterface(typeof(IRepository<>))
                 .Should()
@@ -25,7 +26,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Infrastructure
         [Fact]
         public void Repositories_Should_Have_Right_Name()
         {
-            var result = Types.InAssembly(typeof(QuokkaDev.Templates.Persistence.Ef.DI.ServiceCollectionExtensions).Assembly)
+            var result = Types.InAssembly(typeof(ServiceCollectionExtensions).Assembly)
                 .That()
                 .ImplementInterface(typeof(IRepository<>))
                 .Should()

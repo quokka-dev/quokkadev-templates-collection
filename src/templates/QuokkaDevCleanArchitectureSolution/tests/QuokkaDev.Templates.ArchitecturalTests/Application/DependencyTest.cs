@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using NetArchTest.Rules;
-using QuokkaDev.Templates.Application.DI;
+using QuokkaDev.Templates.Application;
 using Xunit;
 
 namespace QuokkaDev.Templates.ArchitecturalTests.Application

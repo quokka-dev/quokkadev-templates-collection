@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>17.0</MinimumVisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{82b43b9b-a64c-4715-b499-d71e9ca2bd60};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{17498975-AB91-47D1-B094-F55E351EC77D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>QuokkaDevItemTemplates</RootNamespace>
+    <AssemblyName>QuokkaDevItemTemplates</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <GeneratePkgDefFile>false</GeneratePkgDefFile>
+    <IncludeAssemblyInVSIXContainer>false</IncludeAssemblyInVSIXContainer>
+    <IncludeDebugSymbolsInVSIXContainer>false</IncludeDebugSymbolsInVSIXContainer>
+    <IncludeDebugSymbolsInLocalVSIXDeployment>false</IncludeDebugSymbolsInLocalVSIXDeployment>
+    <CreateVsixContainer>false</CreateVsixContainer>
+    <DeployExtension>false</DeployExtension>
+    <DeployVSTemplates>false</DeployVSTemplates>
+    <CopyVsixManifestToOutput>false</CopyVsixManifestToOutput>
+    <CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>
+    <CopyOutputSymbolsToOutputDirectory>false</CopyOutputSymbolsToOutputDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.CoreUtility">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web\ResultFilterTemplate.cs" />
+    <None Include="Web\PolicyRequirementTemplate.cs" />
+    <None Include="Web\ExceptionFilterTemplate.cs" />
+    <None Include="Web\ControllerTemplate.cs" />
+    <None Include="Web\ActionFilterTemplate.cs" />
+    <None Include="Web\MiddlewareTemplate.cs" />
+    <None Include="Web\AuthorizationFilterTemplate.cs" />
+    <None Include="Testing\XUnitTestTemplate.cs" />
+    <None Include="Application\Batch.cs" />
+    <None Include="Application\NotificationHandlerTemplate.cs" />
+    <None Include="Application\CommandAndHandlerTemplate.cs" />
+    <None Include="Application\CommandHandlerTemplate.cs" />
+    <None Include="Application\CommandTemplate.cs" />
+    <None Include="Application\CommandValidatorTemplate.cs" />
+    <None Include="Application\QueryAndHandlerTemplate.cs" />
+    <None Include="Application\QueryHandlerTemplate.cs" />
+    <None Include="Application\QueryTemplate.cs" />
+    <None Include="Application\QueryValidatorTemplate.cs" />
+    <None Include="DataAccess\EntityConfigurationTemplate.cs" />
+    <None Include="DataAccess\RepositoryTemplate.cs" />
+    <None Include="DataAccess\DbContextTemplate.cs" />
+    <None Include="DataAccess\QueryServiceTemplate.cs" />
+    <None Include="Domain\AggregateRoot.cs" />
+    <None Include="Domain\Entity.cs" />
+    <None Include="Domain\Events.cs" />
+    <None Include="Domain\Factory.cs" />
+    <None Include="Domain\IRepository.cs" />
+    <None Include="Domain\Specifications.cs" />
+    <None Include="Domain\EntityId.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <VSTemplate Include="Application\CqrsNotificationHandlerTemplate.vstemplate">
+      <OutputSubPath>Application</OutputSubPath>
+    </VSTemplate>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataAccess\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Testing\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <VSTemplate Include="Web\WebApiResultFilterTemplate.vstemplate">
+      <OutputSubPath>Web</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Web\WebApiPolicyRequirementTemplate.vstemplate">
+      <OutputSubPath>Web</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Web\WebApiExceptionFilterTemplate.vstemplate">
+      <OutputSubPath>Web</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Web\WebApiControllerTemplate.vstemplate">
+      <OutputSubPath>Web</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Web\WebApiActionFilterTemplate.vstemplate">
+      <OutputSubPath>Web</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Web\MiddlewareTemplate.vstemplate">
+      <OutputSubPath>Web</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Web\AuthorizationFilterTemplate.vstemplate">
+      <OutputSubPath>Web</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Testing\XUnitTestTemplate.vstemplate">
+      <OutputSubPath>Testing</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Domain\DomainEntityKey.vstemplate">
+      <OutputSubPath>Domain Driven Design</OutputSubPath>
+    </VSTemplate>
+    <Content Include="Domain\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <VSTemplate Include="Domain\Specification.vstemplate">
+      <OutputSubPath>Domain Driven Design</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Domain\SimpleAggregateRoot.vstemplate">
+      <OutputSubPath>Domain Driven Design</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Domain\Repository.vstemplate">
+      <OutputSubPath>Domain Driven Design</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Domain\Factory.vstemplate">
+      <OutputSubPath>Domain Driven Design</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Domain\Events.vstemplate">
+      <OutputSubPath>Domain Driven Design</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Domain\Entity.vstemplate">
+      <OutputSubPath>Domain Driven Design</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Domain\AggregateRoot.vstemplate">
+      <OutputSubPath>Domain Driven Design</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="DataAccess\QueryServiceTemplate.vstemplate">
+      <OutputSubPath>Data Access</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="DataAccess\DbContextTemplate.vstemplate">
+      <OutputSubPath>Data Access</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="DataAccess\EntityConfigurationTemplate.vstemplate">
+      <OutputSubPath>Data Access</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="DataAccess\DataAccessRepositoryTemplate.vstemplate">
+      <OutputSubPath>Data Access</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="DataAccess\AggregateConfig.vstemplate">
+      <OutputSubPath>Data Access</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Application\UseCaseTemplate.vstemplate">
+      <OutputSubPath>Application</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Application\BatchTemplate.vstemplate">
+      <OutputSubPath>Application</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Application\CqrsCommandAndHandlerTemplate.vstemplate">
+      <OutputSubPath>Application</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Application\CqrsCommandHandlerTemplate.vstemplate">
+      <OutputSubPath>Application</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Application\CqrsCommandTemplate.vstemplate">
+      <OutputSubPath>Application</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Application\CqrsCommandValidatorTemplate.vstemplate">
+      <OutputSubPath>Application</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Application\CqrsQueryAndHandlerTemplate.vstemplate">
+      <OutputSubPath>Application</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Application\CqrsQueryHandlerTemplate.vstemplate">
+      <OutputSubPath>Application</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Application\CqrsQueryTemplate.vstemplate">
+      <OutputSubPath>Application</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Application\CqrsQueryValidatorTemplate.vstemplate">
+      <OutputSubPath>Application</OutputSubPath>
+    </VSTemplate>
+    <Content Include="Application\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
