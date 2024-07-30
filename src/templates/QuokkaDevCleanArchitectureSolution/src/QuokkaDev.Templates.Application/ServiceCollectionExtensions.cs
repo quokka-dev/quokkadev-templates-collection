@@ -1,8 +1,10 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using QuokkaDev.AsyncNotifications;
 using QuokkaDev.Cqrs;
+using QuokkaDev.Cqrs.Abstractions;
 using QuokkaDev.Cqrs.Decorators;
 using QuokkaDev.Templates.Application.Infrastructure.Interfaces;
 using QuokkaDev.Templates.Application.Infrastructure.Services;
@@ -97,6 +99,13 @@ namespace QuokkaDev.Templates.Application
                 o.IsRequestLoggingEnabled = true;
                 o.IsResponseLoggingEnabled = true;
             }).AndQueryValidation(_ => { });
+
+            // Add automatic transaction management
+            _services.Decorate<ICommandDispatcher>((inner, provider) => new CommandTransactionDecorator(
+                inner,
+                provider.GetRequiredService<ITransactionManager>(),
+                provider.GetRequiredService<ILogger<CommandTransactionDecorator>>()
+            ));
 
             return this;
         }

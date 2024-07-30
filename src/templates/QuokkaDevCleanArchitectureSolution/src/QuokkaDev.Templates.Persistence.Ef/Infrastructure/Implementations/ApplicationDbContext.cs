@@ -66,25 +66,7 @@ namespace QuokkaDev.Templates.Persistence.Ef.Infrastructure.Implementations
         {
             await SaveChangesAsync(cancellationToken);
             return true;
-        }
-
-        public async Task<bool> TransactionalSaveEntitiesAsync(CancellationToken cancellationToken = default)
-        {
-            bool result;
-            var transaction = await BeginTransactionAsync();
-
-            try
-            {
-                result = await SaveEntitiesAsync(cancellationToken);
-                await CommitTransactionAsync(transaction!);
-                return result;
-            }
-            catch (Exception)
-            {
-                await RollbackTransactionAsync(transaction!);
-                throw;
-            }
-        }
+        }        
 
         public async Task<ICommandTransaction?> BeginTransactionAsync()
         {
