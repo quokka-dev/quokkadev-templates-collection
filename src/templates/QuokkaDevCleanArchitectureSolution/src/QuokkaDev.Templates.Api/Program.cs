@@ -34,7 +34,8 @@ builder.Services.AddSingleton<BatchHostedService>();
 builder.Services.AddSingleton<IHostedService, BatchHostedService>(
                    serviceProvider => serviceProvider.GetRequiredService<BatchHostedService>());
 
-builder.Services.AddDataAccess(connectionString);
+builder.Services.AddDataAccess(connectionString)
+    .AddSpannedTransactions();
 builder.Services.AddQueriesDataAccess(connectionString);
 
 builder.Services.AddApplicationServices(configuration)

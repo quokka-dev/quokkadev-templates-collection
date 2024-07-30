@@ -12,12 +12,13 @@ namespace QuokkaDev.Templates.Persistence.Ef
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Register services for data access used in commands
+        /// Register services for data access used in commands.
         /// </summary>
-        /// <param name="services">The service collection where register the services</param>
-        /// <param name="connectionString">the connection string for a SQL server Db</param>
-        /// <param name="useInMemoryDb">Indicate if you want to use an inMemory Db (for test purposes)</param>
-        /// <returns>The original service collection</returns>
+        /// <param name="services">The service collection where to register the services.</param>
+        /// <param name="connectionString">The connection string for a SQL server database.</param>
+        /// <param name="enableAudit">Indicates if audit logging should be enabled.</param>
+        /// <param name="enableDomainEventDispathing">Indicates if domain event dispatching should be enabled.</param>
+        /// <returns>The original service collection.</returns>
         public static IServiceCollection AddDataAccess(this IServiceCollection services, string connectionString, bool enableAudit = true, bool enableDomainEventDispathing = true)
         {
             services.RegisterUnitOfWork(connectionString, enableAudit, enableDomainEventDispathing)
@@ -26,9 +27,31 @@ namespace QuokkaDev.Templates.Persistence.Ef
             return services;
         }
 
+        /// <summary>
+        /// Register services for spanned transactions.
+        /// </summary>
+        /// <param name="services">The service collection where to register the services.</param>
+        /// <returns>The original service collection.</returns>
+        public static IServiceCollection AddSpannedTransactions(this IServiceCollection services)
+        {
+            services
+                .AddScoped<ISpannedTransaction, SpannedTransaction>()
+                .AddScoped<ISpannedTransactionBuilder, SpannedTransactionBuilder>()
+                .AddScoped<ISpannedTransactionBuilderFactory, SpannedTransactionBuilderFactory>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// Register the unit of work and related services.
+        /// </summary>
+        /// <param name="services">The service collection where to register the services.</param>
+        /// <param name="connectionString">The connection string for a SQL server database.</param>
+        /// <param name="enableAudit">Indicates if audit logging should be enabled.</param>
+        /// <param name="enableDomainEventDispathing">Indicates if domain event dispatching should be enabled.</param>
+        /// <returns>The original service collection.</returns>
         private static IServiceCollection RegisterUnitOfWork(this IServiceCollection services, string connectionString, bool enableAudit = true, bool enableDomainEventDispathing = true)
         {
-
             services.AddDbContext<IUnitOfWork, ApplicationDbContext>((sp, options) =>
             {
                 options.UseSqlServer(connectionString,
@@ -61,13 +84,18 @@ namespace QuokkaDev.Templates.Persistence.Ef
             return services;
         }
 
+        /// <summary>
+        /// Register all repository services found in the current assembly.
+        /// </summary>
+        /// <param name="services">The service collection where to register the services.</param>
+        /// <returns>The original service collection.</returns>
         private static IServiceCollection RegisterRepositories(this IServiceCollection services)
         {
             Assembly currentAssembly = typeof(ServiceCollectionExtensions).Assembly;
 
             var repositories = currentAssembly.GetTypes().Where(t => t.IsAbstract == false &&
                     t.Name != "BaseRepository" &&
-                    t.Name.EndsWith("Repository")); ;
+                    t.Name.EndsWith("Repository"));
 
             foreach (var repository in repositories)
             {
