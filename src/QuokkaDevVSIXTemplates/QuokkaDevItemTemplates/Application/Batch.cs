@@ -1,12 +1,14 @@
-﻿namespace $rootnamespace$
+﻿using QuokkaDev.Templates.Application.Infrastructure.Interfaces;
+
+namespace $rootnamespace$
 {
     public sealed record $safeitemname$Data() { }
 
     public class $safeitemname$ : IBatch<$safeitemname$Data>
     {
-        private readonly ICoreServices<$safeitemname$> _coreServices;
+        private readonly IBatchCoreServices<$safeitemname$> _coreServices;
 
-        public $safeitemname$(ICoreServices<$safeitemname$> coreServices)
+        public $safeitemname$(IBatchCoreServices<$safeitemname$> coreServices)
         {
             _coreServices = coreServices;
         }

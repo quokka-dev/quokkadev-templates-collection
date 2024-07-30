@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using QuokkaDev.Cqrs.Abstractions;
+using QuokkaDev.Templates.Application.Infrastructure.Interfaces;
 using Microsoft.Extensions.Logging;
 
 namespace $rootnamespace$
@@ -25,9 +26,9 @@ namespace $rootnamespace$
     /// </summary>
     public class $safeitemname$  : ICommandHandler<$fileinputname$Command, $fileinputname$CommandResult>
     {
-        private readonly ICoreServices<$safeitemname$> _coreServices;
+        private readonly ICommandsCoreServices<$safeitemname$> _coreServices;
 
-        public $safeitemname$(ICoreServices<$safeitemname$> coreServices)
+        public $safeitemname$(ICommandsCoreServices<$safeitemname$> coreServices)
         {
             _coreServices = coreServices;
         }
