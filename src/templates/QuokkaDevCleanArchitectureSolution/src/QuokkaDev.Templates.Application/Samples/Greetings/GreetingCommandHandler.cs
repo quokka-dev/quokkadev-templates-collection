@@ -37,7 +37,7 @@ namespace QuokkaDev.Templates.Application.Samples.Greetings
         public GreetingCommandHandler(ICommandsCoreServices<GreetingCommandHandler> coreServices)
         {
             _coreServices = coreServices;
-        }
+        }        
 
         /// <summary>
         /// Handles the given GreetingCommand and returns a GreetingCommandResult.

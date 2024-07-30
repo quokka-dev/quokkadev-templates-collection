@@ -7,7 +7,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Presentation
 {
     public class FilterTest
     {
-        private const string FILTER_NAMESPACE = "QuokkaDev.Templates.Api.Filters";
+        private const string FILTER_NAMESPACE = "QuokkaDev.Templates.Api.Infrastructure.Filters";
 
         [Fact]
         public void Filters_Should_Reside_In_Namespace()

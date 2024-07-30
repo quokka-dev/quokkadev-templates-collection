@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using NetArchTest.Rules;
+using QuokkaDev.Templates.ArchitecturalTests.CustomRules;
 using QuokkaDev.Templates.Domain.SeedWork;
 using Xunit;
 
@@ -50,17 +51,17 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Domain
             result.IsSuccessful.Should().BeTrue($"Repositories interfaces must have name starting with 'I' and ending with 'Repository' but {result.GetOffendingTypes()} does not");
         }
 
-        [Fact(DisplayName = "Repositories Interfaces Should Have Right Namespace")]
-        public void Repositories_Interfaces_Should_Have_Right_Namespace()
+        [Fact(DisplayName = "Repositories Interfaces Should Reside In Right Namespace")]
+        public void Repositories_Interfaces_Should_Reside_In_Right_Namespace()
         {
             var result = Types.InAssembly(typeof(IAggregateRoot).Assembly)
                 .That()
                 .ImplementInterface(typeof(IRepository<>))
                 .Should()
-                .ResideInNamespaceStartingWith(AGGREGATE_NAMESPACE)
+                .MeetCustomRule(new RepositoryInterfaceIsInAggregateNamespace())
                 .GetResult();
 
-            result.IsSuccessful.Should().BeTrue($"Repositories interfaces must reside in namespace starting with '{AGGREGATE_NAMESPACE}' but {result.GetOffendingTypes()} does not");
+            result.IsSuccessful.Should().BeTrue($"Repositories interfaces must have reside in his aggregate namespace but {result.GetOffendingTypes()} does not");
         }
     }
 }

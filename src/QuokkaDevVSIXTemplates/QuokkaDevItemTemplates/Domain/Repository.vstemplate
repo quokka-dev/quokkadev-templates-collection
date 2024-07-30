@@ -16,10 +16,6 @@
         <Assembly>System</Assembly>
       </Reference>
     </References>
-	  <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.cs" CustomTool="MSBuild:Compile" >AggregateRoot.cs</ProjectItem>
 	  <ProjectItem ReplaceParameters="true" TargetFileName="I$fileinputname$Repository.cs" CustomTool="MSBuild:Compile" >IRepository.cs</ProjectItem>
-	  <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$Specifications.cs" CustomTool="MSBuild:Compile" >Specifications.cs</ProjectItem>
-	  <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$Events.cs" CustomTool="MSBuild:Compile" >Events.cs</ProjectItem>
-	  <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$Factory.cs" CustomTool="MSBuild:Compile" >Factory.cs</ProjectItem>
-  </TemplateContent>
+    </TemplateContent>
 </VSTemplate>
