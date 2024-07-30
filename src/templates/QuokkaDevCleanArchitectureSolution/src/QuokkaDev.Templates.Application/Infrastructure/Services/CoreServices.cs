@@ -4,32 +4,7 @@ using QuokkaDev.Templates.Application.Infrastructure.Interfaces;
 
 namespace QuokkaDev.Templates.Application.Infrastructure.Services
 {
-    /// <summary>
-    /// Provides core services required by the application.
-    /// </summary>
-    /// <typeparam name="T">The type of the class that requires the core services.</typeparam>
-    public interface ICoreServices<T> where T : class
-    {
-        /// <summary>
-        /// Gets the logger instance.
-        /// </summary>
-        ILogger<T> Logger { get; }
-
-        /// <summary>
-        /// Gets the mapper instance.
-        /// </summary>
-        IMapper Mapper { get; }
-
-        /// <summary>
-        /// Gets the repository factory instance.
-        /// </summary>
-        IRepositoryFactory RepositoryFactory { get; }
-
-        /// <summary>
-        /// Gets the unit of work instance.
-        /// </summary>
-        IUnitOfWork UnitOfWork { get; }
-    }
+    
 
     /// <summary>
     /// Implementation of <see cref="ICoreServices{T}"/> that provides core services required by the application.
@@ -73,4 +48,28 @@ namespace QuokkaDev.Templates.Application.Infrastructure.Services
             Mapper = mapper;
         }
     }
+
+    internal class CommandsCoreServices<T> : CoreServices<T>, ICommandsCoreServices<T> where T : class
+    {
+        public ICurrentUserAccessor CurrentUserAccessor { get; }
+
+        public CommandsCoreServices(ILogger<T> logger, IUnitOfWork unitOfWork, IRepositoryFactory repositoryFactory, IMapper mapper, ICurrentUserAccessor currentUserAccessor)
+            : base(logger, unitOfWork, repositoryFactory, mapper)
+        {
+            CurrentUserAccessor = currentUserAccessor;
+        }
+
+    }
+
+    internal class BatchCoreServices<T> : CoreServices<T>, IBatchCoreServices<T> where T : class
+    {
+        public ITransactionManager TransactionManager { get; }
+
+        public BatchCoreServices(ILogger<T> logger, IUnitOfWork unitOfWork, IRepositoryFactory repositoryFactory, IMapper mapper, ITransactionManager transactionManager)
+            : base(logger, unitOfWork, repositoryFactory, mapper)
+        {
+            TransactionManager = transactionManager;
+        }
+    }
 }
+

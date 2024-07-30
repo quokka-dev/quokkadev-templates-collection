@@ -18,6 +18,8 @@ namespace QuokkaDev.Templates.Application
         {
             services.AddScoped<IRepositoryFactory, RepositoryFactory>();
             services.AddScoped(typeof(ICoreServices<>), typeof(CoreServices<>));
+            services.AddScoped(typeof(IBatchCoreServices<>), typeof(BatchCoreServices<>));
+            services.AddScoped(typeof(ICommandsCoreServices<>), typeof(CommandsCoreServices<>));
             return new ApplicationServicesBuilder(services, configuration);
         }
     }

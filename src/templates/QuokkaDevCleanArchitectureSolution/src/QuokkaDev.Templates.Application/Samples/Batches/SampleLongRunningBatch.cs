@@ -7,9 +7,9 @@ namespace QuokkaDev.Templates.Application.Samples.Batches
 
     public class SampleLongRunningBatch : IBatch<SampleLongRunningBatchData>
     {
-        private readonly ICoreServices<SampleLongRunningBatch> _coreServices;
+        private readonly IBatchCoreServices<SampleLongRunningBatch> _coreServices;
 
-        public SampleLongRunningBatch(ICoreServices<SampleLongRunningBatch> coreServices)
+        public SampleLongRunningBatch(IBatchCoreServices<SampleLongRunningBatch> coreServices)
         {
             _coreServices = coreServices;
         }

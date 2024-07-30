@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using QuokkaDev.Cqrs.Abstractions;
+using QuokkaDev.Templates.Application.Infrastructure.Interfaces;
 using QuokkaDev.Templates.Application.Infrastructure.Services;
 using QuokkaDev.Templates.Domain.Samples.HelloWorldMessages;
 
@@ -25,7 +26,7 @@ namespace QuokkaDev.Templates.Application.Samples.Greetings
     /// </summary>
     public class GreetingCommandHandler : ICommandHandler<GreetingCommand, GreetingCommandResult>
     {
-        private readonly ICoreServices<GreetingCommandHandler> _coreServices;
+        private readonly ICommandsCoreServices<GreetingCommandHandler> _coreServices;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GreetingCommandHandler"/> class.
@@ -33,7 +34,7 @@ namespace QuokkaDev.Templates.Application.Samples.Greetings
         /// <param name="logger">The logger to be used by the handler.</param>
         /// <param name="unitOfWork">The unit of work for managing database transactions.</param>
         /// <param name="repositoryFactory">The factory for creating repositories.</param>
-        public GreetingCommandHandler(ICoreServices<GreetingCommandHandler> coreServices)
+        public GreetingCommandHandler(ICommandsCoreServices<GreetingCommandHandler> coreServices)
         {
             _coreServices = coreServices;
         }
