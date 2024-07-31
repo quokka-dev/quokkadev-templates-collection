@@ -8,7 +8,7 @@ using System.Data;
 
 namespace QuokkaDev.Templates.Persistence.Ef.Infrastructure.Implementations
 {
-    internal class ApplicationDbContext : DbContext, IUnitOfWork, ITransactionManager
+    internal class ApplicationDbContext : DbContext, IUnitOfWork, ITransactionManager, IDataAccessBootstrapper
     {
         private readonly ILogger<ApplicationDbContext> logger;
         private IDbContextTransaction? currentTransaction = null;
@@ -18,7 +18,6 @@ namespace QuokkaDev.Templates.Persistence.Ef.Infrastructure.Implementations
         /// </summary>
         public ApplicationDbContext()
         {
-
             logger = null!;
         }
 
@@ -100,6 +99,15 @@ namespace QuokkaDev.Templates.Persistence.Ef.Infrastructure.Implementations
         public void Reset()
         {
             ChangeTracker.Clear();
+        }
+
+        public async Task BootstrapAsync()
+        {
+            //await this.Database.EnsureDeletedAsync();
+            if ((await this.Database.GetPendingMigrationsAsync()).Any())
+            {
+                await this.Database.MigrateAsync();
+            }
         }
 
         private async Task CommitTransactionInternalAsync(ICommandTransaction transaction)

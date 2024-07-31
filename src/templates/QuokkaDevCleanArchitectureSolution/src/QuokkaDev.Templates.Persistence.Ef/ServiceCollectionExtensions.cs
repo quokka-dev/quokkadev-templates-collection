@@ -49,6 +49,15 @@ namespace QuokkaDev.Templates.Persistence.Ef
         /// <returns>The original service collection.</returns>
         private static IServiceCollection RegisterUnitOfWork(this IServiceCollection services, string connectionString, bool enableAudit = true, bool enableDomainEventDispathing = true)
         {
+            if (enableAudit)
+            { 
+                services.AddScoped<AuditInterceptor>();
+            }
+            if (enableDomainEventDispathing)
+            {
+                services.AddScoped<DispatchEventInterceptor>();
+            }            
+
             services.AddDbContext<IUnitOfWork, ApplicationDbContext>((sp, options) =>
             {
                 options.UseSqlServer(connectionString,
@@ -77,7 +86,8 @@ namespace QuokkaDev.Templates.Persistence.Ef
 
             services.AddScoped<DbContext>(sp => { return sp.GetRequiredService<ApplicationDbContext>(); });
             services.AddScoped<ITransactionManager>(sp => { return sp.GetRequiredService<ApplicationDbContext>(); });
-
+            services.AddScoped<IDataAccessBootstrapper>(sp => { return sp.GetRequiredService<ApplicationDbContext>(); });
+            
             return services;
         }
 

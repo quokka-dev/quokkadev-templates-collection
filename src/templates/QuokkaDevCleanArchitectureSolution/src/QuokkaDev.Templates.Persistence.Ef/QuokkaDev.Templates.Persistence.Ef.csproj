@@ -18,8 +18,4 @@
     <ProjectReference Include="..\QuokkaDev.Templates.Domain\QuokkaDev.Templates.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Infrastructure\Converters\" />
-  </ItemGroup>
-
 </Project>

@@ -5,8 +5,10 @@ using QuokkaDev.Templates.Api.Infrastructure;
 using QuokkaDev.Templates.Api.Infrastructure.HostedServices;
 using QuokkaDev.Templates.Api.Infrastructure.Middlewares;
 using QuokkaDev.Templates.Application;
+using QuokkaDev.Templates.Application.Infrastructure.Interfaces;
 using QuokkaDev.Templates.Persistence.Ef;
 using QuokkaDev.Templates.Query.Dapper;
+using System.Configuration;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -118,6 +120,15 @@ app.MapHealthChecks("/hc", new HealthCheckOptions()
 {
     Predicate = _ => true
 });
+
+if (!configuration.GetValue<bool>("CONTINOUS_INTEGRATION_ENV", false))
+{
+    using var scope = app.Services.CreateScope();
+    using var dbBootstrap = scope.ServiceProvider.GetRequiredService<IDataAccessBootstrapper>();
+    {
+        dbBootstrap.BootstrapAsync().Wait();
+    }    
+}
 
 app.Run();
 
