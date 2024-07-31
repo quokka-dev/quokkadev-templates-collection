@@ -8,8 +8,6 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Domain
 {
     public class DomainInterfaceTest
     {
-        private const string AGGREGATE_NAMESPACE = "QuokkaDev.Templates.Domain";
-
         [Fact(DisplayName = "Interfaces Should Have Right Name")]
         public void Interfaces_Should_Have_Right_Name()
         {

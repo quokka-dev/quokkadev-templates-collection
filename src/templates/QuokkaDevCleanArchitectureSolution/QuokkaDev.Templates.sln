@@ -42,18 +42,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adapters", "Adapters", "{50271278-506D-4798-B3CC-E05791B3273D}"
 EndProject
-//#if (UseExternalSeedWork)
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuokkaDev.Templates.Domain.SeedWork", "src\QuokkaDev.Templates.Domain.SeedWork\QuokkaDev.Templates.Domain.SeedWork.csproj", "{103C82DE-66E5-42C7-A78B-A32E1E408161}"
 EndProject
-//#endif
-//#if (UseExternalDomainCommon)
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuokkaDev.Templates.Domain.Common", "src\QuokkaDev.Templates.Domain.Common\QuokkaDev.Templates.Domain.Common.csproj", "{2D104D4A-A129-44EE-8BCD-666774A75690}"
 EndProject
-//#endif
-//#if (UseExternalApplicationInfrastructure)
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuokkaDev.Templates.Application.Infrastructure", "src\QuokkaDev.Templates.Application.Infrastructure\QuokkaDev.Templates.Application.Infrastructure.csproj", "{FDDCB39C-2B41-48A0-B1FD-D8AF6C876046}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuokkaDev.Templates.Application.Infrastructure", "src\QuokkaDev.Templates.Application.Infrastructure\QuokkaDev.Templates.Application.Infrastructure.csproj", "{FDDCB39C-2B41-48A0-B1FD-D8AF6C876046}"
 EndProject
-//#endif
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5E350577-D3DF-44F0-A250-951A1AC33B77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,24 +88,22 @@ Global
 		{59466C64-EC03-4C27-92E5-B0FD253734AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59466C64-EC03-4C27-92E5-B0FD253734AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59466C64-EC03-4C27-92E5-B0FD253734AD}.Release|Any CPU.Build.0 = Release|Any CPU
-//#if (UseExternalSeedWork)
 		{103C82DE-66E5-42C7-A78B-A32E1E408161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{103C82DE-66E5-42C7-A78B-A32E1E408161}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{103C82DE-66E5-42C7-A78B-A32E1E408161}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{103C82DE-66E5-42C7-A78B-A32E1E408161}.Release|Any CPU.Build.0 = Release|Any CPU
-//#endif
-//#if (UseExternalDomainCommon)
 		{2D104D4A-A129-44EE-8BCD-666774A75690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2D104D4A-A129-44EE-8BCD-666774A75690}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D104D4A-A129-44EE-8BCD-666774A75690}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D104D4A-A129-44EE-8BCD-666774A75690}.Release|Any CPU.Build.0 = Release|Any CPU
-//#endif
-//#if (UseExternalApplicationInfrastructure)
 		{FDDCB39C-2B41-48A0-B1FD-D8AF6C876046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FDDCB39C-2B41-48A0-B1FD-D8AF6C876046}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDDCB39C-2B41-48A0-B1FD-D8AF6C876046}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDDCB39C-2B41-48A0-B1FD-D8AF6C876046}.Release|Any CPU.Build.0 = Release|Any CPU
-//#endif
+		{5E350577-D3DF-44F0-A250-951A1AC33B77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E350577-D3DF-44F0-A250-951A1AC33B77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E350577-D3DF-44F0-A250-951A1AC33B77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E350577-D3DF-44F0-A250-951A1AC33B77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -128,15 +122,9 @@ Global
 		{E34143C0-811F-4B0F-9A26-71E3CF985587} = {E53732A4-B84A-454E-A7DC-367E8032F460}
 		{376FA0C4-D6EB-4AE7-8C06-D93C8CA82BB6} = {E53732A4-B84A-454E-A7DC-367E8032F460}
 		{50271278-506D-4798-B3CC-E05791B3273D} = {E53732A4-B84A-454E-A7DC-367E8032F460}
-//#if (UseExternalSeedWork)
 		{103C82DE-66E5-42C7-A78B-A32E1E408161} = {E34143C0-811F-4B0F-9A26-71E3CF985587}
-//#endif
-//#if (UseExternalSeedWork)
 		{2D104D4A-A129-44EE-8BCD-666774A75690} = {E34143C0-811F-4B0F-9A26-71E3CF985587}
-//#endif
-//#if (UseExternalApplicationInfrastructure)
 		{FDDCB39C-2B41-48A0-B1FD-D8AF6C876046} = {376FA0C4-D6EB-4AE7-8C06-D93C8CA82BB6}
-//#endif
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A6829A5D-EE37-47A5-89D9-30BDC3E87B2A}

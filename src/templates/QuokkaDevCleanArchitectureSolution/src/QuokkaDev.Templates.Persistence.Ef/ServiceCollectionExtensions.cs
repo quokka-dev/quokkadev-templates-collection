@@ -34,10 +34,7 @@ namespace QuokkaDev.Templates.Persistence.Ef
         /// <returns>The original service collection.</returns>
         public static IServiceCollection AddSpannedTransactions(this IServiceCollection services)
         {
-            services
-                .AddScoped<ISpannedTransaction, SpannedTransaction>()
-                .AddScoped<ISpannedTransactionBuilder, SpannedTransactionBuilder>()
-                .AddScoped<ISpannedTransactionBuilderFactory, SpannedTransactionBuilderFactory>();
+            services.AddScoped<ISpannedTransactionBuilderFactory, SpannedTransactionBuilderFactory>();
 
             return services;
         }
