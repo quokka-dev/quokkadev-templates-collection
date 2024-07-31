@@ -20,4 +20,16 @@
 ## 8.16 - User Interface
 ## 8.17 - Build, Test and Deploy
 ## 8.18 - Migrations
+
+### QuokkaDev.Templates.Persistence.Ef Migrations 
+
+```bash
+
+Add-Migration MigrationName -Project QuokkaDev.Templates.Persistence.Ef -StartupProject QuokkaDev.Templates.Api -Context ApplicationDbContext
+
+Update-Database MigrationName -Project QuokkaDev.Templates.Persistence.Ef -StartupProject QuokkaDev.Templates.Api -Context ApplicationDbContextDbContext
+
+Remove-Migration -Project QuokkaDev.Templates.Persistence.Ef -StartupProject QuokkaDev.Templates.Api -Context ApplicationDbContextDbContext
+
+```
 ## 8.19 - Configurability

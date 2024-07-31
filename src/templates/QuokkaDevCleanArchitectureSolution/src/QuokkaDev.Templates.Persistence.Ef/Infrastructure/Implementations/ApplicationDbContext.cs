@@ -103,6 +103,7 @@ namespace QuokkaDev.Templates.Persistence.Ef.Infrastructure.Implementations
 
         public async Task BootstrapAsync()
         {
+            //Uncomment this line to drop and recreate the database
             //await this.Database.EnsureDeletedAsync();
             if ((await this.Database.GetPendingMigrationsAsync()).Any())
             {
