@@ -7,8 +7,8 @@
     <ProjectGuid>5e350577-d3df-44f0-a250-951a1ac33b77</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
-    <DockerServiceName>quokkadev.templates.api</DockerServiceName>
-	<DockerComposeProjectName>dev_environment</DockerComposeProjectName>
+    <DockerServiceName>Quokkadev.Templates.Api</DockerServiceName>
+	<DockerComposeProjectName>quokkadevtemplates_dev_environment</DockerComposeProjectName>
   </PropertyGroup>
   <ItemGroup>
     <None Include=".env" />

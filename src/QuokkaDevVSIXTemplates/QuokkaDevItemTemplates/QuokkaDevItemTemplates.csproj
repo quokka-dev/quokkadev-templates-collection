@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Testing\IntegrationTestTemplate.cs" />
+    <None Include="Testing\ArchitecturalTestTemplate.cs" />
     <None Include="Web\ResultFilterTemplate.cs" />
     <None Include="Web\PolicyRequirementTemplate.cs" />
     <None Include="Web\ExceptionFilterTemplate.cs" />
@@ -97,6 +99,12 @@
     <Content Include="Testing\icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <VSTemplate Include="Testing\IntegrationTestTemplate.vstemplate">
+      <OutputSubPath>Testing</OutputSubPath>
+    </VSTemplate>
+    <VSTemplate Include="Testing\ArchitecturalTestTemplate.vstemplate">
+      <OutputSubPath>Testing</OutputSubPath>
+    </VSTemplate>
     <Content Include="Web\icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

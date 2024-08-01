@@ -1,5 +1,5 @@
 version: '3.4'
-name: 'dev_environment'
+name: 'quokkadevtemplates_dev_environment'
 
 networks:
   proxynet:
@@ -7,21 +7,21 @@ networks:
   
 # Change volumes names
 volumes:   
-  sql_volume:
+  quokkadevtemplates_sql_volume:
     external: true
-  seq_volume:
+  quokkadevtemplates_seq_volume:
     external: true
-  key_volume:
+  quokkadevtemplates_key_volume:
     external: true
-  # blob_volume:
+  # quokkadevtemplates_blob_volume:
   #   external: true
-  # smtp_volume:
+  # quokkadevtemplates_smtp_volume:
   #   external: true
 
 services:
   QuokkaDev.Templates.Api:
     image: ${DOCKER_REGISTRY-}quokkadevtemplatesapi
-    container_name: api_dev_instance
+    container_name: quokkadevtemplates_api_dev_instance
     build:
       context: .
       dockerfile: src/QuokkaDev.Templates.Api/Dockerfile
@@ -29,7 +29,7 @@ services:
       - ConnectionStrings__Default=${ConnectionStrings__Default}
       - Serilog__WriteTo__0__Args__serverUrl=${Serilog__WriteTo__0__Args__serverUrl}
     volumes:
-      - key_volume:/root/.aspnet/DataProtection-Keys     
+      - quokkadevtemplates_key_volume:/root/.aspnet/DataProtection-Keys     
     depends_on:
       - sql
       - seq
@@ -37,12 +37,12 @@ services:
       
   sql:
     image: ${DOCKER_REGISTRY-}mcr.microsoft.com/mssql/server:2022-latest
-    container_name: sql_dev_instance
+    container_name: quokkadevtemplates_sql_dev_instance
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=MyS@P@55w0rd!
     volumes:
-      - sql_volume:/var/opt/mssql
+      - quokkadevtemplates_sql_volume:/var/opt/mssql
     ports:
       - "1433:1433"
 
@@ -53,17 +53,17 @@ services:
     environment:
       - ACCEPT_EULA=Y
     volumes:
-      - seq_volume:/data
+      - quokkadevtemplates_seq_volume:/data
     ports:
       - "5001:80"
       - "5341:5341"
 
   # azurite:
   #   image: mcr.microsoft.com/azure-storage/azurite
-  #   container_name: blob_dev_instance
+  #   container_name: quokkadevtemplates_blob_dev_instance
   #   hostname: azurite
   #   volumes:
-  #     - blob_volume:/data
+  #     - quokkadevtemplates_blob_volume:/data
   #   ports:
   #     - "10000:10000"
   #     - "10001:10001"
@@ -71,9 +71,9 @@ services:
   
   # smtp:
   #   image: ${DOCKER_REGISTRY-}rnwood/smtp4dev:latest
-  #   container_name: smtp_dev_instance
+  #   container_name: quokkadevtemplates_smtp_dev_instance
   #   volumes:
-  #     - smtp_volume:/smtp4dev
+  #     - quokkadevtemplates_smtp_volume:/smtp4dev
   #   ports:
   #     - "5000:80"
   #     - "25:25"

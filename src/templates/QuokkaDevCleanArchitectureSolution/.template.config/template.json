@@ -48,6 +48,13 @@
             "description": "Add Application.Infrastructure as separate project",
             "defaultValue": "false",
             "datatype": "bool"
+        },
+        "DockerItemsPlaceholder": {
+            "type": "parameter",
+            "description": "Prefix used for Docker items (use only lowercase letters, numbers and _)",
+            "defaultValue": "quokkadevtemplates",
+            "datatype": "string",
+            "replaces": "quokkadevtemplates"
         }
     },
     "sources": [

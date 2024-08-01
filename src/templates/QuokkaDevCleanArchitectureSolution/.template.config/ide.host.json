@@ -35,6 +35,14 @@
             },
             "isVisible": true,
             "defaultValue": "false"
+        },
+        {
+            "id": "DockerItemsPlaceholder",
+            "name": {
+                "text": "Prefix used for Docker items (use only lowercase letters, numbers and _)"
+            },
+            "isVisible": true,
+            "defaultValue": "quokkadevtemplates"
         }
     ],
     "supportsDocker": false,
