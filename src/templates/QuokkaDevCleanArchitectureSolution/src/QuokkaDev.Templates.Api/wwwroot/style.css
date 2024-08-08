@@ -1,0 +1,13 @@
+﻿.swagger-ui svg:not(:root) {
+	display: none;
+}
+
+.topbar-wrapper .link:before {
+	background-image: url('logos.png');
+	display: inline-block;
+	background-size: 200px 74px;
+	width: 200px;	
+	height: 74px;
+	background-repeat: no-repeat;
+	content: "";
+}

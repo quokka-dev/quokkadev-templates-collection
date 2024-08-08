@@ -2,7 +2,6 @@
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using NetArchTest.Rules;
-using QuokkaDev.Templates.Api;
 using Xunit;
 
 namespace QuokkaDev.Templates.ArchitecturalTests.Presentation
@@ -12,7 +11,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Presentation
         [Fact(DisplayName = "Controllers Should Have ApiControllerAttribute")]
         public void Controllers_Should_Have_ApiControllerAttribute()
         {
-            var result = Types.InAssembly(typeof(Startup).Assembly)
+            var result = Types.InAssembly(typeof(Program).Assembly)
                 .That()
                 .Inherit(typeof(ControllerBase))
                 .Should()
@@ -25,7 +24,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Presentation
         [Fact(DisplayName = "Controllers Should Have RouteAttribute")]
         public void Controllers_Should_Have_RouteAttribute()
         {
-            var result = Types.InAssembly(typeof(Startup).Assembly)
+            var result = Types.InAssembly(typeof(Program).Assembly)
                 .That()
                 .Inherit(typeof(ControllerBase))
                 .Should()
@@ -38,7 +37,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Presentation
         [Fact(DisplayName = "Controllers Should Have ApiVersionAttribute")]
         public void Controllers_Should_Have_ApiVersionAttribute()
         {
-            var result = Types.InAssembly(typeof(Startup).Assembly)
+            var result = Types.InAssembly(typeof(Program).Assembly)
                 .That()
                 .Inherit(typeof(ControllerBase))
                 .Should()

@@ -18,31 +18,109 @@
             "datatype": "choice",
             "choices": [
                 {
-                    "choice": "netcoreapp3.1",
-                    "description": ".Net Core 3.1"
-                },
-                {
-                    "choice": "net5.0",
-                    "description": ".Net 5.0"
-                },
-                {
-                    "choice": "net6.0",
-                    "description": ".Net 6.0"
-                },
-                {
                     "choice": "net8.0",
                     "description": ".Net 8.0"
                 }
             ],
             "replaces": "net8.0",
             "defaultValue": "net8.0"
+        },
+        "UseArc42Templates": {
+            "type": "parameter",
+            "description": "Add a docs folder with Arc42 templates documents",
+            "defaultValue": "false",
+            "datatype": "bool"
+        },
+        "UseExternalSeedWork": {
+            "type": "parameter",
+            "description": "Add SeedWork as separate project",
+            "defaultValue": "false",
+            "datatype": "bool"
+        },
+        "UseExternalDomainCommon": {
+            "type": "parameter",
+            "description": "Add Domain.Common as separate project",
+            "defaultValue": "false",
+            "datatype": "bool"
+        },
+        "UseExternalApplicationInfrastructure": {
+            "type": "parameter",
+            "description": "Add Application.Infrastructure as separate project",
+            "defaultValue": "false",
+            "datatype": "bool"
+        },
+        "DockerItemsPlaceholder": {
+            "type": "parameter",
+            "description": "Prefix used for Docker items (use only lowercase letters, numbers and _)",
+            "defaultValue": "quokkadevtemplates",
+            "datatype": "string",
+            "replaces": "quokkadevtemplates"
         }
     },
     "sources": [
         {
             "modifiers": [
-
+                {
+                    "condition": "(!UseArc42Templates)",
+                    "exclude": [
+                        "docs/**/*"
+                    ]
+                },
+                {
+                    "condition": "(!UseExternalSeedWork)",
+                    "exclude": [
+                        "src/QuokkaDev.Templates.Domain.SeedWork/**/*"
+                    ]
+                },
+                {
+                    "condition": "(UseExternalSeedWork)",
+                    "exclude": [
+                        "src/QuokkaDev.Templates.Domain/SeedWork/**/*"
+                    ]
+                },
+                {
+                    "condition": "(!UseExternalDomainCommon)",
+                    "exclude": [
+                        "src/QuokkaDev.Templates.Domain.Common/**/*"
+                    ]
+                },
+                {
+                    "condition": "(UseExternalDomainCommon)",
+                    "exclude": [
+                        "src/QuokkaDev.Templates.Domain/Common/**/*"
+                    ]
+                },
+                {
+                    "condition": "(!UseExternalApplicationInfrastructure)",
+                    "exclude": [
+                        "src/QuokkaDev.Templates.Application.Infrastructure/**/*"
+                    ]
+                },
+                {
+                    "condition": "(UseExternalApplicationInfrastructure)",
+                    "exclude": [
+                        "src/QuokkaDev.Templates.Application/Infrastructure/**/*"
+                    ]
+                }
             ]
+        },
+        {
+            "source": "src/QuokkaDev.Templates.Domain/Common",
+            "target": "src/QuokkaDev.Templates.Domain.Common",
+            "include": ["**/*.cs"],
+            "condition": "(UseExternalDomainCommon)"
+        },
+        {
+            "source": "src/QuokkaDev.Templates.Domain/SeedWork",
+            "target": "src/QuokkaDev.Templates.Domain.SeedWork",
+            "include": ["**/*.cs"],
+            "condition": "(UseExternalSeedWork)"
+        },
+        {
+            "source": "src/QuokkaDev.Templates.Application/Infrastructure",
+            "target": "src/QuokkaDev.Templates.Application.Infrastructure",
+            "include": ["**/*.cs"],
+            "condition": "(UseExternalApplicationInfrastructure)"
         }
     ]
 }

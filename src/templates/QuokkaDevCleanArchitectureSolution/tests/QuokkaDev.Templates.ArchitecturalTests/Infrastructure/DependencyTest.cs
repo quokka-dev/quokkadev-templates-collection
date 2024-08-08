@@ -9,7 +9,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Infrastructure
         [Fact(DisplayName = "Query.Dapper Should Have No Dependency On Other Projects")]
         public void Query_Dapper_Should_Have_No_Dependency_On_Other_Projects()
         {
-            var result = Types.InAssembly(typeof(QuokkaDev.Templates.Query.Dapper.DI.ServiceCollectionExtensions).Assembly)
+            var result = Types.InAssembly(typeof(Query.Dapper.ServiceCollectionExtensions).Assembly)
                 .Should()
                 .NotHaveDependencyOnAny(
                     "QuokkaDev.Templates.Persistence.Ef",
@@ -22,7 +22,7 @@ namespace QuokkaDev.Templates.ArchitecturalTests.Infrastructure
         [Fact(DisplayName = "Persistence.Ef Should Have No Dependency On Other Projects")]
         public void Persistence_Ef_Should_Have_No_Dependency_On_Other_Projects()
         {
-            var result = Types.InAssembly(typeof(QuokkaDev.Templates.Persistence.Ef.DI.ServiceCollectionExtensions).Assembly)
+            var result = Types.InAssembly(typeof(Persistence.Ef.ServiceCollectionExtensions).Assembly)
                 .Should()
                 .NotHaveDependencyOnAny(
                     "QQuokkaDev.Templates.Query.Dapper",
