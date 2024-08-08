@@ -37,6 +37,14 @@
             "defaultValue": "false"
         },
         {
+            "id": "UseDockerCompose",
+            "name": {
+                "text": "Add Docker compose project"
+            },
+            "isVisible": true,
+            "defaultValue": "false"
+        },
+        {
             "id": "DockerItemsPlaceholder",
             "name": {
                 "text": "Prefix used for Docker items (use only lowercase letters, numbers and _)"

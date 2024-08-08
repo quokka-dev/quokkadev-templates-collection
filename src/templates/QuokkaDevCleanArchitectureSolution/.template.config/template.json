@@ -49,6 +49,12 @@
             "defaultValue": "false",
             "datatype": "bool"
         },
+        "UseDockerCompose": {
+            "type": "parameter",
+            "description": "Add Docker compose project",
+            "defaultValue": "false",
+            "datatype": "bool"
+        },
         "DockerItemsPlaceholder": {
             "type": "parameter",
             "description": "Prefix used for Docker items (use only lowercase letters, numbers and _)",
@@ -100,6 +106,18 @@
                     "condition": "(UseExternalApplicationInfrastructure)",
                     "exclude": [
                         "src/QuokkaDev.Templates.Application/Infrastructure/**/*"
+                    ]
+                },
+                {
+                    "condition": "(!UseDockerCompose)",
+                    "exclude": [
+                        ".dockerignore",
+                        ".env",
+                        "changelog-configuration.json",
+                        "docker-compose.dcproj",
+                        "docker-compose.yml",
+                        "docker-compose.override.yml",
+                        "launchSettings.json"
                     ]
                 }
             ]
