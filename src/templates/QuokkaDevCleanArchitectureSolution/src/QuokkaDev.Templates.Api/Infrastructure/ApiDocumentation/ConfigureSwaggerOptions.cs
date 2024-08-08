@@ -21,7 +21,7 @@ namespace QuokkaDev.Templates.Api.Infrastructure.ApiDocumentation
         }
 
         /// <summary>
-        /// Configure each API discovered for Swagger Invoiceation
+        /// Configure each API discovered for Swagger Invoication
         /// </summary>
         /// <param name="options"></param>
         public void Configure(SwaggerGenOptions options)
