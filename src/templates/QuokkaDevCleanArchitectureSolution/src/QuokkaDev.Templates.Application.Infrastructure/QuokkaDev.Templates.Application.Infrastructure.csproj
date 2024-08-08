@@ -6,4 +6,33 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="13.0.1" />
+		<PackageReference Include="FluentValidation" Version="11.9.2" />
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.2" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+		<PackageReference Include="QuokkaDev.AsyncNotifications" Version="1.1.0" />
+		<PackageReference Include="QuokkaDev.AsyncNotifications.Abstractions" Version="1.1.0" />
+		<PackageReference Include="QuokkaDev.Cqrs" Version="3.1.0" />
+		<PackageReference Include="QuokkaDev.Cqrs.Abstractions" Version="3.1.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
+		<PackageReference Include="QuokkaDev.Cqrs.Decorators" Version="1.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\QuokkaDev.Templates.Domain\QuokkaDev.Templates.Domain.csproj" />
+	</ItemGroup>
+	
+	<!--#if (UseExternalDomainCommon) -->
+	<ItemGroup Condition="'$(UseExternalDomainCommon)' != ''">
+		<ProjectReference Include="..\QuokkaDev.Templates.Domain.Common\QuokkaDev.Templates.Domain.Common.csproj" />
+	</ItemGroup>
+	<!--#endif -->
+	<!--#if (UseExternalSeedWork) -->
+	<ItemGroup Condition="'$(UseExternalSeedWork)' != ''">
+		<ProjectReference Include="..\QuokkaDev.Templates.Domain.SeedWork\QuokkaDev.Templates.Domain.SeedWork.csproj" />
+	</ItemGroup>
+	<!--#endif -->
+
 </Project>

@@ -32,11 +32,35 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\QuokkaDev.Templates.Application\QuokkaDev.Templates.Application.csproj" />
+
+	<ItemGroup>
+		<ProjectReference Include="..\QuokkaDev.Templates.Domain\QuokkaDev.Templates.Domain.csproj" />
+	</ItemGroup>
+
+	<!--#if (UseExternalDomainCommon) -->
+	<ItemGroup Condition="'$(UseExternalDomainCommon)' != ''">
+		<ProjectReference Include="..\QuokkaDev.Templates.Domain.Common\QuokkaDev.Templates.Domain.Common.csproj" />
+	</ItemGroup>
+	<!--#endif -->
+	<!--#if (UseExternalSeedWork) -->
+	<ItemGroup Condition="'$(UseExternalSeedWork)' != ''">
+		<ProjectReference Include="..\QuokkaDev.Templates.Domain.SeedWork\QuokkaDev.Templates.Domain.SeedWork.csproj" />
+	</ItemGroup>
+	<!--#endif -->
+
+	<ItemGroup>
+		<ProjectReference Include="..\QuokkaDev.Templates.Application\QuokkaDev.Templates.Application.csproj" />
+	</ItemGroup>
+
+	<!--#if (UseExternalApplicationInfrastructure) -->
+	<ItemGroup Condition="'$(UseExternalApplicationInfrastructure)' != ''">
+		<ProjectReference Include="..\QuokkaDev.Templates.Application.Infrastructure\QuokkaDev.Templates.Application.Infrastructure.csproj" />
+	</ItemGroup>
+	<!--#endif -->
+	
+  <ItemGroup>    
     <ProjectReference Include="..\QuokkaDev.Templates.Persistence.Ef\QuokkaDev.Templates.Persistence.Ef.csproj" />
-    <ProjectReference Include="..\QuokkaDev.Templates.Query.Dapper\QuokkaDev.Templates.Query.Dapper.csproj" />
-    <ProjectReference Include="..\QuokkaDev.Templates.Domain\QuokkaDev.Templates.Domain.csproj" />
+    <ProjectReference Include="..\QuokkaDev.Templates.Query.Dapper\QuokkaDev.Templates.Query.Dapper.csproj" />    
   </ItemGroup>
 
   <ItemGroup>

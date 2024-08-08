@@ -35,12 +35,35 @@
 	    <InternalsVisibleTo Include="QuokkaDev.Templates.IntegrationTests" />
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\..\src\QuokkaDev.Templates.Api\QuokkaDev.Templates.Api.csproj" />
-      <ProjectReference Include="..\..\src\QuokkaDev.Templates.Application\QuokkaDev.Templates.Application.csproj" />
-      <ProjectReference Include="..\..\src\QuokkaDev.Templates.Persistence.Ef\QuokkaDev.Templates.Persistence.Ef.csproj" />
-      <ProjectReference Include="..\..\src\QuokkaDev.Templates.Query.Dapper\QuokkaDev.Templates.Query.Dapper.csproj" />
-      <ProjectReference Include="..\..\src\QuokkaDev.Templates.Domain\QuokkaDev.Templates.Domain.csproj" />
-    </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\QuokkaDev.Templates.Domain\QuokkaDev.Templates.Domain.csproj" />
+	</ItemGroup>
+
+	<!--#if (UseExternalDomainCommon) -->
+	<ItemGroup Condition="'$(UseExternalDomainCommon)' != ''">
+		<ProjectReference Include="..\..\src\QuokkaDev.Templates.Domain.Common\QuokkaDev.Templates.Domain.Common.csproj" />
+	</ItemGroup>
+	<!--#endif -->
+	<!--#if (UseExternalSeedWork) -->
+	<ItemGroup Condition="'$(UseExternalSeedWork)' != ''">
+		<ProjectReference Include="..\..\src\QuokkaDev.Templates.Domain.SeedWork\QuokkaDev.Templates.Domain.SeedWork.csproj" />
+	</ItemGroup>
+	<!--#endif -->
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\QuokkaDev.Templates.Application\QuokkaDev.Templates.Application.csproj" />
+	</ItemGroup>
+
+	<!--#if (UseExternalApplicationInfrastructure) -->
+	<ItemGroup Condition="'$(UseExternalApplicationInfrastructure)' != ''">
+		<ProjectReference Include="..\..\src\QuokkaDev.Templates.Application.Infrastructure\QuokkaDev.Templates.Application.Infrastructure.csproj" />
+	</ItemGroup>
+	<!--#endif -->
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\QuokkaDev.Templates.Persistence.Ef\QuokkaDev.Templates.Persistence.Ef.csproj" />
+		<ProjectReference Include="..\..\src\QuokkaDev.Templates.Query.Dapper\QuokkaDev.Templates.Query.Dapper.csproj" />
+		<ProjectReference Include="..\..\src\QuokkaDev.Templates.Api\QuokkaDev.Templates.Api.csproj" />
+	</ItemGroup>
 
 </Project>
