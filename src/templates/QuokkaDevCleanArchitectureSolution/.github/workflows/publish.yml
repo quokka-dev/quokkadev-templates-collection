@@ -7,9 +7,12 @@ on:
 
 permissions: write-all
 
+env:
+  CONTINOUS_INTEGRATION_ENV: true
+
 jobs:
   build:
-    
+
     runs-on: ubuntu-latest
 
     strategy:
@@ -19,9 +22,9 @@ jobs:
     steps:
 
       - name: Checkout repository
-        uses: actions/checkout@v3 
+        uses: actions/checkout@v3
         with:
-          fetch-depth: 0   
+          fetch-depth: 0
 
       - name: Cache NuGet
         uses: actions/cache@v3
@@ -29,7 +32,7 @@ jobs:
           path: ~/.nuget/packages
           key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-nuget-        
+            ${{ runner.os }}-nuget-
 
       # Prepare
 
@@ -40,10 +43,10 @@ jobs:
 
       - uses: paulhatch/semantic-version@v4.0.2
         name: Calculate version
-        with:  
-          tag_prefix: "v"          
-          major_pattern: "(MAJOR)"          
-          minor_pattern: "(MINOR)"          
+        with:
+          tag_prefix: "v"
+          major_pattern: "(MAJOR)"
+          minor_pattern: "(MINOR)"
           format: "${major}.${minor}.${patch}"
         id: calculate_version
 
@@ -55,7 +58,7 @@ jobs:
           path: ~/sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
-      
+
       - name: Cache SonarCloud scanner
         id: cache-sonar-scanner
         uses: actions/cache@v1
@@ -63,24 +66,24 @@ jobs:
           path: ./.sonar/scanner
           key: ${{ runner.os }}-sonar-scanner
           restore-keys: ${{ runner.os }}-sonar-scanner
-      
+
       - name: Install SonarCloud scanner
-        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'        
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         run: |
-          mkdir -p .sonar/scanner                
+          mkdir -p .sonar/scanner
           dotnet tool install dotnet-sonarscanner --tool-path .sonar/scanner
- 
+
       # end SonarCloud configuration
 
       - name: Install dependencies
         run: dotnet restore
 
       # Test and reporting
-      
+
       - name: Generate Unit Test Report
         uses: zyborg/dotnet-tests-report@v1
         with:
-          project_path: tests/QuokkaDev.Templates.UnitTests           
+          project_path: tests/QuokkaDev.Templates.UnitTests
           report_name: QuokkaDev.Templates Unit Test Report
           report_title: QuokkaDev.Templates Unit Test Report
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -89,7 +92,7 @@ jobs:
       - name: Generate Architectural Test Report
         uses: zyborg/dotnet-tests-report@v1
         with:
-          project_path: tests/QuokkaDev.Templates.ArchitecturalTests           
+          project_path: tests/QuokkaDev.Templates.ArchitecturalTests
           report_name: QuokkaDev.Templates Architectural Test Report
           report_title: QuokkaDev.Templates Architectural Test Report
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -98,7 +101,7 @@ jobs:
       - name: Generate Integration Test Report
         uses: zyborg/dotnet-tests-report@v1
         with:
-          project_path: tests/QuokkaDev.Templates.IntegrationTests           
+          project_path: tests/QuokkaDev.Templates.IntegrationTests
           report_name: QuokkaDev.Templates Integration Test Report
           report_title: QuokkaDev.Templates Integration Test Report
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -113,41 +116,41 @@ jobs:
         run: |
           cp coverage/*/coverage.cobertura.xml coverage/coverage.cobertura.xml
           cp coverage/*/coverage.opencover.xml coverage/coverage.opencover.xml
-        
+
       - name: Generate QuokkaDev.Templates Code Coverage Summary Report
-        uses: irongut/CodeCoverageSummary@v1.0.2      
+        uses: irongut/CodeCoverageSummary@v1.0.2
         with:
           filename: coverage/coverage.cobertura.xml
           badge: true
           format: 'markdown'
           output: 'both'
-          
+
       - name: Publish QuokkaDev.Templates Code Coverage Summary Report
         uses: LouisBrunner/checks-action@v1.2.0
         if: always()
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           name: Code coverage
-          conclusion: ${{ job.status }}          
-          output: | 
+          conclusion: ${{ job.status }}
+          output: |
             {"summary":"Code Coverage"}
-          output_text_description_file: code-coverage-results.md 
+          output_text_description_file: code-coverage-results.md
 
       # Build
 
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}        
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           .sonar/scanner/dotnet-sonarscanner begin /k:"quokka-dev_quokkadev-project-key" /o:"quokka-dev" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="coverage/coverage.opencover.xml"
           dotnet build --configuration Release --no-restore /p:Version=${{ steps.calculate_version.outputs.version }}
           .sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
-      # Publish 
+      # Publish
 
       # Standalone application on Azure
-      
+
       #- uses: azure/webapps-deploy@v2
       #  with:
       #    publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
