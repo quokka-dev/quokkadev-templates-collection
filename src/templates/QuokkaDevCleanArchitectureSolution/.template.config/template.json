@@ -117,7 +117,8 @@
                         "docker-compose.dcproj",
                         "docker-compose.yml",
                         "docker-compose.override.yml",
-                        "launchSettings.json"
+                        "launchSettings.json",
+                        "src/QuokkaDev.Templates.Api/Dockerfile"
                     ]
                 }
             ]

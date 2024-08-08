@@ -17,7 +17,9 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
-    },
+    }
+    //#if (UseDockerCompose)
+    ,
     "Container (Dockerfile)": {
       "commandName": "Docker",
       "launchBrowser": true,
@@ -29,6 +31,7 @@
       "publishAllPorts": true,
       "useSSL": true
     }
+    //#endif
   },
   "$schema": "https://json.schemastore.org/launchsettings.json",
   "iisSettings": {

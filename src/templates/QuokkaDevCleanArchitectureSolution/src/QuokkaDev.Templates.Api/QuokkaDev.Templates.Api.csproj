@@ -5,9 +5,11 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>4e4beaff-e9c2-4fca-ad3d-2dc2bc699e13</UserSecretsId>
+	<!--#if (UseDockerCompose) -->
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
     <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
+	  <!--#endif -->
   </PropertyGroup>
 
   <ItemGroup>
@@ -80,9 +82,9 @@
 			<DependentUpon>appsettings.json</DependentUpon>
 		</None>
 	</ItemGroup>
-
+	<!--#if (UseDockerCompose) -->
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(OS)' == 'Windows_NT'">
 	  <Exec Command="powershell.exe -ExecutionPolicy Bypass -File $(ProjectDir)..\..\extra\SetupDockerVolumes.ps1" />
 	</Target>
-
+	<!--#endif -->
 </Project>
