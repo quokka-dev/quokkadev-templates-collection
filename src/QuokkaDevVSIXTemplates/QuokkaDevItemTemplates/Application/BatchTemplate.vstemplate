@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+	<TemplateData>
+		<Name>Application Batch</Name>
+		<Description>Create a new long running application batch</Description>
+		<Icon>Icon.png</Icon>
+		<TemplateID>5f76ca47-0099-4b84-bc3c-ed03d6528245</TemplateID>		
+		<ProjectType>CSharp</ProjectType>
+		<RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+		<NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+		<DefaultName>NewBatch</DefaultName>
+	</TemplateData>
+	<TemplateContent>
+		<References>
+			<Reference>
+				<Assembly>System</Assembly>
+			</Reference>
+		</References>
+		<ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.cs">Batch.cs</ProjectItem>
+	</TemplateContent>
+</VSTemplate>

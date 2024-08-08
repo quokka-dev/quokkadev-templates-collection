@@ -1,13 +1,52 @@
 {
     "$schema":"http://json.schemastore.org/vs-2017.3.host",
     "name": { "text": "QuokkaDev Clean Architecture Solution" },
-    "description": { "text": "A template for creating a solution following Clean Architecture style" }, 
+    "description": { "text": "A template for creating a solution following Clean Architecture style" },
     "order": 5,
-    "symbolInfo": [        
-        
+    "symbolInfo": [
+        {
+            "id": "UseArc42Templates",
+            "name": {
+                "text": "Add a docs folder with Arc42 templates documents"
+            },
+            "isVisible": true,
+            "defaultValue": "false"
+        },
+        {
+            "id": "UseExternalSeedWork",
+            "name": {
+                "text": "Add SeedWork as separate project"
+            },
+            "isVisible": true,
+            "defaultValue": "false"
+        },
+        {
+            "id": "UseExternalDomainCommon",
+            "name": {
+                "text": "Add Domain.Common as separate project"
+            },
+            "isVisible": true,
+            "defaultValue": "false"
+        },
+        {
+            "id": "UseExternalApplicationInfrastructure",
+            "name": {
+                "text": "Add Application.Infrastructure as separate project"
+            },
+            "isVisible": true,
+            "defaultValue": "false"
+        },
+        {
+            "id": "DockerItemsPlaceholder",
+            "name": {
+                "text": "Prefix used for Docker items (use only lowercase letters, numbers and _)"
+            },
+            "isVisible": true,
+            "defaultValue": "quokkadevtemplates"
+        }
     ],
     "supportsDocker": false,
-    "includeLaunchSettings": true,    
-    "isApi": true,    
+    "includeLaunchSettings": true,
+    "isApi": true,
     "icon": "icon.png"
 }
