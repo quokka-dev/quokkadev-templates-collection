@@ -8,8 +8,11 @@
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
     <DockerServiceName>Quokkadev.Templates.Api</DockerServiceName>
-	<DockerComposeProjectName>quokkadevtemplates_dev_environment</DockerComposeProjectName>
+    <DockerComposeProjectName>quokkadevtemplates_dev_environment</DockerComposeProjectName>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="changelog-configuration.json" />
+  </ItemGroup>
   <ItemGroup>
     <None Include=".env" />
     <None Include="docker-compose.override.yml">

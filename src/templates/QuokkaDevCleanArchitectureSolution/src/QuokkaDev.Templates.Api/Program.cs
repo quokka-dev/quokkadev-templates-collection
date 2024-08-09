@@ -121,14 +121,15 @@ app.MapHealthChecks("/hc", new HealthCheckOptions()
     Predicate = _ => true
 });
 
-if (!configuration.GetValue<bool>("CONTINOUS_INTEGRATION_ENV", false))
-{
-    using var scope = app.Services.CreateScope();
-    using var dbBootstrap = scope.ServiceProvider.GetRequiredService<IDataAccessBootstrapper>();
-    {
-        dbBootstrap.BootstrapAsync().Wait();
-    }    
-}
+// Uncomment to enable database bootstrap
+//if (!configuration.GetValue<bool>("CONTINOUS_INTEGRATION_ENV", false))
+//{
+//    using var scope = app.Services.CreateScope();
+//    using var dbBootstrap = scope.ServiceProvider.GetRequiredService<IDataAccessBootstrapper>();
+//    {
+//        dbBootstrap.BootstrapAsync().Wait();
+//    }    
+//}
 
 app.Run();
 

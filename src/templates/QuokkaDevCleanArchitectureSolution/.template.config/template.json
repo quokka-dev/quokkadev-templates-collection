@@ -113,7 +113,6 @@
                     "exclude": [
                         ".dockerignore",
                         ".env",
-                        "changelog-configuration.json",
                         "docker-compose.dcproj",
                         "docker-compose.yml",
                         "docker-compose.override.yml",
